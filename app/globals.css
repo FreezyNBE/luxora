@@ -31,6 +31,7 @@
 
     /* Status */
     --color-success: #5c8a63;
+    --color-success-dark: #476b4d;
     --color-success-bg: #edf5ee;
 
     --color-warning: #b89152;
@@ -75,6 +76,7 @@
 
     /* Status */
     --color-success: #5c8a63;
+    --color-success-dark: #476b4d;
     --color-error: #b85c52;
 }
 
