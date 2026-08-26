@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, Inter } from "next/font/google";
+import { Roboto_Condensed, Inter } from "next/font/google";
 import "./globals.css";
 import Navigation from "./components/Navigation";
+import GlobalContextProvider from "./context/GlobalContext";
+import Footer from "./components/Footer";
 
-const cormorant = Cormorant_Garamond({
+const roboto = Roboto_Condensed({
     subsets: ["latin"],
     variable: "--font-heading",
     display: "swap",
@@ -22,11 +24,12 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
     return (
-        <html lang="en" className={`${cormorant.variable} ${inter.variable} h-full antialiased`}>
-            <body className="relative min-h-full">
+        <html lang="en" className={`${roboto.variable} ${inter.variable} h-full antialiased`}>
+            <GlobalContextProvider>
                 <Navigation />
                 {children}
-            </body>
+                <Footer />
+            </GlobalContextProvider>
         </html>
     );
 }

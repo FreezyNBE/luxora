@@ -11,6 +11,8 @@
     --color-background-soft: #f5f2ec;
     --color-background-warm: #eee9df;
     --color-background-white: #ffffff;
+    --color-background-brown: #1d1a17;
+    --color-background-brown-dark: #110f0e;
 
     /* Text */
     --color-text-primary: #1a1917;
@@ -59,6 +61,8 @@
     --color-cream: #faf9f6;
     --color-cream-soft: #f5f2ec;
     --color-cream-dark: #eee9df;
+    --color-brown: #1d1a17;
+    --color-brown-dark: #110f0e;
 
     /* Text */
     --color-ink: #1a1917;
