@@ -62,27 +62,27 @@ export default function Home() {
                 <div className="relative -top-18 w-full lg:w-5/6 flex max-lg:flex-col items-center bg-cream-soft border border-border rounded-lg shadow-xl mx-2 lg:mx-5">
                     <div className="w-full lg:flex-1/2 p-5 space-y-1">
                         <div className="text-muted-light text-xs font-semibold uppercase pl-2 cursor-default">Check-In</div>
-                        <div className="w-full text-ink cursor-pointer hover:opacity-80 hover:text-gold-dark group border-2 p-2 rounded-full border-transparent hover:border-gold-dark hover:bg-gold-light/10 transition duration-100 ease-in">
+                        <div className="w-full text-ink cursor-pointer hover:opacity-80 hover:text-gold-dark group border-b-2 p-2 border-b-transparent hover:border-b-gold-dark transition-all duration-100 ease-in">
                             <span className="text-sm font-semibold">May 24, 2026</span>
-                            <span className="inline-block align-middle float-right text-muted-light group-hover:text-gold-dark duration-100 ease-in">
+                            <span className="inline-block align-middle float-right text-muted-light group-hover:text-gold-dark transition-all duration-100 ease-in">
                                 <CalendarRange size={"1.25rem"} />
                             </span>
                         </div>
                     </div>
                     <div className="w-full lg:flex-1/2 p-5 space-y-1">
                         <div className="text-muted-light text-xs font-semibold uppercase pl-2 cursor-default">Check-Out</div>
-                        <div className="w-full text-ink cursor-pointer hover:opacity-80 hover:text-gold-dark group border-2 p-2 rounded-full border-transparent hover:border-gold-dark hover:bg-gold-light/10 transition duration-100 ease-in">
+                        <div className="w-full text-ink cursor-pointer hover:opacity-80 hover:text-gold-dark group border-b-2 p-2 border-b-transparent hover:border-b-gold-dark transition-all duration-100 ease-in">
                             <span className="text-sm font-semibold">May 25, 2026</span>
-                            <span className="inline-block align-middle float-right text-muted-light group-hover:text-gold-dark">
+                            <span className="inline-block align-middle float-right text-muted-light group-hover:text-gold-dark transition-all duration-100 ease-in">
                                 <CalendarRange size={"1.25rem"} />
                             </span>
                         </div>
                     </div>
                     <div className="w-full lg:flex-1/2 p-5 space-y-1">
                         <div className="text-muted-light text-xs font-semibold uppercase pl-2 cursor-default">Quests</div>
-                        <div className="w-full text-ink cursor-pointer hover:opacity-80 hover:text-gold-dark group border-2 p-2 rounded-full border-transparent hover:border-gold-dark hover:bg-gold-light/10 transition duration-100 ease-in">
+                        <div className="w-full text-ink cursor-pointer hover:opacity-80 hover:text-gold-dark group border-b-2 p-2 border-b-transparent hover:border-b-gold-dark transition-all duration-100 ease-in">
                             <span className="text-sm font-semibold">2 Adults, 0 Children</span>
-                            <span className="inline-block align-middle float-right pt-0.5 text-muted-light group-hover:text-gold-dark">
+                            <span className="inline-block align-middle float-right pt-0.5 text-muted-light group-hover:text-gold-dark transition-all duration-100 ease-in">
                                 <ChevronDown size={"1.25rem"} />
                             </span>
                         </div>
@@ -101,41 +101,49 @@ export default function Home() {
                 <div className="w-full lg:w-5/6 py-3 space-y-3">
                     <div className="uppercase text-sm">Why choose us</div>
                     <h1 className="font-bold text-3xl">Timeless Elegance, Modern Comfort</h1>
-                    <div className="flex max-lg:flex-wrap items-center justify-center max-lg:gap-y-5 lg:gap-x-5 mt-5">
+                    <div className="flex max-lg:flex-wrap items-center justify-center max-lg:gap-y-5 lg:gap-x-5 mt-6">
                         <div className="flex-1/2">
-                            <div className="flex flex-col items-center justify-center gap-2">
-                                <MapPin className="text-gold-light" size={"2rem"} />
-                                <span className="font-semibold text-sm text-ink">Prime Location</span>
-                                <p className="max-w-46 text-xs text-muted">
-                                    Located in the heart of the city, close to attractions and business hubs.
-                                </p>
+                            <div className="w-full flex items-center justify-center">
+                                <div className="flex flex-col items-center justify-center gap-2 border border-transparent rounded-lg px-4 xl:px-16 py-2 hover:bg-gold-dark/20 hover:border-gold-dark cursor-pointer transition duration-75 ease-in-out">
+                                    <MapPin className="text-gold-light" size={"2rem"} />
+                                    <span className="font-semibold text-sm text-ink">Prime Location</span>
+                                    <p className="max-w-46 text-xs text-muted">
+                                        Located in the heart of the city, close to attractions and business hubs.
+                                    </p>
+                                </div>
                             </div>
                         </div>
                         <div className="flex-1/2">
-                            <div className="flex flex-col items-center justify-center gap-2">
-                                <BedSingle className="text-gold-light" size={"2rem"} />
-                                <span className="font-semibold text-sm text-ink">Exceptional Comfort</span>
-                                <p className="max-w-46 text-xs text-muted">
-                                    Well-appointed rooms with modern amenities for a relaxing stay.
-                                </p>
+                            <div className="w-full flex items-center justify-center">
+                                <div className="flex flex-col items-center justify-center gap-2 border border-transparent rounded-lg px-4 xl:px-16 py-2 hover:bg-gold-dark/20 hover:border-gold-dark cursor-pointer transition duration-75 ease-in-out">
+                                    <BedSingle className="text-gold-light" size={"2rem"} />
+                                    <span className="font-semibold text-sm text-ink">Exceptional Comfort</span>
+                                    <p className="max-w-46 text-xs text-muted">
+                                        Well-appointed rooms with modern amenities for a relaxing stay.
+                                    </p>
+                                </div>
                             </div>
                         </div>
                         <div className="flex-1/2">
-                            <div className="flex flex-col items-center justify-center gap-2">
-                                <ThumbsUp className="text-gold-light" size={"2rem"} />
-                                <span className="font-semibold text-sm text-ink">World Class Service</span>
-                                <p className="max-w-46 text-xs text-muted">
-                                    Our dedicated team is here to ensure your stay is perfect in every way.
-                                </p>
+                            <div className="w-full flex items-center justify-center">
+                                <div className="flex flex-col items-center justify-center gap-2 border border-transparent rounded-lg px-4 xl:px-16 py-2 hover:bg-gold-dark/20 hover:border-gold-dark cursor-pointer transition duration-75 ease-in-out">
+                                    <ThumbsUp className="text-gold-light" size={"2rem"} />
+                                    <span className="font-semibold text-sm text-ink">World Class Service</span>
+                                    <p className="max-w-46 text-xs text-muted">
+                                        Our dedicated team is here to ensure your stay is perfect in every way.
+                                    </p>
+                                </div>
                             </div>
                         </div>
                         <div className="flex-1/2">
-                            <div className="flex flex-col items-center justify-center gap-2">
-                                <Medal className="text-gold-light" size={"2rem"} />
-                                <span className="font-semibold text-sm text-ink">Best Price Guarantee</span>
-                                <p className="max-w-46 text-xs text-muted">
-                                    Book directly with us for the best rates and exclusive benefits.
-                                </p>
+                            <div className="w-full flex items-center justify-center">
+                                <div className="flex flex-col items-center justify-center gap-2 border border-transparent rounded-lg px-4 xl:px-16 py-2 hover:bg-gold-dark/20 hover:border-gold-dark cursor-pointer transition duration-75 ease-in-out">
+                                    <Medal className="text-gold-light" size={"2rem"} />
+                                    <span className="font-semibold text-sm text-ink">Best Price Guarantee</span>
+                                    <p className="max-w-46 text-xs text-muted">
+                                        Book directly with us for the best rates and exclusive benefits.
+                                    </p>
+                                </div>
                             </div>
                         </div>
                     </div>
