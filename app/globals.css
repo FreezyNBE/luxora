@@ -44,6 +44,9 @@
 
     --color-info: #5c7890;
     --color-info-bg: #eef4f8;
+
+    /* Navbar */
+    --navbar-height: 80px;
 }
 
 @theme inline {
@@ -68,6 +71,7 @@
     --color-ink: #1a1917;
     --color-muted: #5f5b55;
     --color-muted-light: #8a867f;
+    --color-heading: #525252;
 
     /* Dark */
     --color-charcoal: #171716;
@@ -98,4 +102,8 @@ h2,
 h3,
 h4 {
     font-family: var(--font-heading), Arial, Helvetica, sans-serif;
+}
+
+.min-border {
+    @apply w-fit border-b-2 border-b-transparent hover:border-b-gold;
 }

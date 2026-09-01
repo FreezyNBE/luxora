@@ -2,16 +2,26 @@
 
 import { Calendar, Gem, Heart, Menu, User, X } from "lucide-react";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "./misc/Button";
 import { useGlobal } from "../context/GlobalContext";
+import { usePathname } from "next/navigation";
 
 function Navigation() {
     const { disableBodyOverflow, enableBodyOverflow } = useGlobal();
     const [navMobileStatus, setNavMobileStatus] = useState<boolean>(false);
     const [navMobileVisible, setNavMobileVisible] = useState<boolean>(false);
+    const pathname = usePathname();
+
+    useEffect(() => {
+        if (navMobileStatus) {
+            console.log("pathname is", pathname);
+            closeMenu(false);
+        }
+    }, [pathname]);
 
     const openMenu = () => {
+        console.log("clicked");
         setNavMobileVisible(true);
 
         // Let the element mount first
@@ -21,23 +31,28 @@ function Navigation() {
         });
     };
 
-    const closeMenu = () => {
+    const closeMenu = (showAnimation: boolean = true) => {
         setNavMobileStatus(false);
 
         // Wait for animation to finish before removing it
-        setTimeout(() => {
-            setNavMobileVisible(false);
-            enableBodyOverflow();
-        }, 300);
+        setTimeout(
+            () => {
+                setNavMobileVisible(false);
+                enableBodyOverflow();
+            },
+            showAnimation ? 300 : 10,
+        );
     };
 
     return (
-        <div className="text-white">
-            <nav className="absolute inset-0 w-full h-fit flex items-center justify-between gap-4 px-10 py-5 z-10 backdrop-blur-md">
-                <h1 className="flex items-center justify-center gap-1 text-2xl font-bold cursor-default">
-                    <Gem size={"1.5rem"} className="text-gold-light" />
-                    <span>Luxora</span>
-                </h1>
+        <div className={`h-(--navbar-height) ${pathname === "/" ? "text-white" : "text-ink"}`}>
+            <nav className="relative inset-0 w-full h-fit flex items-center justify-between gap-4 px-10 py-5 z-10 backdrop-blur-md">
+                <Link href="/">
+                    <h1 className="flex items-center justify-center gap-1 text-2xl font-bold">
+                        <Gem size={"1.5rem"} className="text-gold-light" />
+                        <span>Luxora</span>
+                    </h1>
+                </Link>
                 {!navMobileVisible && (
                     <ul className="flex uppercase text-sm max-lg:hidden gap-6 xl:gap-10">
                         <li>
@@ -50,7 +65,7 @@ function Navigation() {
                         </li>
                         <li>
                             <Link
-                                href="/"
+                                href="/rooms"
                                 className="py-2 border-b-2 border-b-transparent hover:border-b-gold hover:text-gold-light transition duration-100 ease-in"
                             >
                                 Rooms
@@ -95,7 +110,7 @@ function Navigation() {
                         <User className="max-lg:hidden hover:opacity-70" />
                         <Heart className="max-lg:hidden hover:opacity-70" />
                         <Calendar className="max-lg:hidden hover:opacity-70" />
-                        <div onClick={navMobileVisible ? closeMenu : openMenu}>
+                        <div onClick={() => (navMobileVisible ? closeMenu() : openMenu())}>
                             <Menu className="lg:hidden hover:opacity-70" />
                         </div>
                     </div>
@@ -107,9 +122,9 @@ function Navigation() {
 
             {/* Mobile navigation */}
             {navMobileVisible && (
-                <div className="fixed inset-0 w-full h-full bg-black/50 z-20" onClick={closeMenu}>
+                <div className="fixed inset-0 w-full h-full bg-black/50 z-20 text-white" onClick={() => closeMenu()}>
                     <div
-                        className={`w-full h-full overflow-auto fixed top-0 left-0 backdrop-blur-xl border-r border-r-border-dark px-5 ${navMobileStatus ? "translate-x-0" : "-translate-x-full"} transform duration-300 ease-in`}
+                        className={`w-full h-full overflow-auto fixed top-0 left-0 backdrop-blur-xl border-r border-r-border-dark px-5 ${navMobileStatus ? "translate-x-0" : "-translate-x-full"} transform duration-300 ease-in bg-black/90`}
                         onClick={(event: React.MouseEvent<HTMLDivElement>) => event.stopPropagation()}
                     >
                         <div className="w-full">
@@ -119,7 +134,7 @@ function Navigation() {
                                         <Gem size={"1.5rem"} className="text-gold-light" />
                                         <span>Luxora</span>
                                     </div>
-                                    <div className="hover:opacity-50 cursor-pointer" onClick={closeMenu}>
+                                    <div className="hover:opacity-50 cursor-pointer" onClick={() => closeMenu()}>
                                         <X />
                                     </div>
                                 </h1>
@@ -134,7 +149,7 @@ function Navigation() {
                                         <span>Home</span>
                                     </Link>
                                     <Link
-                                        href="/"
+                                        href="/rooms"
                                         className="w-fit py-2 border-b-2 border-b-transparent hover:border-b-gold hover:text-gold-light transition duration-100 ease-in"
                                     >
                                         <span>Rooms</span>
