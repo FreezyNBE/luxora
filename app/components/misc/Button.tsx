@@ -13,3 +13,14 @@ export function Button({ children, className = "", ...props }: ButtonType) {
         </button>
     );
 }
+
+export function CircleButton({ children, className = "", ...props }: ButtonType) {
+    return (
+        <button
+            className={`w-32 h-10 bg-gold rounded-full hover:bg-gold-dark text-white transition duration-100 ease-in cursor-pointer ${className.length ? className : ""} truncate`}
+            {...props}
+        >
+            {children}
+        </button>
+    );
+}

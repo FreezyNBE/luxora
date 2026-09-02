@@ -1,6 +1,7 @@
-import { Button } from "@/app/components/misc/Button";
+import { Button, CircleButton } from "@/app/components/misc/Button";
 import SliderPriceRange from "@/app/components/misc/SliderPriceRange";
-import { CalendarRange, ChevronDown, TextSearch } from "lucide-react";
+import { CalendarRange, ChevronDown, Eye, Square, SquareM, TextSearch, UserRound } from "lucide-react";
+import Link from "next/link";
 
 function RoomsPage() {
     return (
@@ -52,9 +53,9 @@ function RoomsPage() {
                 </div>
             </div>
 
-            <div className="p-5">
+            <div className="w-full flex flex-col lg:flex-row p-5 gap-x-10">
                 {/* Filters */}
-                <div className="max-w-64 space-y-5 text-sm">
+                <div className="w-full max-w-52 space-y-5 text-sm">
                     <h1 className="font-medium uppercase cursor-default">Filters</h1>
 
                     <div className="w-full h-[0.5] bg-black/10" />
@@ -166,6 +167,84 @@ function RoomsPage() {
                 </div>
 
                 {/* n Rooms found */}
+                <div className="w-full space-y-5">
+                    <div className="flex flex-col sm:flex-row items-center justify-between my-5 sm:my-0 gap-2 sm:gap-0">
+                        <div>
+                            <span className="uppercase text-sm font-medium cursor-default select-none">12 Rooms Found</span>
+                        </div>
+                        <div className="space-x-1 text-sm border border-border-light rounded-md px-6 py-2">
+                            <label htmlFor="sortby" className="text-muted-light select-none">
+                                Sort by:
+                            </label>
+                            <select name="sortby" id="sortby" defaultValue={"Recommanded"} className="outline-none">
+                                <option value="recommanded">Recommanded</option>
+                                <option value="recommanded">Raitings</option>
+                                <option value="recommanded">High price</option>
+                                <option value="recommanded">Low price</option>
+                            </select>
+                        </div>
+                    </div>
+                    {/* Items */}
+                    <div className="space-y-5 mt-4 sm:grid grid-cols-2 gap-2 lg:block">
+                        {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map((i, index) => (
+                            <div
+                                key={index}
+                                className="flex flex-col lg:flex-row w-full h-full border border-border-light overflow-hidden"
+                            >
+                                <img
+                                    src="/img/hero2.png"
+                                    alt=""
+                                    className="w-full lg:max-w-sm h-1/2 md:h-72 lg:h-full object-cover"
+                                />
+                                <div className="w-full flex flex-col lg:flex-row gap-y-3 lg:gap-y-0 lg:ms-5 py-2 ps-2 lg:ps-0">
+                                    <div className="w-full flex flex-col items-start justify-center">
+                                        <h1 className="text-2xl font-semibold">Deluxe Room</h1>
+                                        <div className="flex flex-col xl:flex-row gap-x-8 mt-1">
+                                            <div className="text-muted-light">
+                                                <SquareM size="1rem" className="inline-block" />
+                                                <div className="relative inline-block align-middle ms-1 text-xs font-medium">
+                                                    28 <span className="font-semibold">&#13217;</span>
+                                                </div>
+                                            </div>
+                                            <div className="text-muted-light">
+                                                <Eye size="1rem" className="inline-block" />
+                                                <span className="inline-block align-middle ms-1 text-xs font-medium">
+                                                    City View
+                                                </span>
+                                            </div>
+                                            <div className="text-muted-light">
+                                                <UserRound size="1rem" className="inline-block" />
+                                                <span className="inline-block align-middle ms-1 text-xs font-medium">
+                                                    2 Guests
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <p className="w-5/6 max-w-xs text-muted-light text-xs font-medium my-5 ">
+                                            Relax in our Deluxe Room featuring elegant interios and all the essential amenities.
+                                        </p>
+                                        <Link
+                                            href={"/"}
+                                            className="text-xs font-semibold text-gold border-b-2 border-b-transparent hover:border-b-gold hover:text-gold-dark"
+                                        >
+                                            View Details
+                                        </Link>
+                                    </div>
+                                    <div className="flex flex-col items-end justify-center gap-y-5 me-3">
+                                        <div className="flex flex-col items-end justify-center">
+                                            <h1 className="text-2xl font-semibold">$150</h1>
+                                            <div className="block text-xs font-semibold text-muted-light cursor-default">
+                                                / night
+                                            </div>
+                                        </div>
+                                        <Link href={"/"}>
+                                            <CircleButton className="uppercase text-sm font-medium">View Room</CircleButton>
+                                        </Link>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
             </div>
         </main>
     );
