@@ -1,6 +1,16 @@
 import { Button, CircleButton } from "@/app/components/misc/Button";
 import SliderPriceRange from "@/app/components/misc/SliderPriceRange";
-import { CalendarRange, ChevronDown, Eye, Square, SquareM, TextSearch, UserRound } from "lucide-react";
+import {
+    CalendarRange,
+    ChevronDown,
+    ChevronLeft,
+    ChevronRight,
+    Eye,
+    Square,
+    SquareM,
+    TextSearch,
+    UserRound,
+} from "lucide-react";
 import Link from "next/link";
 
 function RoomsPage() {
@@ -167,7 +177,7 @@ function RoomsPage() {
                 </div>
 
                 {/* n Rooms found */}
-                <div className="w-full space-y-5">
+                <div className="w-full flex flex-col space-y-5">
                     <div className="flex flex-col sm:flex-row items-center justify-between my-5 sm:my-0 gap-2 sm:gap-0">
                         <div>
                             <span className="uppercase text-sm font-medium cursor-default select-none">12 Rooms Found</span>
@@ -186,7 +196,7 @@ function RoomsPage() {
                     </div>
                     {/* Items */}
                     <div className="space-y-5 mt-4 sm:grid grid-cols-2 gap-2 lg:block">
-                        {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map((i, index) => (
+                        {[0 /*, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11*/].map((i, index) => (
                             <div
                                 key={index}
                                 className="flex flex-col lg:flex-row w-full h-full border border-border-light overflow-hidden"
@@ -202,7 +212,7 @@ function RoomsPage() {
                                         <div className="flex flex-col xl:flex-row gap-x-8 mt-1">
                                             <div className="text-muted-light">
                                                 <SquareM size="1rem" className="inline-block" />
-                                                <div className="relative inline-block align-middle ms-1 text-xs font-medium">
+                                                <div className="inline-block align-middle ms-1 text-xs font-medium">
                                                     28 <span className="font-semibold">&#13217;</span>
                                                 </div>
                                             </div>
@@ -243,6 +253,35 @@ function RoomsPage() {
                                 </div>
                             </div>
                         ))}
+                    </div>
+                    {/* Pages */}
+                    <div className="w-full h-full flex items-end justify-center gap-x-2">
+                        {/* Back */}
+                        <div className="max-h-5 flex items-center justify-center px-2 py-4 bg-bg-light border border-border-dark/10 rounded-sm text-ink cursor-pointer hover:border-gold hover:bg-gold hover:text-white">
+                            <ChevronLeft size={"1rem"} />
+                        </div>
+                        {/* Page No */}
+                        <div className="flex gap-x-1">
+                            <div className="w-10 h-5 flex items-center justify-center p-4 bg-bg-light border border-border-dark/10 rounded-sm text-ink cursor-pointer hover:border-gold hover:bg-gold hover:text-white">
+                                <span>1</span>
+                            </div>
+                            <div className="w-10 h-5 flex items-center justify-center p-4 bg-bg-light border border-border-dark/10 rounded-sm text-ink cursor-pointer hover:border-gold hover:bg-gold hover:text-white">
+                                <span>2</span>
+                            </div>
+                            <div className="w-10 h-5 flex items-center justify-center p-4 bg-bg-light border border-border-dark/10 rounded-sm text-ink cursor-pointer hover:border-gold hover:bg-gold hover:text-white">
+                                <span>3</span>
+                            </div>
+                            <div className="w-10 h-5 flex items-center justify-center p-4 bg-bg-light border border-border-dark/10 rounded-sm text-ink cursor-default select-none hover:border-gold hover:bg-gold hover:text-white">
+                                <span>...</span>
+                            </div>
+                            <div className="w-10 h-5 flex items-center justify-center p-4 bg-bg-light border border-border-dark/10 rounded-sm text-ink cursor-pointer hover:border-gold hover:bg-gold hover:text-white">
+                                <span>10</span>
+                            </div>
+                        </div>
+                        {/* Forward */}
+                        <div className="max-h-5 flex items-center justify-center px-2 py-4 bg-bg-light border border-border-dark/10 rounded-sm text-ink cursor-pointer hover:border-gold hover:bg-gold hover:text-white">
+                            <ChevronRight size={"1rem"} />
+                        </div>
                     </div>
                 </div>
             </div>
