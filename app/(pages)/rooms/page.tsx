@@ -1,3 +1,4 @@
+import BreadCrumbs from "@/app/components/Breadcrumbs";
 import { Button, CircleButton } from "@/app/components/misc/Button";
 import SliderPriceRange from "@/app/components/misc/SliderPriceRange";
 import {
@@ -15,7 +16,18 @@ import Link from "next/link";
 
 function RoomsPage() {
     return (
-        <main className="p-2 bg-cream">
+        <main className="bg-cream">
+            {/* Breadcrumb */}
+            <BreadCrumbs
+                links={[
+                    {
+                        name: "Rooms",
+                        url: "/rooms",
+                    },
+                ]}
+                usePadding={true}
+            />
+
             <div className="flex flex-col items-center justify-center gap-y-3 text-shadow-2xs my-10">
                 <span className="text-sm uppercase font-medium">Rooms &#038; Suites</span>
                 <h3 className="text-3xl font-bold">Find Your Perfect Stay</h3>
@@ -46,9 +58,9 @@ function RoomsPage() {
                         </div>
                     </div>
                     <div className="w-full lg:flex-1/2 p-5 space-y-1">
-                        <div className="text-muted-light text-sm font-semibold uppercase ps-2 cursor-default">Quests</div>
+                        <div className="text-muted-light text-sm font-semibold uppercase ps-2 cursor-default">Guests</div>
                         <div className="w-full text-ink cursor-pointer hover:opacity-80 hover:text-gold-dark group border-b-2 p-2 border-b-transparent hover:border-b-gold-dark transition-all duration-100 ease-in">
-                            <span className="font-semibold">2 Adults, 0 Children</span>
+                            <span className="font-semibold">One person</span>
                             <span className="inline-block align-middle float-right pt-0.5 text-muted-light group-hover:text-gold-dark transition-all duration-100 ease-in">
                                 <ChevronDown size={"1.25rem"} />
                             </span>
@@ -177,7 +189,7 @@ function RoomsPage() {
                 </div>
 
                 {/* n Rooms found */}
-                <div className="w-full flex flex-col space-y-5">
+                <div className="w-full space-y-5">
                     <div className="flex flex-col sm:flex-row items-center justify-between my-5 sm:my-0 gap-2 sm:gap-0">
                         <div>
                             <span className="uppercase text-sm font-medium cursor-default select-none">12 Rooms Found</span>
@@ -196,7 +208,7 @@ function RoomsPage() {
                     </div>
                     {/* Items */}
                     <div className="space-y-5 mt-4 sm:grid grid-cols-2 gap-2 lg:block">
-                        {[0 /*, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11*/].map((i, index) => (
+                        {[0, 1, 2, 3, 4, 5].map((i, index) => (
                             <div
                                 key={index}
                                 className="flex flex-col lg:flex-row w-full h-full border border-border-light overflow-hidden"
@@ -233,7 +245,7 @@ function RoomsPage() {
                                             Relax in our Deluxe Room featuring elegant interios and all the essential amenities.
                                         </p>
                                         <Link
-                                            href={"/"}
+                                            href={"/rooms/test"}
                                             className="text-xs font-semibold text-gold border-b-2 border-b-transparent hover:border-b-gold hover:text-gold-dark"
                                         >
                                             View Details
@@ -246,7 +258,7 @@ function RoomsPage() {
                                                 / night
                                             </div>
                                         </div>
-                                        <Link href={"/"}>
+                                        <Link href={"/rooms/test"}>
                                             <CircleButton className="uppercase text-sm font-medium">View Room</CircleButton>
                                         </Link>
                                     </div>
@@ -255,33 +267,54 @@ function RoomsPage() {
                         ))}
                     </div>
                     {/* Pages */}
-                    <div className="w-full h-full flex items-end justify-center gap-x-2">
+                    <div className="w-full flex items-end justify-center gap-x-2">
                         {/* Back */}
-                        <div className="max-h-5 flex items-center justify-center px-2 py-4 bg-bg-light border border-border-dark/10 rounded-sm text-ink cursor-pointer hover:border-gold hover:bg-gold hover:text-white">
+                        <Link
+                            href="/"
+                            className="max-h-5 flex items-center justify-center px-2 py-4 bg-bg-light border border-border-dark/10 rounded-sm text-ink cursor-pointer hover:border-gold hover:bg-gold hover:text-white"
+                        >
                             <ChevronLeft size={"1rem"} />
-                        </div>
+                        </Link>
                         {/* Page No */}
                         <div className="flex gap-x-1">
-                            <div className="w-10 h-5 flex items-center justify-center p-4 bg-bg-light border border-border-dark/10 rounded-sm text-ink cursor-pointer hover:border-gold hover:bg-gold hover:text-white">
+                            <Link
+                                href="/"
+                                className="w-10 h-5 flex items-center justify-center p-4 bg-bg-light border border-border-dark/10 rounded-sm text-ink cursor-pointer hover:border-gold hover:bg-gold hover:text-white"
+                            >
                                 <span>1</span>
-                            </div>
-                            <div className="w-10 h-5 flex items-center justify-center p-4 bg-bg-light border border-border-dark/10 rounded-sm text-ink cursor-pointer hover:border-gold hover:bg-gold hover:text-white">
+                            </Link>
+                            <Link
+                                href="/"
+                                className="w-10 h-5 flex items-center justify-center p-4 bg-bg-light border border-border-dark/10 rounded-sm text-ink cursor-pointer hover:border-gold hover:bg-gold hover:text-white"
+                            >
                                 <span>2</span>
-                            </div>
-                            <div className="w-10 h-5 flex items-center justify-center p-4 bg-bg-light border border-border-dark/10 rounded-sm text-ink cursor-pointer hover:border-gold hover:bg-gold hover:text-white">
+                            </Link>
+                            <Link
+                                href="/"
+                                className="w-10 h-5 flex items-center justify-center p-4 bg-bg-light border border-border-dark/10 rounded-sm text-ink cursor-pointer hover:border-gold hover:bg-gold hover:text-white"
+                            >
                                 <span>3</span>
-                            </div>
-                            <div className="w-10 h-5 flex items-center justify-center p-4 bg-bg-light border border-border-dark/10 rounded-sm text-ink cursor-default select-none hover:border-gold hover:bg-gold hover:text-white">
+                            </Link>
+                            <Link
+                                href="/"
+                                className="w-10 h-5 flex items-center justify-center p-4 bg-bg-light border border-border-dark/10 rounded-sm text-ink cursor-default select-none hover:border-gold hover:bg-gold hover:text-white"
+                            >
                                 <span>...</span>
-                            </div>
-                            <div className="w-10 h-5 flex items-center justify-center p-4 bg-bg-light border border-border-dark/10 rounded-sm text-ink cursor-pointer hover:border-gold hover:bg-gold hover:text-white">
+                            </Link>
+                            <Link
+                                href="/"
+                                className="w-10 h-5 flex items-center justify-center p-4 bg-bg-light border border-border-dark/10 rounded-sm text-ink cursor-pointer hover:border-gold hover:bg-gold hover:text-white"
+                            >
                                 <span>10</span>
-                            </div>
+                            </Link>
                         </div>
                         {/* Forward */}
-                        <div className="max-h-5 flex items-center justify-center px-2 py-4 bg-bg-light border border-border-dark/10 rounded-sm text-ink cursor-pointer hover:border-gold hover:bg-gold hover:text-white">
+                        <Link
+                            href="/"
+                            className="max-h-5 flex items-center justify-center px-2 py-4 bg-bg-light border border-border-dark/10 rounded-sm text-ink cursor-pointer hover:border-gold hover:bg-gold hover:text-white"
+                        >
                             <ChevronRight size={"1rem"} />
-                        </div>
+                        </Link>
                     </div>
                 </div>
             </div>

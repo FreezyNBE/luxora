@@ -77,7 +77,7 @@ export default function Home() {
                     <div className="w-full lg:flex-1/2 p-5 space-y-1">
                         <div className="text-muted-light text-sm font-semibold uppercase ps-2 cursor-default">Quests</div>
                         <div className="w-full text-ink cursor-pointer hover:opacity-80 hover:text-gold-dark group border-b-2 p-2 border-b-transparent hover:border-b-gold-dark transition-all duration-100 ease-in">
-                            <span className="font-semibold">2 Adults, 0 Children</span>
+                            <span className="font-semibold">One person</span>
                             <span className="inline-block align-middle float-right pt-0.5 text-muted-light group-hover:text-gold-dark transition-all duration-100 ease-in">
                                 <ChevronDown size={"1.25rem"} />
                             </span>
