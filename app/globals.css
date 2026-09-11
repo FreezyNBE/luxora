@@ -117,3 +117,67 @@ h4 {
 .link-border {
     @apply border-b-2 border-b-transparent hover:border-b-gold-light hover:text-gold transition-all duration-75 ease-in;
 }
+
+.image-slide-in-right {
+    position: absolute;
+    inset: 0;
+    animation: slideInRight 400ms ease-in-out forwards;
+}
+
+.image-slide-in-left {
+    position: absolute;
+    inset: 0;
+    animation: slideInLeft 400ms ease-in-out forwards;
+}
+
+.image-slide-out-left {
+    position: absolute;
+    inset: 0;
+    animation: slideOutLeft 400ms ease-in-out forwards;
+}
+
+.image-slide-out-right {
+    position: absolute;
+    inset: 0;
+    animation: slideOutRight 400ms ease-in-out forwards;
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+    }
+
+    to {
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInLeft {
+    from {
+        transform: translateX(-100%);
+    }
+
+    to {
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideOutLeft {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(-100%);
+    }
+}
+
+@keyframes slideOutRight {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(100%);
+    }
+}

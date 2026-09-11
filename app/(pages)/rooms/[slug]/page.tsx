@@ -1,3 +1,4 @@
+import ImageSlider from "@/app/components/core/ImageSlider";
 import { Button, ButtonOutline } from "@/app/components/misc/Button";
 import {
     AlarmClock,
@@ -22,15 +23,13 @@ import {
 
 export default function RoomPage() {
     return (
-        <div className="w-full flex flex-col xl:flex-row gap-5 py-2 overflow-hidden">
+        <div className="w-full flex flex-col 2xl:flex-row gap-5 py-2 overflow-hidden">
             {/* Content Left */}
             <div className="flex flex-col">
                 {/* Sliding images */}
                 <div className="w-full h-full flex flex-col items-center justify-center 2xl:flex-row gap-x-3 overflow-hidden">
                     {/* Big image sliding */}
-                    <div className="w-full h-full">
-                        <img src="/img/hero.png" alt="" className="w-full h-full object-cover rounded-lg" />
-                    </div>
+                    <ImageSlider />
 
                     {/* Small images top-bottom */}
                     <div className="h-full mt-2 2xl:mt-0">
@@ -43,7 +42,7 @@ export default function RoomPage() {
                 </div>
 
                 {/* Informations */}
-                <div className="py-8">
+                <div className="pt-8">
                     <div className="flex flex-col xl:flex-row gap-5">
                         <div className="w-full max-w-4xl">
                             {/* About current item */}
@@ -142,8 +141,8 @@ export default function RoomPage() {
             </div>
 
             {/* Content Right */}
-            <div className="w-full xl:max-w-sm">
-                <div className="border border-border-light shadow-lg p-6">
+            <div className="w-full 2xl:max-w-sm">
+                <div className="border border-border-light shadow-lg rounded-lg p-6">
                     <section className="w-full flex flex-col items-start justify-center">
                         <h1 className="text-2xl font-semibold">Deluxe Room</h1>
                         <div className="flex flex-col 2xl:flex-row gap-x-8 gap-y-2 mt-1">
