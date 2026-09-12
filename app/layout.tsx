@@ -4,6 +4,7 @@ import "./globals.css";
 import Navigation from "./components/Navigation";
 import GlobalContextProvider from "./context/GlobalContext";
 import Footer from "./components/Footer";
+import GalleryContextProvider from "./context/GalleryContext";
 
 const roboto = Roboto_Condensed({
     subsets: ["latin"],
@@ -26,9 +27,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     return (
         <html lang="en" className={`${roboto.variable} ${inter.variable} h-full antialiased`}>
             <GlobalContextProvider>
-                <Navigation />
-                {children}
-                <Footer />
+                <GalleryContextProvider>
+                    <Navigation />
+                    {children}
+                    <Footer />
+                </GalleryContextProvider>
             </GlobalContextProvider>
         </html>
     );

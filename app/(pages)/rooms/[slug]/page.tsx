@@ -1,5 +1,8 @@
+"use client";
+
 import ImageSlider from "@/app/components/core/ImageSlider";
 import { Button, ButtonOutline } from "@/app/components/misc/Button";
+import { useGallery } from "@/app/context/GalleryContext";
 import {
     AlarmClock,
     BadgeCheck,
@@ -20,23 +23,61 @@ import {
     Wifi,
     Wind,
 } from "lucide-react";
+import Image from "next/image";
 
 export default function RoomPage() {
+    const { createGallery } = useGallery();
+
+    const displayGallery = () => {
+        createGallery(["/img/hero.png", "/img/img1.jpg", "/img/img2.jpg", "/img/img3.jpg", "/img/img4.jpg", "/img/img5.jpg"]);
+    };
+
     return (
         <div className="w-full flex flex-col 2xl:flex-row gap-5 py-2 overflow-hidden">
             {/* Content Left */}
             <div className="flex flex-col">
                 {/* Sliding images */}
-                <div className="w-full h-full flex flex-col items-center justify-center 2xl:flex-row gap-x-3 overflow-hidden">
+                <div className="w-full h-full flex flex-col items-start justify-center 2xl:flex-row gap-x-3 overflow-hidden">
                     {/* Big image sliding */}
                     <ImageSlider />
 
                     {/* Small images top-bottom */}
-                    <div className="h-full mt-2 2xl:mt-0">
-                        <div className="w-[calc((100%-16px)/3)] 2xl:w-80 h-full flex 2xl:flex-col gap-2">
-                            <img src="/img/hero.png" alt="" className="w-full h-full object-cover rounded-lg" />
-                            <img src="/img/hero.png" alt="" className="w-full h-full object-cover rounded-lg" />
-                            <img src="/img/hero.png" alt="" className="w-full h-full object-cover rounded-lg" />
+                    <div className="mt-2 2xl:mt-0 w-full 2xl:w-xs max-2xl:overflow-y-auto">
+                        <div className="flex 2xl:flex-col gap-2">
+                            <div className="relative shrink-0 w-52 2xl:w-80 h-32 2xl:h-42">
+                                <Image
+                                    src="/img/img4.jpg"
+                                    alt={`Image gallery 1`}
+                                    fill
+                                    className="w-full h-full object-cover rounded-lg"
+                                />
+                                <div className="absolute inset-0 flex items-center justify-center bg-black/30 rounded-lg " />
+                            </div>
+                            <div className="relative shrink-0 w-52 2xl:w-80 h-32 2xl:h-42">
+                                <Image
+                                    src="/img/img2.jpg"
+                                    alt={`Image gallery 2`}
+                                    fill
+                                    className="w-full h-full object-cover rounded-lg"
+                                />
+                                <div className="absolute inset-0 flex items-center justify-center bg-black/30 rounded-lg " />
+                            </div>
+                            <div
+                                className="relative shrink-0 w-52 2xl:w-80 h-32 2xl:h-42 cursor-pointer group"
+                                onClick={displayGallery}
+                            >
+                                <Image
+                                    src="/img/img4.jpg"
+                                    alt={`Image gallery 3`}
+                                    fill
+                                    className="w-full h-full object-cover rounded-lg"
+                                />
+                                <div className="absolute inset-0 flex items-center justify-center bg-black/50 rounded-lg group-hover:bg-black/70 transition-all duration-100 ease-in-out">
+                                    <div className="w-fit h-fit flex items-end justify-center px-5 py-2.5 rounded-lg text-white/80 bg-bg-dark/30 border border-border-light/30">
+                                        +3 Photos
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

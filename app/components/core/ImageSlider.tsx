@@ -6,14 +6,12 @@ import { useState } from "react";
 
 type Direction = "next" | "prev";
 
-export default function ImageSlider() {
-    const images = [
-        "/img/hero.png",
-        "https://images.pexels.com/photos/12489187/pexels-photo-12489187.jpeg",
-        "https://images.pexels.com/photos/39040572/pexels-photo-39040572.jpeg",
-        "https://images.pexels.com/photos/34672504/pexels-photo-34672504.jpeg",
-        "https://images.pexels.com/photos/33105840/pexels-photo-33105840.jpeg",
-    ];
+type ImageSliderTypes = {
+    showCounting?: boolean;
+};
+
+export default function ImageSlider({ showCounting = true }: ImageSliderTypes) {
+    const images = ["/img/hero.png", "/img/img1.jpg", "/img/img2.jpg", "/img/img3.jpg", "/img/img4.jpg", "/img/img5.jpg"];
 
     const [currentIndex, setCurrentIndex] = useState(0);
     const [incomingIndex, setIncomingIndex] = useState<number | null>(null);
@@ -107,13 +105,15 @@ export default function ImageSlider() {
                 </div>
 
                 {/* Counting */}
-                <div className="absolute bottom-5 left-5">
-                    <div className="bg-bg-dark/50 border border-border-light/50 rounded-lg px-6 py-2">
-                        <span className="text-white tracking-widest">
-                            {currentIndex + 1}/{images.length}
-                        </span>
+                {showCounting && (
+                    <div className="absolute bottom-5 left-5">
+                        <div className="bg-bg-dark/50 border border-border-light/50 rounded-lg px-6 py-2">
+                            <span className="text-white tracking-widest">
+                                {currentIndex + 1}/{images.length}
+                            </span>
+                        </div>
                     </div>
-                </div>
+                )}
             </div>
         </div>
     );
