@@ -25,6 +25,19 @@ export function ButtonOutline({ children, className = "", ...props }: ButtonType
     );
 }
 
+export function ButtonAction({ children, className = "", ...props }: ButtonType) {
+    return (
+        <button
+            className={`w-50 h-12 px-4 py-1 bg-black rounded-lg hover:bg-black/80 transition duration-100 ease-in cursor-pointer ${
+                className.length ? className : ""
+            } truncate`}
+            {...props}
+        >
+            {children}
+        </button>
+    );
+}
+
 export function CircleButton({ children, className = "", ...props }: ButtonType) {
     return (
         <button

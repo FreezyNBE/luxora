@@ -181,3 +181,11 @@ h4 {
         transform: translateX(100%);
     }
 }
+
+.link-text {
+    @apply hover:text-gold hover:underline;
+}
+
+.link-text-color {
+    @apply text-gold hover:text-gold-dark hover:underline;
+}
