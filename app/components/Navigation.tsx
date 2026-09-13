@@ -114,7 +114,7 @@ function Navigation() {
                             <Menu className="lg:hidden hover:opacity-70" />
                         </div>
                     </div>
-                    <Link href={"/login"}>
+                    <Link href={"/"}>
                         <Button className="text-sm uppercase">Book now</Button>
                     </Link>
                 </div>

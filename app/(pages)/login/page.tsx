@@ -1,7 +1,7 @@
 import { ButtonAction } from "@/app/components/misc/Button";
 import { LockKeyhole, Mail, ShieldCheck } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
-import { FaGithub, FaGoogle } from "react-icons/fa";
 
 export default function LoginPage() {
     return (
@@ -67,15 +67,15 @@ export default function LoginPage() {
                                 </div>
                             </div>
                             <div className="w-full flex flex-col sm:flex-row items-center justify-center gap-3 mt-5">
-                                <ButtonAction className="w-full text-sm bg-cream-soft text-ink font-semibold border border-border-light hover:bg-black hover:text-white">
+                                <ButtonAction className="w-full text-sm bg-cream-soft text-ink font-semibold border border-border-light hover:bg-cream-dark hover:border-transparent">
                                     <div className="flex items-center justify-center gap-x-2">
-                                        <FaGoogle />
+                                        <Image src="/svg/sm-google.svg" alt="Google" width={20} height={20} />
                                         <span>Google</span>
                                     </div>
                                 </ButtonAction>
-                                <ButtonAction className="w-full text-sm bg-cream-soft text-ink font-semibold border border-border-light hover:bg-black hover:text-white">
+                                <ButtonAction className="w-full text-sm bg-cream-soft text-ink font-semibold border border-border-light hover:bg-cream-dark hover:border-transparent">
                                     <div className="flex items-center justify-center gap-x-2">
-                                        <FaGithub />
+                                        <Image src="/svg/sm-github.svg" alt="Github" width={20} height={20} />
                                         <span>Github</span>
                                     </div>
                                 </ButtonAction>

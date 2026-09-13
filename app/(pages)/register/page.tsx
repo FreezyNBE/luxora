@@ -1,7 +1,6 @@
 import { ButtonAction } from "@/app/components/misc/Button";
-import { Asterisk, EyeOff, Info, LockKeyhole, Mail, ShieldCheck, SquareAsterisk, User } from "lucide-react";
+import { EyeOff, LockKeyhole, Mail, ShieldCheck, User } from "lucide-react";
 import Link from "next/link";
-import { FaGithub, FaGoogle } from "react-icons/fa";
 
 export default function RegisterPage() {
     return (
