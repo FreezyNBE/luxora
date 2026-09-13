@@ -215,7 +215,7 @@ function RoomsPage() {
                             >
                                 <img
                                     src="/img/hero2.png"
-                                    alt=""
+                                    alt={`Deluxe Room`}
                                     className="w-full lg:max-w-sm h-1/2 md:h-72 lg:h-full object-cover"
                                 />
                                 <div className="w-full flex flex-col lg:flex-row gap-y-3 lg:gap-y-0 lg:ms-5 py-2 ps-2 lg:ps-0">

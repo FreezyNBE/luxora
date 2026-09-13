@@ -63,6 +63,7 @@ export default function ImageSlider({ showCounting = true }: ImageSliderTypes) {
                         src={images[currentIndex]}
                         alt={`Image ${currentIndex + 1}`}
                         fill
+                        sizes="(max-width: 1536px) 100vw, 100%"
                         className="object-cover"
                         priority
                     />
@@ -78,8 +79,8 @@ export default function ImageSlider({ showCounting = true }: ImageSliderTypes) {
                             src={images[incomingIndex]}
                             alt={`Image ${incomingIndex + 1}`}
                             fill
+                            sizes="(max-width: 1536px) 100vw, 100%"
                             className="object-cover"
-                            priority
                         />
                     </div>
                 )}

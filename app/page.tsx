@@ -21,7 +21,13 @@ export default function Home() {
             {/* Hero section */}
             <section className="relative w-full h-300 text-white">
                 {/* Background image */}
-                <Image src="/img/hero.png" alt="Hotel Room" fill className="absolute inset-0 w-full h-full object-cover" />
+                <Image
+                    src="/img/hero.png"
+                    alt="Hotel Room"
+                    fill
+                    sizes="100vw"
+                    className="absolute inset-0 w-full h-full object-cover"
+                />
 
                 {/* Dark overlay */}
                 <div className="absolute inset-0 bg-linear-to-r from-black/20 via-black/30 to-transparent after:absolute after:inset-0 after:bg-linear-to-r after:from-black/30 after:to-transparent" />
@@ -149,8 +155,16 @@ export default function Home() {
 
             {/* About us */}
             <section className="w-full lg:h-120 flex flex-col lg:flex-row mt-20">
-                <img src="/img/about-us.png" alt="Hotel Room" className="w-full lg:w-1/2 h-full object-cover" />
-                <div className="w-full bg-cream-dark">
+                <div className="relative w-full h-80 lg:h-full lg:w-1/2">
+                    <Image
+                        src="/img/about-us.png"
+                        alt="Hotel Room"
+                        fill
+                        sizes="(min-width: 1024px) 50vw, 100vw"
+                        className="object-cover"
+                    />
+                </div>
+                <div className="w-full lg:w-1/2 bg-cream-dark">
                     <div className="w-full h-full flex flex-col items-start justify-center gap-2 px-10 py-4 space-y-5">
                         <div className="text-shadow-xs uppercase text-muted">About Luxora Hotel</div>
                         <h2 className="text-shadow-xs font-bold text-4xl">A Stay That Feels Like Home</h2>

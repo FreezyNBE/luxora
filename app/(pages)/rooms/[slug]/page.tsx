@@ -42,13 +42,14 @@ export default function RoomPage() {
                     <ImageSlider />
 
                     {/* Small images top-bottom */}
-                    <div className="mt-2 2xl:mt-0 w-full 2xl:w-xs max-2xl:overflow-y-auto">
+                    <div className="mt-2 2xl:mt-0 w-full 2xl:w-xs max-2xl:overflow-y-auto rounded-lg">
                         <div className="flex 2xl:flex-col gap-2">
                             <div className="relative shrink-0 w-52 2xl:w-80 h-32 2xl:h-42">
                                 <Image
                                     src="/img/img4.jpg"
                                     alt={`Image gallery 1`}
                                     fill
+                                    sizes="(min-width: 1536px) 320px, 208px"
                                     className="w-full h-full object-cover rounded-lg"
                                 />
                                 <div className="absolute inset-0 flex items-center justify-center bg-black/30 rounded-lg " />
@@ -58,6 +59,7 @@ export default function RoomPage() {
                                     src="/img/img2.jpg"
                                     alt={`Image gallery 2`}
                                     fill
+                                    sizes="(min-width: 1536px) 320px, 208px"
                                     className="w-full h-full object-cover rounded-lg"
                                 />
                                 <div className="absolute inset-0 flex items-center justify-center bg-black/30 rounded-lg " />
@@ -70,6 +72,7 @@ export default function RoomPage() {
                                     src="/img/img4.jpg"
                                     alt={`Image gallery 3`}
                                     fill
+                                    sizes="(min-width: 1536px) 320px, 208px"
                                     className="w-full h-full object-cover rounded-lg"
                                 />
                                 <div className="absolute inset-0 flex items-center justify-center bg-black/50 rounded-lg group-hover:bg-black/70 transition-all duration-100 ease-in-out">
