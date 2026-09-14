@@ -14,20 +14,17 @@ import {
     Users,
 } from "lucide-react";
 import Image from "next/image";
+import HeroSlider from "./components/core/HeroSlider";
 
 export default function Home() {
     return (
         <main className="-mt-(--navbar-height)">
             {/* Hero section */}
             <section className="relative w-full h-300 text-white">
-                {/* Background image */}
-                <Image
-                    src="/img/hero.png"
-                    alt="Hotel Room"
-                    fill
-                    sizes="100vw"
-                    className="absolute inset-0 w-full h-full object-cover"
-                />
+                {/* Hero Slider */}
+                <div className="absolute inset-0 w-full h-full">
+                    <HeroSlider />
+                </div>
 
                 {/* Dark overlay */}
                 <div className="absolute inset-0 bg-linear-to-r from-black/20 via-black/30 to-transparent after:absolute after:inset-0 after:bg-linear-to-r after:from-black/30 after:to-transparent" />
