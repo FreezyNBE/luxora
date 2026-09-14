@@ -23,6 +23,7 @@
     --color-text-light: #b0aca5;
     --color-text-white: #ffffff;
     --color-text-under: #313131;
+    --color-text-ligher: #aaaaaa;
 
     /* Dark Sections */
     --color-dark: #171716;
@@ -78,6 +79,7 @@
     --color-muted-light: #8a867f;
     --color-heading: #525252;
     --color-under: #313131;
+    --color-ligher: #aaaaaa;
 
     /* Dark */
     --color-charcoal: #171716;
