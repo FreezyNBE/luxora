@@ -163,9 +163,9 @@ export default function Home() {
                 </div>
                 <div className="w-full lg:w-1/2 bg-cream-dark">
                     <div className="w-full h-full flex flex-col items-start justify-center gap-2 px-10 py-4 space-y-5">
-                        <div className="text-shadow-xs uppercase text-muted">About Luxora Hotel</div>
-                        <h2 className="text-shadow-xs font-bold text-4xl">A Stay That Feels Like Home</h2>
-                        <p className="max-w-md text-shadow-xs">
+                        <div className="tracking-wide uppercase text-heading">About Luxora Hotel</div>
+                        <h2 className="font-bold text-4xl">A Stay That Feels Like Home</h2>
+                        <p className="max-w-md text-heading tracking-wide">
                             At Luxora Hotel, we blend timeless elegance with modern comfort to create unforgettable experiences.
                             Whether you're here for business, leisure, or a special occasion, we're commited to making your stay
                             exceptional.

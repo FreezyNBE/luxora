@@ -3,7 +3,7 @@ import Link from "next/link";
 
 function Footer() {
     return (
-        <div className="w-full bg-brown-dark text-ligher overfow-hidden">
+        <footer className="w-full bg-brown-dark text-ligher overfow-hidden">
             <div className="grid grid-cols-1 min-[445px]:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-5 gap-5 p-5">
                 <div className="space-y-5">
                     <h1 className="flex items-center gap-1 text-xl font-bold cursor-default text-white">
@@ -70,7 +70,9 @@ function Footer() {
                 </div>
                 <div className="space-y-5">
                     <h1 className="text-white cursor-default uppercase tracking-wider">Newsletter</h1>
-                    <p className="w-full max-w-54 text-sm">Subscribe to get special offers and travel inspiration.</p>
+                    <span className="block w-full max-w-54 text-sm">
+                        Subscribe to get special offers and travel inspiration.
+                    </span>
                     <div className="flex items-center text-sm">
                         <div className="w-58 border border-r-0 border-border-dark p-2 rounded-lg rounded-r-none">
                             <input
@@ -95,7 +97,7 @@ function Footer() {
                     &copy; {new Date().getFullYear()} - Luxora Hotel - <span className="text-gold">Project</span>.
                 </div>
             </div>
-        </div>
+        </footer>
     );
 }
 

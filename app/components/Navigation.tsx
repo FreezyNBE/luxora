@@ -15,13 +15,11 @@ function Navigation() {
 
     useEffect(() => {
         if (navMobileStatus) {
-            console.log("pathname is", pathname);
             closeMenu(false);
         }
     }, [pathname]);
 
     const openMenu = () => {
-        console.log("clicked");
         setNavMobileVisible(true);
 
         // Let the element mount first
@@ -73,7 +71,7 @@ function Navigation() {
                         </li>
                         <li>
                             <Link
-                                href="/"
+                                href="/facilities"
                                 className="py-2 border-b-2 border-b-transparent hover:border-b-gold hover:text-gold-light transition duration-100 ease-in"
                             >
                                 Facilities
@@ -155,7 +153,7 @@ function Navigation() {
                                         <span>Rooms</span>
                                     </Link>
                                     <Link
-                                        href="/"
+                                        href="/facilities"
                                         className="w-fit py-2 border-b-2 border-b-transparent hover:border-b-gold hover:text-gold-light transition duration-100 ease-in"
                                     >
                                         <span>Facilities</span>

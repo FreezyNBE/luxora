@@ -4,10 +4,10 @@ import Link from "next/link";
 
 export default function RegisterPage() {
     return (
-        <div className="relative w-full bg-cream py-10 overflow-hidden">
+        <div className="relative w-full bg-cream py-5 overflow-hidden">
             <div className="w-full flex items-center justify-center py-5 px-2">
                 {/* Container */}
-                <div className="w-full max-w-md bg-cream py-10 px-5 md:px-10 rounded-xs border border-border-light">
+                <div className="w-full max-w-md bg-cream py-7 px-5 rounded-xs border border-border-light">
                     {/* Heading */}
                     <div className="w-full flex flex-col items-center justify-center gap-y-2 text-center">
                         <h1 className="text-3xl font-semibold">Create Your Account</h1>
@@ -21,7 +21,7 @@ export default function RegisterPage() {
                             <label htmlFor="email" className="text-sm font-semibold">
                                 Full Name
                             </label>
-                            <div className="w-full max-w-lg py-2 px-4 flex items-center gap-x-3 p-2 border-2 border-border-light rounded-lg">
+                            <div className="w-full max-w-lg py-2 px-4 flex items-center gap-x-3 p-2 border border-border-light rounded-lg">
                                 <User size={"1.35rem"} className="text-gray-800/70" />
                                 <input
                                     type="text"
@@ -29,6 +29,7 @@ export default function RegisterPage() {
                                     name="name"
                                     className="w-full max-w-72 outline-none text-ink text-sm placeholder:font-medium font-semibold"
                                     placeholder="Enter your full name"
+                                    autoComplete="true"
                                 />
                             </div>
                         </div>
@@ -36,7 +37,7 @@ export default function RegisterPage() {
                             <label htmlFor="email" className="text-sm font-semibold">
                                 Email Address
                             </label>
-                            <div className="w-full max-w-lg py-2 px-4 flex items-center gap-x-3 p-2 border-2 border-border-light rounded-lg">
+                            <div className="w-full max-w-lg py-2 px-4 flex items-center gap-x-3 p-2 border border-border-light rounded-lg">
                                 <Mail size={"1.35rem"} className="text-gray-800/70" />
                                 <input
                                     type="email"
@@ -44,6 +45,7 @@ export default function RegisterPage() {
                                     name="email"
                                     className="w-full max-w-72 outline-none text-ink text-sm placeholder:font-medium font-semibold"
                                     placeholder="Enter your email"
+                                    autoComplete="true"
                                 />
                             </div>
                         </div>
@@ -52,7 +54,7 @@ export default function RegisterPage() {
                                 Password
                             </label>
                             <div>
-                                <div className="w-full max-w-lg py-2 px-4 flex items-center gap-x-3 p-2 border-2 border-border-light rounded-lg">
+                                <div className="w-full max-w-lg py-2 px-4 flex items-center gap-x-3 p-2 border border-border-light rounded-lg">
                                     <LockKeyhole size={"1.35rem"} className="text-gray-800/70" />
                                     <input
                                         type="password"
@@ -70,7 +72,7 @@ export default function RegisterPage() {
                             <label htmlFor="password" className="text-sm font-semibold">
                                 Confirm Password
                             </label>
-                            <div className="w-full max-w-lg py-2 px-4 flex items-center gap-x-3 p-2 border-2 border-border-light rounded-lg">
+                            <div className="w-full max-w-lg py-2 px-4 flex items-center gap-x-3 p-2 border border-border-light rounded-lg">
                                 <LockKeyhole size={"1.35rem"} className="text-gray-800/70" />
                                 <input
                                     type="password"
@@ -87,7 +89,7 @@ export default function RegisterPage() {
                     <div className="mt-8 space-y-5">
                         <div className="space-y-2">
                             <div className="pb-2">
-                                <div className="w-full mb-2 flex">
+                                <div className="w-full mb-2 flex items-center justify-center">
                                     <input
                                         type="checkbox"
                                         name="all_room_types"
@@ -96,7 +98,7 @@ export default function RegisterPage() {
                                     />
                                     <label
                                         htmlFor="all_room_types"
-                                        className="select-none ms-2 text-xs font-medium text-heading"
+                                        className="select-none ms-2 text-sm font-medium text-heading"
                                     >
                                         I agree to the{" "}
                                         <Link href={"/"} className="link-text-color">
@@ -119,7 +121,7 @@ export default function RegisterPage() {
                             </p>
                         </div>
                         <div>
-                            <div className="relative inset-0 w-full h-0.5 bg-bg-light rounded-full cursor-default" />
+                            <div className="relative inset-0 w-full h-px bg-bg-light rounded-full cursor-default" />
                         </div>
                         <div className="flex items-center justify-center gap-2 cursor-default">
                             <ShieldCheck className="text-green-700" />

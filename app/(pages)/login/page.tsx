@@ -5,10 +5,10 @@ import Link from "next/link";
 
 export default function LoginPage() {
     return (
-        <div className="relative w-full bg-cream py-10 overflow-hidden">
+        <div className="relative w-full bg-cream py-5 overflow-hidden">
             <div className="w-full flex items-center justify-center py-5 px-2">
                 {/* Container */}
-                <div className="w-full max-w-md bg-cream py-10 px-5 md:px-10 rounded-xs border border-border-light">
+                <div className="w-full max-w-md bg-cream py-7 px-5 rounded-xs border border-border-light">
                     {/* Heading */}
                     <div className="w-full flex flex-col items-center justify-center gap-y-2 text-center">
                         <h1 className="text-3xl font-semibold">Sign in</h1>
@@ -22,7 +22,7 @@ export default function LoginPage() {
                             <label htmlFor="email" className="text-sm font-semibold">
                                 Email Address
                             </label>
-                            <div className="w-full max-w-lg py-2 px-4 flex items-center gap-x-3 p-2 border-2 border-border-light rounded-lg">
+                            <div className="w-full max-w-lg py-2 px-4 flex items-center gap-x-3 p-2 border border-border-light rounded-lg">
                                 <Mail size={"1.35rem"} className="text-gray-800/70" />
                                 <input
                                     type="email"
@@ -30,6 +30,7 @@ export default function LoginPage() {
                                     name="email"
                                     className="w-full max-w-72 outline-none text-ink text-sm placeholder:font-medium font-semibold"
                                     placeholder="Enter your email"
+                                    autoComplete="true"
                                 />
                             </div>
                         </div>
@@ -37,7 +38,7 @@ export default function LoginPage() {
                             <label htmlFor="password" className="text-sm font-semibold">
                                 Password
                             </label>
-                            <div className="w-full max-w-lg py-2 px-4 flex items-center gap-x-3 p-2 border-2 border-border-light rounded-lg">
+                            <div className="w-full max-w-lg py-2 px-4 flex items-center gap-x-3 p-2 border border-border-light rounded-lg">
                                 <LockKeyhole size={"1.35rem"} className="text-gray-800/70" />
                                 <input
                                     type="password"
@@ -50,7 +51,7 @@ export default function LoginPage() {
                         </div>
                     </div>
                     {/* Footer */}
-                    <div className="mt-8 space-y-10">
+                    <div className="mt-8 space-y-5">
                         <div className="space-y-2">
                             <ButtonAction className="w-full text-sm text-white font-semibold">Sign In</ButtonAction>
                             <p className="text-sm text-ink font-medium text-center">
@@ -60,8 +61,8 @@ export default function LoginPage() {
                                 </Link>
                             </p>
                         </div>
-                        <div>
-                            <div className="relative inset-0 w-full h-0.5 bg-bg-light rounded-full cursor-default">
+                        <div className="pt-5">
+                            <div className="relative inset-0 w-full h-px bg-bg-light rounded-full cursor-default">
                                 <div className="absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 bg-cream px-3 text-xs font-medium">
                                     or
                                 </div>
