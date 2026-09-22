@@ -2,9 +2,6 @@ import { Button } from "@/app/components/misc/Button";
 import { Mail, MapPin, Phone } from "lucide-react";
 
 export default function ContactPage() {
-    const validUntil = new Date();
-    validUntil.setDate(validUntil.getDate() + 1);
-
     return (
         <div className="w-full space-y-10 bg-cream">
             {/* Top */}
@@ -88,7 +85,7 @@ export default function ContactPage() {
                                     id="message"
                                     name="message"
                                     rows={3}
-                                    className="w-full max-w-lg max-h-30 py-2 px-4 flex items-start gap-x-3 p-2 border border-border-light rounded-lg outline-none text-ink text-sm placeholder:font-medium font-semibold"
+                                    className="w-full max-w-lg min-h-20 max-h-23 py-2 px-4 flex items-start gap-x-3 p-2 border border-border-light rounded-lg outline-none text-ink text-sm placeholder:font-medium font-semibold"
                                     placeholder="Your Message"
                                 />
                             </div>
