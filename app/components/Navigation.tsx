@@ -87,15 +87,7 @@ function Navigation() {
                         </li>
                         <li>
                             <Link
-                                href="/"
-                                className="py-2 border-b-2 border-b-transparent hover:border-b-gold hover:text-gold-light transition duration-100 ease-in"
-                            >
-                                Gallery
-                            </Link>
-                        </li>
-                        <li>
-                            <Link
-                                href="/"
+                                href="/contact"
                                 className="py-2 border-b-2 border-b-transparent hover:border-b-gold hover:text-gold-light transition duration-100 ease-in"
                             >
                                 Contact
@@ -165,13 +157,7 @@ function Navigation() {
                                         <span>Offers</span>
                                     </Link>
                                     <Link
-                                        href="/"
-                                        className="w-fit py-2 border-b-2 border-b-transparent hover:border-b-gold hover:text-gold-light transition duration-100 ease-in"
-                                    >
-                                        <span>Gallery</span>
-                                    </Link>
-                                    <Link
-                                        href="/"
+                                        href="/contact"
                                         className="w-fit py-2 border-b-2 border-b-transparent hover:border-b-gold hover:text-gold-light transition duration-100 ease-in"
                                     >
                                         <span>Contact</span>

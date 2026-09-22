@@ -1,5 +1,5 @@
-import { Button, CircleButton } from "@/app/components/misc/Button";
-import { Calendar, Clock, Eye, SquareM, UserRound } from "lucide-react";
+import { Button } from "@/app/components/misc/Button";
+import { Calendar, Clock } from "lucide-react";
 import Link from "next/link";
 
 export default function OffersPage() {
