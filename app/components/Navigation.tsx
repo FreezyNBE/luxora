@@ -79,7 +79,7 @@ function Navigation() {
                         </li>
                         <li>
                             <Link
-                                href="/"
+                                href="/offers"
                                 className="py-2 border-b-2 border-b-transparent hover:border-b-gold hover:text-gold-light transition duration-100 ease-in"
                             >
                                 Offers
@@ -159,7 +159,7 @@ function Navigation() {
                                         <span>Facilities</span>
                                     </Link>
                                     <Link
-                                        href="/"
+                                        href="/offers"
                                         className="w-fit py-2 border-b-2 border-b-transparent hover:border-b-gold hover:text-gold-light transition duration-100 ease-in"
                                     >
                                         <span>Offers</span>
