@@ -39,7 +39,7 @@ export default function RoomPageLayout({ children }: { children: React.ReactNode
                             <span className="text-muted group-hover:text-orange-800/60 font-semibold text-sm">My Profile</span>
                         </Link>
                     )}
-                    {pathname === "/user/bookmark" ? (
+                    {pathname === "/user/booking" ? (
                         <Link
                             href={"/user/bookmark"}
                             className="w-full lg:w-56 flex items-center gap-x-2 ps-3 py-2 rounded-sm bg-orange-200/50 cursor-pointer hover:bg-orange-200/80 transition-all duration-75"
@@ -49,7 +49,7 @@ export default function RoomPageLayout({ children }: { children: React.ReactNode
                         </Link>
                     ) : (
                         <Link
-                            href={"/user/bookmark"}
+                            href={"/user/booking"}
                             className="w-full lg:w-56 flex items-center gap-x-2 ps-3 py-2 rounded-sm bg-transparent cursor-pointer hover:bg-orange-300/20 transition-all duration-75 group"
                         >
                             <Bookmark size={"1.25rem"} className="text-muted group-hover:text-orange-800/60" />

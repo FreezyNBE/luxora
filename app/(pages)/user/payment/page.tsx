@@ -1,5 +1,4 @@
-import { ButtonAction } from "@/app/components/misc/Button";
-import { Check, EyeOff, IdCard, Info, MapPinned, SquarePen, User } from "lucide-react";
+import { Check, EyeOff, IdCard, SquarePen } from "lucide-react";
 
 export default function PaymentMethodsPage() {
     return (

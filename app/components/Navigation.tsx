@@ -172,11 +172,11 @@ function Navigation() {
                                     <User />
                                     <span>My Account</span>
                                 </Link>
-                                <Link href={"/"} className="flex items-center gap-2 hover:opacity-70">
+                                <Link href={"/user/wishlist"} className="flex items-center gap-2 hover:opacity-70">
                                     <Heart />
                                     <span>My Wishlist</span>
                                 </Link>
-                                <Link href={"/"} className="flex items-center gap-2 hover:opacity-70">
+                                <Link href={"/user/booking"} className="flex items-center gap-2 hover:opacity-70">
                                     <Calendar />
                                     <span>My Bookings</span>
                                 </Link>

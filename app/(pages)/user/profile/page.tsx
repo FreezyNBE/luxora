@@ -7,7 +7,7 @@ export default function ProfilePage() {
             <div className="w-fit">
                 <div className="relative block text-lg font-medium tracking-wide group cursor-pointer">
                     <span>My Profile</span>
-                    <div className="absolute bottom-0 w-0 group-hover:w-full h-0.5 bg-gold transition-all duration-300 ease-in" />
+                    <div className="absolute bottom-0 w-0 group-hover:w-full h-0.5 bg-gold-light transition-all duration-300 ease-in" />
                 </div>
             </div>
             {/* Fields */}
