@@ -1,6 +1,5 @@
-import { Button, ButtonAction, ButtonOutline } from "@/app/components/misc/Button";
+import { ButtonAction } from "@/app/components/misc/Button";
 import { Mail, MapPin, Phone } from "lucide-react";
-import Image from "next/image";
 
 export default function ContactPage() {
     return (

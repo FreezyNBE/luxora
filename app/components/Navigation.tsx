@@ -168,7 +168,7 @@ function Navigation() {
                             <div className="w-full h-[0.5] bg-border-dark" />
 
                             <div className="space-y-3 py-5 text-sm">
-                                <Link href={"/"} className="flex items-center gap-2 hover:opacity-70">
+                                <Link href={"/user/profile"} className="flex items-center gap-2 hover:opacity-70">
                                     <User />
                                     <span>My Account</span>
                                 </Link>
