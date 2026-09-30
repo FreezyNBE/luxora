@@ -1,12 +1,18 @@
 "use client";
 
 import BreadCrumbs from "@/app/components/Breadcrumbs";
-import { Bookmark, BrickWallShield, CreditCard, Heart, LogOut, MapPin, User } from "lucide-react";
+import { useCurrentSession } from "@/lib/auth-session";
+import { Bookmark, CreditCard, Heart, LogOut, User } from "lucide-react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { redirect, usePathname } from "next/navigation";
 
 export default function RoomPageLayout({ children }: { children: React.ReactNode }) {
     const pathname = usePathname();
+    const session = useCurrentSession();
+
+    if (!session?.user) {
+        return redirect("/login");
+    }
 
     return (
         <div className="w-full min-h-150 px-10 py-5 border-t border-t-border-light bg-cream">
@@ -24,7 +30,7 @@ export default function RoomPageLayout({ children }: { children: React.ReactNode
                 <div className="max-lg:w-full flex flex-col gap-y-1 gap-x-5">
                     {pathname === "/user/profile" ? (
                         <Link
-                            href={"/user/profile"}
+                            href="/user/profile"
                             className="w-full lg:w-56 flex items-center gap-x-2 ps-3 py-2 rounded-sm bg-orange-200/50 cursor-pointer hover:bg-orange-200/80 transition-all duration-75"
                         >
                             <User size={"1.25rem"} className="text-orange-800/80" />
@@ -32,7 +38,7 @@ export default function RoomPageLayout({ children }: { children: React.ReactNode
                         </Link>
                     ) : (
                         <Link
-                            href={"/user/profile"}
+                            href="/user/profile"
                             className="w-full lg:w-56 flex items-center gap-x-2 ps-3 py-2 rounded-sm bg-transparent cursor-pointer hover:bg-orange-300/20 transition-all duration-75 group"
                         >
                             <User size={"1.25rem"} className="text-muted group-hover:text-orange-800/60" />
@@ -41,7 +47,7 @@ export default function RoomPageLayout({ children }: { children: React.ReactNode
                     )}
                     {pathname === "/user/booking" ? (
                         <Link
-                            href={"/user/bookmark"}
+                            href="/user/bookmark"
                             className="w-full lg:w-56 flex items-center gap-x-2 ps-3 py-2 rounded-sm bg-orange-200/50 cursor-pointer hover:bg-orange-200/80 transition-all duration-75"
                         >
                             <Bookmark size={"1.25rem"} className="text-orange-800/80" />
@@ -49,7 +55,7 @@ export default function RoomPageLayout({ children }: { children: React.ReactNode
                         </Link>
                     ) : (
                         <Link
-                            href={"/user/booking"}
+                            href="/user/booking"
                             className="w-full lg:w-56 flex items-center gap-x-2 ps-3 py-2 rounded-sm bg-transparent cursor-pointer hover:bg-orange-300/20 transition-all duration-75 group"
                         >
                             <Bookmark size={"1.25rem"} className="text-muted group-hover:text-orange-800/60" />
@@ -58,7 +64,7 @@ export default function RoomPageLayout({ children }: { children: React.ReactNode
                     )}
                     {pathname === "/user/wishlist" ? (
                         <Link
-                            href={"/user/wishlist"}
+                            href="/user/wishlist"
                             className="w-full lg:w-56 flex items-center gap-x-2 ps-3 py-2 rounded-sm bg-orange-200/50 cursor-pointer hover:bg-orange-200/80 transition-all duration-75"
                         >
                             <Heart size={"1.25rem"} className="text-orange-800/80" />
@@ -66,7 +72,7 @@ export default function RoomPageLayout({ children }: { children: React.ReactNode
                         </Link>
                     ) : (
                         <Link
-                            href={"/user/wishlist"}
+                            href="/user/wishlist"
                             className="w-full lg:w-56 flex items-center gap-x-2 ps-3 py-2 rounded-sm bg-transparent cursor-pointer hover:bg-orange-300/20 transition-all duration-75 group"
                         >
                             <Heart size={"1.25rem"} className="text-muted group-hover:text-orange-800/60" />
@@ -75,7 +81,7 @@ export default function RoomPageLayout({ children }: { children: React.ReactNode
                     )}
                     {pathname === "/user/payment" ? (
                         <Link
-                            href={"/user/payment"}
+                            href="/user/payment"
                             className="w-full lg:w-56 flex items-center gap-x-2 ps-3 py-2 rounded-sm bg-orange-200/50 cursor-pointer hover:bg-orange-200/80 transition-all duration-75"
                         >
                             <CreditCard size={"1.25rem"} className="text-orange-800/80" />
@@ -83,7 +89,7 @@ export default function RoomPageLayout({ children }: { children: React.ReactNode
                         </Link>
                     ) : (
                         <Link
-                            href={"/user/payment"}
+                            href="/user/payment"
                             className="w-full lg:w-56 flex items-center gap-x-2 ps-3 py-2 rounded-sm bg-transparent cursor-pointer hover:bg-orange-300/20 transition-all duration-75 group"
                         >
                             <CreditCard size={"1.25rem"} className="text-muted group-hover:text-orange-800/60" />
@@ -92,10 +98,13 @@ export default function RoomPageLayout({ children }: { children: React.ReactNode
                             </span>
                         </Link>
                     )}
-                    <div className="w-full lg:w-56 flex items-center gap-x-2 ps-3 py-2 rounded-sm bg-transparent cursor-pointer hover:bg-orange-300/20 transition-all duration-75 group">
+                    <Link
+                        href="/user/logout"
+                        className="w-full lg:w-56 flex items-center gap-x-2 ps-3 py-2 rounded-sm bg-transparent cursor-pointer hover:bg-orange-300/20 transition-all duration-75 group"
+                    >
                         <LogOut size={"1.25rem"} className="text-muted group-hover:text-orange-800/60" />
                         <span className="text-muted group-hover:text-orange-800/60 font-semibold text-sm">Logout</span>
-                    </div>
+                    </Link>
                 </div>
 
                 {children}

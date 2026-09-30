@@ -1,17 +1,23 @@
 "use client";
 
-import { Calendar, Gem, Heart, Menu, User, X } from "lucide-react";
+import { Calendar, Gem, Heart, LogOut, Menu, Plus, User, X } from "lucide-react";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { Button } from "./misc/Button";
 import { useGlobal } from "../context/GlobalContext";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
+import { useCurrentSession } from "@/lib/auth-session";
+import { authClient } from "@/lib/auth-client";
+import toast from "react-hot-toast";
 
 function Navigation() {
     const { disableBodyOverflow, enableBodyOverflow } = useGlobal();
     const [navMobileStatus, setNavMobileStatus] = useState<boolean>(false);
     const [navMobileVisible, setNavMobileVisible] = useState<boolean>(false);
     const pathname = usePathname();
+    const router = useRouter();
+
+    const session = useCurrentSession();
 
     useEffect(() => {
         if (navMobileStatus) {
@@ -42,6 +48,17 @@ function Navigation() {
         );
     };
 
+    const logoutUser = async () => {
+        await authClient.signOut({
+            fetchOptions: {
+                onSuccess: () => {
+                    toast.success("Logged out.");
+                    router.push("/login");
+                },
+            },
+        });
+    };
+
     return (
         <div className={`h-(--navbar-height) ${pathname === "/" ? "text-white" : "text-ink"}`}>
             <nav className="relative inset-0 w-full h-fit flex items-center justify-between gap-4 px-10 py-5 z-10 backdrop-blur-md">
@@ -54,52 +71,56 @@ function Navigation() {
                 {!navMobileVisible && (
                     <ul className="flex uppercase text-sm max-lg:hidden gap-6 xl:gap-10">
                         <li>
-                            <Link
-                                href="/"
-                                className="py-2 border-b-2 border-b-transparent hover:border-b-gold hover:text-gold-light transition duration-100 ease-in"
-                            >
+                            <Link href="/" className="after-effect">
                                 Home
                             </Link>
                         </li>
                         <li>
-                            <Link
-                                href="/rooms"
-                                className="py-2 border-b-2 border-b-transparent hover:border-b-gold hover:text-gold-light transition duration-100 ease-in"
-                            >
+                            <Link href="/rooms" className="after-effect">
                                 Rooms
                             </Link>
                         </li>
                         <li>
-                            <Link
-                                href="/facilities"
-                                className="py-2 border-b-2 border-b-transparent hover:border-b-gold hover:text-gold-light transition duration-100 ease-in"
-                            >
+                            <Link href="/facilities" className="after-effect">
                                 Facilities
                             </Link>
                         </li>
                         <li>
-                            <Link
-                                href="/offers"
-                                className="py-2 border-b-2 border-b-transparent hover:border-b-gold hover:text-gold-light transition duration-100 ease-in"
-                            >
+                            <Link href="/offers" className="after-effect">
                                 Offers
                             </Link>
                         </li>
                         <li>
-                            <Link
-                                href="/contact"
-                                className="py-2 border-b-2 border-b-transparent hover:border-b-gold hover:text-gold-light transition duration-100 ease-in"
-                            >
+                            <Link href="/contact" className="after-effect">
                                 Contact
                             </Link>
                         </li>
                     </ul>
                 )}
                 <div className="flex items-center gap-4">
-                    <div className="flex justify-center items-center gap-3 cursor-pointer hover:underline">
-                        <User className="max-lg:hidden hover:opacity-70" />
-                        <Heart className="max-lg:hidden hover:opacity-70" />
-                        <Calendar className="max-lg:hidden hover:opacity-70" />
+                    <div className="flex justify-center items-center gap-3 cursor-pointer">
+                        {session?.user ? (
+                            <>
+                                <Link href="/user/profile">
+                                    <User className="max-lg:hidden hover:opacity-70" />
+                                </Link>
+                                <Link href="/user/wishlist">
+                                    <Heart className="max-lg:hidden hover:opacity-70" />
+                                </Link>
+                                <Link href="/user/booking">
+                                    <Calendar className="max-lg:hidden hover:opacity-70" />
+                                </Link>
+                            </>
+                        ) : (
+                            <>
+                                <Link href="/login" className="max-lg:hidden after-effect">
+                                    Login
+                                </Link>
+                                <Link href="/register" className="max-lg:hidden after-effect ms-2">
+                                    Register
+                                </Link>
+                            </>
+                        )}
                         <div onClick={() => (navMobileVisible ? closeMenu() : openMenu())}>
                             <Menu className="lg:hidden hover:opacity-70" />
                         </div>
@@ -132,34 +153,19 @@ function Navigation() {
                                 <div className="w-full h-[0.5] bg-border-dark" />
 
                                 <div className="flex flex-col justify-center gap-3 my-5">
-                                    <Link
-                                        href="/"
-                                        className="w-fit py-2 border-b-2 border-b-transparent hover:border-b-gold hover:text-gold-light transition duration-100 ease-in"
-                                    >
+                                    <Link href="/" className="w-fit py-2 after-effect-none">
                                         <span>Home</span>
                                     </Link>
-                                    <Link
-                                        href="/rooms"
-                                        className="w-fit py-2 border-b-2 border-b-transparent hover:border-b-gold hover:text-gold-light transition duration-100 ease-in"
-                                    >
+                                    <Link href="/rooms" className="w-fit py-2 after-effect-none">
                                         <span>Rooms</span>
                                     </Link>
-                                    <Link
-                                        href="/facilities"
-                                        className="w-fit py-2 border-b-2 border-b-transparent hover:border-b-gold hover:text-gold-light transition duration-100 ease-in"
-                                    >
+                                    <Link href="/facilities" className="w-fit py-2 after-effect-none">
                                         <span>Facilities</span>
                                     </Link>
-                                    <Link
-                                        href="/offers"
-                                        className="w-fit py-2 border-b-2 border-b-transparent hover:border-b-gold hover:text-gold-light transition duration-100 ease-in"
-                                    >
+                                    <Link href="/offers" className="w-fit py-2 after-effect-none">
                                         <span>Offers</span>
                                     </Link>
-                                    <Link
-                                        href="/contact"
-                                        className="w-fit py-2 border-b-2 border-b-transparent hover:border-b-gold hover:text-gold-light transition duration-100 ease-in"
-                                    >
+                                    <Link href="/contact" className="w-fit py-2 after-effect-none">
                                         <span>Contact</span>
                                     </Link>
                                 </div>
@@ -168,18 +174,40 @@ function Navigation() {
                             <div className="w-full h-[0.5] bg-border-dark" />
 
                             <div className="space-y-3 py-5 text-sm">
-                                <Link href={"/user/profile"} className="flex items-center gap-2 hover:opacity-70">
-                                    <User />
-                                    <span>My Account</span>
-                                </Link>
-                                <Link href={"/user/wishlist"} className="flex items-center gap-2 hover:opacity-70">
-                                    <Heart />
-                                    <span>My Wishlist</span>
-                                </Link>
-                                <Link href={"/user/booking"} className="flex items-center gap-2 hover:opacity-70">
-                                    <Calendar />
-                                    <span>My Bookings</span>
-                                </Link>
+                                {session?.user ? (
+                                    <>
+                                        <Link href={"/user/profile"} className="flex items-center gap-2 hover:opacity-70">
+                                            <User />
+                                            <span>My Account</span>
+                                        </Link>
+                                        <Link href={"/user/wishlist"} className="flex items-center gap-2 hover:opacity-70">
+                                            <Heart />
+                                            <span>My Wishlist</span>
+                                        </Link>
+                                        <Link href={"/user/booking"} className="flex items-center gap-2 hover:opacity-70">
+                                            <Calendar />
+                                            <span>My Bookings</span>
+                                        </Link>
+                                        <div
+                                            onClick={logoutUser}
+                                            className="flex items-center gap-2 cursor-pointer hover:opacity-70"
+                                        >
+                                            <LogOut />
+                                            <span>Logout</span>
+                                        </div>
+                                    </>
+                                ) : (
+                                    <>
+                                        <Link href={"/login"} className="flex items-center gap-2 hover:opacity-70">
+                                            <User />
+                                            <span>Login</span>
+                                        </Link>
+                                        <Link href={"/register"} className="flex items-center gap-2 hover:opacity-70">
+                                            <Plus />
+                                            <span>Register</span>
+                                        </Link>
+                                    </>
+                                )}
                             </div>
 
                             <div className="w-full h-[0.5] bg-border-dark" />

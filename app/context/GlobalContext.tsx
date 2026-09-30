@@ -1,6 +1,7 @@
 "use client";
 
 import { createContext, useContext, useState } from "react";
+import { Toaster } from "react-hot-toast";
 
 type GlobalContextTypes = {
     bodyOverflowHidden: boolean;
@@ -38,6 +39,7 @@ export default function GlobalContextProvider({ children }: { children: React.Re
             }}
         >
             <body className="relative min-h-full" style={{ overflow: bodyOverflowHidden ? "hidden" : "auto" }}>
+                <Toaster />
                 {children}
             </body>
         </GlobalContext.Provider>

@@ -1,8 +1,16 @@
 import { ButtonAction } from "@/app/components/misc/Button";
+import { getUserSession } from "@/lib/auth.server";
 import { EyeOff, LockKeyhole, Mail, ShieldCheck, User } from "lucide-react";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 
-export default function RegisterPage() {
+export default async function RegisterPage() {
+    const session = await getUserSession();
+
+    if (session?.user) {
+        return redirect("/");
+    }
+
     return (
         <div className="relative w-full bg-cream py-5 overflow-hidden">
             <div className="w-full flex items-center justify-center py-5 px-2">
