@@ -1,8 +1,6 @@
 "use client";
 
-import { Button, ButtonOutline } from "@/app/components/misc/Button";
-import { Calendar, Clock, User } from "lucide-react";
-import Link from "next/link";
+import { Calendar, User } from "lucide-react";
 import { useState } from "react";
 
 type tabTypes = "upcoming" | "completed" | "canceled";

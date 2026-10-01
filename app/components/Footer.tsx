@@ -80,12 +80,12 @@ function Footer() {
                                 id="subscribe"
                                 name="subscribe"
                                 placeholder="Enter your email"
-                                className="outline-none text-white placeholder:text-muted"
+                                className="w-full outline-none text-white placeholder:text-muted placeholder:text-xs placeholder:font-semibold"
                             />
                         </div>
                         <label
                             htmlFor="subscribe"
-                            className="uppercase py-2.25 px-4 bg-gold border-2 border-gold text-white tracking-wide font-medium text-xs rounded-lg rounded-l-none cursor-pointer hover:bg-blue-500 hover:border-blue-500 transition-all duration-75"
+                            className="uppercase py-2.25 px-4 bg-gold border-2 border-gold text-white tracking-wide font-medium text-xs rounded-lg rounded-l-none cursor-pointer hover:bg-blue-500 hover:border-blue-500 transition-all duration-100 ease-in"
                         >
                             Subscribe
                         </label>

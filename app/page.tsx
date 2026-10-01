@@ -88,7 +88,7 @@ export default function Home() {
                         </div>
                     </div>
                     <div className="max-lg:w-full px-5 py-2 space-y-1">
-                        <Button className="w-full flex items-center justify-center gap-1 bg-gold hover:bg-gold-dark">
+                        <Button className="w-full flex items-center justify-center gap-1">
                             <CircleCheck />
                             <span>Check Availability</span>
                         </Button>

@@ -1,17 +1,7 @@
 import BreadCrumbs from "@/app/components/Breadcrumbs";
-import { Button, CircleButton } from "@/app/components/misc/Button";
+import { Button } from "@/app/components/misc/Button";
 import SliderPriceRange from "@/app/components/misc/SliderPriceRange";
-import {
-    CalendarRange,
-    ChevronDown,
-    ChevronLeft,
-    ChevronRight,
-    Eye,
-    Square,
-    SquareM,
-    TextSearch,
-    UserRound,
-} from "lucide-react";
+import { CalendarRange, ChevronDown, ChevronLeft, ChevronRight, Eye, SquareM, TextSearch, UserRound } from "lucide-react";
 import Link from "next/link";
 
 function RoomsPage() {
@@ -67,7 +57,7 @@ function RoomsPage() {
                         </div>
                     </div>
                     <div className="max-lg:w-full px-5 py-2 space-y-1">
-                        <Button className="w-full flex items-center justify-center gap-1 bg-gold hover:bg-gold-dark">
+                        <Button className="w-full flex items-center justify-center gap-1">
                             <TextSearch />
                             <span>Update Search</span>
                         </Button>
@@ -259,7 +249,9 @@ function RoomsPage() {
                                             </div>
                                         </div>
                                         <Link href={"/rooms/test"}>
-                                            <CircleButton className="uppercase text-sm font-medium">View Room</CircleButton>
+                                            <Button rounded="full" className="uppercase">
+                                                View Room
+                                            </Button>
                                         </Link>
                                     </div>
                                 </div>

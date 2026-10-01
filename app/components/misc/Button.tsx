@@ -1,23 +1,15 @@
 interface ButtonType extends React.ButtonHTMLAttributes<HTMLButtonElement> {
     children: React.ReactNode;
+    rounded?: "none" | "xs" | "sm" | "md" | "lg" | "xl" | "full";
     className?: string;
 }
 
-export function Button({ children, className = "", ...props }: ButtonType) {
+export function Button({ children, rounded = "lg", className = "", ...props }: ButtonType) {
     return (
         <button
-            className={`w-fit min-w:32 h-10 px-8 py-2 bg-gold rounded-sm hover:bg-gold-dark text-white transition duration-100 ease-in cursor-pointer ${className.length ? className : ""} truncate`}
-            {...props}
-        >
-            {children}
-        </button>
-    );
-}
-
-export function ButtonOutline({ children, className = "", ...props }: ButtonType) {
-    return (
-        <button
-            className={`w-fit min-w:32 h-10 px-8 py-2 border border-border-light rounded-sm hover:bg-bg-light text-muted hover:text-ink font-semibold transition duration-100 ease-in cursor-pointer ${className.length ? className : ""} truncate`}
+            className={`px-8 py-3 bg-gold border border-transparent rounded-${rounded} hover:bg-gold-dark text-white text-sm font-medium transition duration-100 ease-in cursor-pointer ${
+                className.length ? className : ""
+            } truncate`}
             {...props}
         >
             {children}
@@ -28,7 +20,7 @@ export function ButtonOutline({ children, className = "", ...props }: ButtonType
 export function ButtonAction({ children, className = "", ...props }: ButtonType) {
     return (
         <button
-            className={`w-50 h-12 px-4 py-1 bg-black rounded-lg hover:bg-black/80 transition duration-100 ease-in cursor-pointer ${
+            className={`w-full px-4 py-3.5 bg-black rounded-lg hover:bg-black/80 text-white text-sm font-semibold transition duration-100 ease-in cursor-pointer ${
                 className.length ? className : ""
             } truncate`}
             {...props}
@@ -38,10 +30,12 @@ export function ButtonAction({ children, className = "", ...props }: ButtonType)
     );
 }
 
-export function CircleButton({ children, className = "", ...props }: ButtonType) {
+export function ButtonStream({ children, className = "", ...props }: ButtonType) {
     return (
         <button
-            className={`w-32 h-10 bg-gold rounded-full hover:bg-gold-dark text-white transition duration-100 ease-in cursor-pointer ${className.length ? className : ""} truncate`}
+            className={`px-8 py-3 bg-cream-soft border border-border-light rounded-lg text-ink text-sm font-semibold hover:bg-cream-dark hover:border-transparent  transition duration-100 ease-in cursor-pointer ${
+                className.length ? className : ""
+            } truncate`}
             {...props}
         >
             {children}

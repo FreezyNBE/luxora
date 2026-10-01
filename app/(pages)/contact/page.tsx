@@ -3,10 +3,10 @@ import { Mail, MapPin, Phone } from "lucide-react";
 
 export default function ContactPage() {
     return (
-        <div className="w-full space-y-10 bg-cream">
+        <div className="w-full bg-cream">
             <div className="w-full flex flex-col xl:flex-row">
                 {/* Contact form */}
-                <div className="w-full flex flex-col">
+                <div className="w-full flex flex-col max-md:mb-3">
                     <div className="relative w-full h-50">
                         <img src="/img/hero.png" alt="Contact Us" className="w-full h-full object-cover" />
 
@@ -14,14 +14,14 @@ export default function ContactPage() {
                         <div className="absolute inset-0 w-full h-full text-white">
                             <div className="h-full flex flex-col items-center justify-center gap-y-3 text-center">
                                 <h1 className="text-5xl tracking-wide font-semibold">Contact Us</h1>
-                                <span className="text-sm">
+                                <span className="w-full max-w-sm md:max-w-md text-sm">
                                     We'd love to hear from you. Reach out for inquites, reservations or feedback.
                                 </span>
                             </div>
                         </div>
                     </div>
-                    <div className="w-full h-full flex items-start justify-center gap-2 md:gap-5 px-5">
-                        <div className="w-1/2 h-full space-y-3 border-r border-r-border-light py-10">
+                    <div className="w-full h-full flex flex-col md:flex-row items-start justify-center gap-2 md:gap-5">
+                        <div className="w-full md:w-1/2 h-full space-y-3 max-md:border-b border-b-border-light md:border-r border-r-border-light py-10 px-5">
                             <div className="flex flex-col gap-y-5">
                                 <div className="flex items-start gap-1">
                                     <MapPin size={"1.25rem"} className="text-gold shrink-0" />
@@ -53,8 +53,8 @@ export default function ContactPage() {
                                 </div>
                             </div>
                         </div>
-                        <div className="w-1/2 flex flex-col items-center justify-center gap-y-3 pt-5">
-                            <h1 className="text-center font-medium">Send us a message</h1>
+                        <div className="w-full md:w-1/2 flex flex-col items-center justify-center gap-y-3 pt-5 px-5">
+                            <h1 className="text-xl text-center font-medium">Send us a message</h1>
                             <div className="w-full max-w-lg py-2 px-4 flex items-center gap-x-3 p-2 border border-border-light rounded-lg">
                                 <input
                                     type="email"
@@ -64,7 +64,7 @@ export default function ContactPage() {
                                     placeholder="Email Address"
                                 />
                             </div>
-                            <div className="w-full w-full max-w-lg ">
+                            <div className="w-full max-w-lg ">
                                 <textarea
                                     id="message"
                                     name="message"
@@ -73,9 +73,7 @@ export default function ContactPage() {
                                     placeholder="Your Message"
                                 />
                             </div>
-                            <ButtonAction className="w-full max-w-lg text-sm bg-cream-soft text-ink font-semibold border border-border-light hover:bg-cream-dark hover:border-transparent">
-                                Send message
-                            </ButtonAction>
+                            <ButtonAction className="w-full max-w-lg">Send message</ButtonAction>
                         </div>
                     </div>
                 </div>

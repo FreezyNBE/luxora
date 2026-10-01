@@ -60,12 +60,12 @@ function Navigation() {
     };
 
     return (
-        <div className={`h-(--navbar-height) ${pathname === "/" ? "text-white" : "text-ink"}`}>
-            <nav className="relative inset-0 w-full h-fit flex items-center justify-between gap-4 px-10 py-5 z-10 backdrop-blur-md">
+        <div className={`h-(--navbar-height) ${pathname === "/" ? "text-white" : "text-heading"}`}>
+            <nav className="relative inset-0 w-full h-fit flex items-center justify-between gap-4 px-10 py-5 z-10">
                 <Link href="/">
                     <h1 className="flex items-center justify-center gap-1 text-2xl font-bold">
                         <Gem size={"1.5rem"} className="text-gold-light" />
-                        <span>Luxora</span>
+                        <span className={pathname === "/" ? "text-white" : "text-ink"}>Luxora</span>
                     </h1>
                 </Link>
                 {!navMobileVisible && (
@@ -126,14 +126,14 @@ function Navigation() {
                         </div>
                     </div>
                     <Link href={"/"}>
-                        <Button className="text-sm uppercase">Book now</Button>
+                        <Button className="uppercase">Book now</Button>
                     </Link>
                 </div>
             </nav>
 
             {/* Mobile navigation */}
             {navMobileVisible && (
-                <div className="fixed inset-0 w-full h-full bg-black/50 z-20 text-white" onClick={() => closeMenu()}>
+                <div className="lg:hidden fixed inset-0 w-full h-full bg-black/50 z-20 text-white" onClick={() => closeMenu()}>
                     <div
                         className={`w-full h-full overflow-auto fixed top-0 left-0 backdrop-blur-xl border-r border-r-border-dark px-5 ${navMobileStatus ? "translate-x-0" : "-translate-x-full"} transform duration-300 ease-in bg-black/90`}
                         onClick={(event: React.MouseEvent<HTMLDivElement>) => event.stopPropagation()}
@@ -214,7 +214,7 @@ function Navigation() {
 
                             <div className="my-5">
                                 <Link href={"/"}>
-                                    <Button className="text-sm uppercase bg-gold-dark hover:opacity-70">Book now</Button>
+                                    <Button className="uppercase">Book now</Button>
                                 </Link>
                             </div>
                         </div>

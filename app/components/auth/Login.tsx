@@ -1,7 +1,7 @@
 "use client";
 
 import { LockKeyhole, Mail, ShieldCheck } from "lucide-react";
-import { ButtonAction } from "../misc/Button";
+import { ButtonAction, ButtonStream } from "../misc/Button";
 import Link from "next/link";
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
@@ -24,10 +24,10 @@ export default function LoginComponent() {
     };
 
     return (
-        <div className="relative w-full bg-cream py-5 overflow-hidden">
+        <div className="relative w-full bg-cream overflow-hidden">
             <div className="w-full flex items-center justify-center py-5 px-2">
                 {/* Container */}
-                <div className="w-full max-w-md bg-cream py-7 px-5 rounded-xs border border-border-light">
+                <div className="w-full max-w-md space-y-10 bg-cream py-7 px-5 rounded-xs border border-border-light shadow-lg">
                     {/* Heading */}
                     <div className="w-full flex flex-col items-center justify-center gap-y-2 text-center">
                         <h1 className="text-3xl font-semibold">Sign in</h1>
@@ -40,7 +40,7 @@ export default function LoginComponent() {
                     {error?.length ? ErrorSignIn(error) : null}
 
                     {/* Fields */}
-                    <div className="mt-10 space-y-5">
+                    <div className="space-y-5">
                         <div className="flex flex-col gap-2">
                             <label htmlFor="email" className="text-sm font-semibold">
                                 Email Address
@@ -80,9 +80,9 @@ export default function LoginComponent() {
                         </div>
                     </div>
                     {/* Footer */}
-                    <div className="mt-8 space-y-5">
+                    <div className="space-y-5">
                         <div className="space-y-2">
-                            <ButtonAction className="w-full text-sm text-white font-semibold">Sign In</ButtonAction>
+                            <ButtonAction>Sign In</ButtonAction>
                             <p className="text-sm text-ink font-medium text-center">
                                 Don&apos;t have an account?{" "}
                                 <Link href="/register" className="link-text-color">
@@ -97,24 +97,18 @@ export default function LoginComponent() {
                                 </div>
                             </div>
                             <div className="w-full flex flex-col sm:flex-row items-center justify-center gap-3 mt-5">
-                                <ButtonAction
-                                    onClick={() => startSignInOAuth("google")}
-                                    className="w-full text-sm bg-cream-soft text-ink font-semibold border border-border-light hover:bg-cream-dark hover:border-transparent"
-                                >
+                                <ButtonStream onClick={() => startSignInOAuth("google")} className="w-full">
                                     <div className="flex items-center justify-center gap-x-2">
                                         <Image src="/svg/sm-google.svg" alt="Google" width={20} height={20} />
                                         <span>Google</span>
                                     </div>
-                                </ButtonAction>
-                                <ButtonAction
-                                    onClick={() => startSignInOAuth("github")}
-                                    className="w-full text-sm bg-cream-soft text-ink font-semibold border border-border-light hover:bg-cream-dark hover:border-transparent"
-                                >
+                                </ButtonStream>
+                                <ButtonStream onClick={() => startSignInOAuth("github")} className="w-full">
                                     <div className="flex items-center justify-center gap-x-2">
                                         <Image src="/svg/sm-github.svg" alt="Github" width={20} height={20} />
                                         <span>Github</span>
                                     </div>
-                                </ButtonAction>
+                                </ButtonStream>
                             </div>
                         </div>
                         <div className="flex items-center justify-center gap-2 cursor-default">

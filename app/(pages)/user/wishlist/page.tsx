@@ -51,7 +51,7 @@ export default function WishlistPage() {
                                     $200 <span className="text-sm text-muted font-medium">/ night</span>
                                 </h1>
                                 <Link href={"/rooms/test"}>
-                                    <Button className="uppercase text-sm font-medium">View Room</Button>
+                                    <Button className="uppercase">View Room</Button>
                                 </Link>
                             </div>
                         </div>

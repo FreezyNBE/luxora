@@ -1,7 +1,7 @@
 "use client";
 
 import ImageSlider from "@/app/components/core/ImageSlider";
-import { Button, ButtonOutline } from "@/app/components/misc/Button";
+import { Button, ButtonStream } from "@/app/components/misc/Button";
 import { useGallery } from "@/app/context/GalleryContext";
 import {
     AlarmClock,
@@ -258,14 +258,14 @@ export default function RoomPage() {
                             </div>
                         </div>
 
-                        <Button className="w-full uppercase flex items-center justify-center gap-x-2 text-sm">
+                        <Button className="w-full flex items-center justify-center gap-x-2">
                             <BookmarkCheck />
                             <span className="font-semibold">Book this room</span>
                         </Button>
-                        <ButtonOutline className="w-full uppercase flex items-center justify-center gap-x-2 text-sm">
+                        <ButtonStream className="w-full flex items-center justify-center gap-x-2">
                             <Heart />
                             <span>Save to wishlist</span>
-                        </ButtonOutline>
+                        </ButtonStream>
                     </div>
 
                     <div className="w-full h-0.5 bg-border-light" />

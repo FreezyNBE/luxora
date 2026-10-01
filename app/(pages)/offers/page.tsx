@@ -73,7 +73,7 @@ export default function OffersPage() {
                             <div className="lg:flex flex-col items-center justify-center space-y-5 me-5">
                                 <h1 className="text-gold text-xl font-semibold">20% OFF</h1>
                                 <Link href={"/rooms/test"}>
-                                    <Button className="uppercase text-sm font-medium">View Details</Button>
+                                    <Button className="uppercase">View details</Button>
                                 </Link>
                             </div>
                         </div>
