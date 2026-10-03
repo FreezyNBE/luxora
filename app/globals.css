@@ -199,3 +199,11 @@ h4 {
 .after-effect-none {
     @apply relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-gold-light after:transition-all after:duration-200 after:ease-in hover:after:w-full;
 }
+
+.apply-password-visibile {
+    @apply text-blue-800/70 hover:text-blue-800;
+}
+
+.apply-password-hidden {
+    @apply text-gray-800/70 hover:text-gray-800;
+}

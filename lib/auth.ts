@@ -1,6 +1,13 @@
 import { betterAuth } from "better-auth";
 import { prismaAdapter } from "better-auth/adapters/prisma";
 import { prisma } from "./prisma";
+import { nextCookies } from "better-auth/next-js";
+
+const appUrl = process.env.APP_URL;
+
+if (!appUrl) {
+    throw Error("APP_URL is not defined");
+}
 
 export const auth = betterAuth({
     database: prismaAdapter(prisma, {
@@ -8,6 +15,7 @@ export const auth = betterAuth({
     }),
     emailAndPassword: {
         enabled: true,
+        autoSignIn: false,
     },
     socialProviders: {
         github: {
@@ -25,4 +33,6 @@ export const auth = betterAuth({
             // disableImplicitLinking: true,
         },
     },
+    trustedOrigins: [appUrl],
+    plugins: [nextCookies()],
 });

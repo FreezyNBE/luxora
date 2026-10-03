@@ -5,4 +5,8 @@ export const authErrors: Record<string, string> = {
     invalid_callback_request: "The authentication request is invalid.",
     unable_to_get_user_info: "We couldn't retrieve your information from the provider.",
     unable_to_create_user: "We couldn't create your account. Please try again.",
+
+    failed_sign_in: "Failed to sign in. Please try again.",
+
+    invalid_email_or_password: "Invalid email or password.",
 };

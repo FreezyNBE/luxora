@@ -1,4 +1,4 @@
-import { authErrors } from "@/app/utils/_auth_errors";
+import { authErrors } from "@/utils/_auth_errors";
 import { X } from "lucide-react";
 
 export default function ErrorSignIn(error: string) {
