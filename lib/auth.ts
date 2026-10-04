@@ -33,6 +33,21 @@ export const auth = betterAuth({
             // disableImplicitLinking: true,
         },
     },
+    user: {
+        additionalFields: {
+            phoneNumber: {
+                type: "string",
+                required: false,
+            },
+            countryName: {
+                type: "string",
+                required: false,
+            },
+            gender: {
+                type: "number",
+            },
+        },
+    },
     trustedOrigins: [appUrl],
     plugins: [nextCookies()],
 });

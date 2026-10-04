@@ -1,6 +1,6 @@
 "use client";
 
-import { EyeOff, LockKeyhole, Mail, ShieldCheck, User } from "lucide-react";
+import { Eye, EyeOff, LockKeyhole, Mail, MapPinned, ShieldCheck, User } from "lucide-react";
 import Link from "next/link";
 import { ButtonAction } from "../misc/Button";
 import { useState } from "react";
@@ -8,6 +8,8 @@ import { MAX_NAME_LENGTH, MIN_NAME_LENGTH } from "@/utils/_new_account_fields";
 import { actionSignUpEmail } from "@/app/action/auth.action";
 import { useRouter } from "next/navigation";
 import ErrorSignUp from "./ErrorSignUp";
+import { countryList } from "@/utils/list_countries";
+import { getIndexByCountry } from "@/utils/_functions";
 
 export default function RegisterComponent() {
     const router = useRouter();
@@ -17,6 +19,8 @@ export default function RegisterComponent() {
     const [isPasswordVisibile, setPasswordVisibile] = useState(false);
     const [isConfirmPasswordVisibile, setConfirmPasswordVisibile] = useState(false);
     const [confirmedPassword, setConfirmedPassword] = useState<string>("");
+    const [country, setCountry] = useState<string>(countryList[getIndexByCountry()]);
+    const [gender, setGender] = useState<number>(0);
     const [agreeTerms, setAgreeTerms] = useState<boolean>(false);
     const [errors, setErrors] = useState<string[]>([]);
 
@@ -160,11 +164,19 @@ export default function RegisterComponent() {
                                                 required
                                             />
                                         )}
-                                        <EyeOff
-                                            size={"1.35rem"}
-                                            className={`cursor-pointer ${isPasswordVisibile ? "apply-password-visibile" : "apply-password-hidden"}`}
-                                            onClick={passwordVisibility}
-                                        />
+                                        {isPasswordVisibile ? (
+                                            <Eye
+                                                size={"1.35rem"}
+                                                className="cursor-pointer apply-password-visibile"
+                                                onClick={passwordVisibility}
+                                            />
+                                        ) : (
+                                            <EyeOff
+                                                size={"1.35rem"}
+                                                className="cursor-pointer apply-password-hidden"
+                                                onClick={passwordVisibility}
+                                            />
+                                        )}
                                     </div>
                                     <span className="text-xs font-medium text-muted-light">Must be at least 8 characters</span>
                                 </div>
@@ -215,11 +227,68 @@ export default function RegisterComponent() {
                                             required
                                         />
                                     )}
-                                    <EyeOff
-                                        size={"1.35rem"}
-                                        className={`cursor-pointer ${isConfirmPasswordVisibile ? "apply-password-visibile" : "apply-password-hidden"}`}
-                                        onClick={confirmedPasswordVisibility}
-                                    />
+                                    {isConfirmPasswordVisibile ? (
+                                        <Eye
+                                            size={"1.35rem"}
+                                            className="cursor-pointer apply-password-visibile"
+                                            onClick={confirmedPasswordVisibility}
+                                        />
+                                    ) : (
+                                        <EyeOff
+                                            size={"1.35rem"}
+                                            className="cursor-pointer apply-password-hidden"
+                                            onClick={confirmedPasswordVisibility}
+                                        />
+                                    )}
+                                </div>
+                            </div>
+                            <div className="flex flex-col gap-2">
+                                <label htmlFor="gender" className="text-sm font-semibold">
+                                    Gender
+                                </label>
+                                <div className="w-full max-w-lg py-2 px-4 flex items-center gap-x-3 p-2 border border-border-light rounded-lg">
+                                    <User size={"1.35rem"} className="text-gray-800/70" />
+                                    <select
+                                        id="gender"
+                                        name="gender"
+                                        autoComplete="gender"
+                                        className="w-full text-muted"
+                                        value={gender}
+                                        onChange={(event: React.ChangeEvent<HTMLSelectElement>) => {
+                                            setGender(Number(event.target.value));
+                                        }}
+                                    >
+                                        <option value="0">Men</option>
+                                        <option value="1">Women</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div className="flex flex-col gap-2">
+                                <label htmlFor="country" className="text-sm font-semibold">
+                                    Country
+                                </label>
+                                <div className="w-full max-w-lg py-2 px-4 flex items-center gap-x-3 p-2 border border-border-light rounded-lg">
+                                    <MapPinned size={"1.35rem"} className="text-gray-800/70" />
+                                    <select
+                                        id="country"
+                                        name="country"
+                                        autoComplete="country"
+                                        className="w-full text-muted"
+                                        value={country}
+                                        onChange={(event: React.ChangeEvent<HTMLSelectElement>) => {
+                                            if (countryList.includes(event.target.value)) {
+                                                setCountry(event.target.value);
+                                            } else {
+                                                setCountry(countryList[getIndexByCountry()]);
+                                            }
+                                        }}
+                                    >
+                                        {countryList.map((country, index) => (
+                                            <option key={index} value={country}>
+                                                {country}
+                                            </option>
+                                        ))}
+                                    </select>
                                 </div>
                             </div>
                         </div>

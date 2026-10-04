@@ -4,6 +4,7 @@ import { auth } from "@/lib/auth";
 import { SignUpCode } from "@/utils/_auth_signup";
 import { validateEmail } from "@/utils/_functions";
 import { MAX_NAME_LENGTH, MAX_PASSWORD_LENGTH, MIN_NAME_LENGTH, MIN_PASSWORD_LENGTH } from "@/utils/_new_account_fields";
+import { countryList } from "@/utils/list_countries";
 
 type ResponseSignUpEmail = {
     success?: boolean;
@@ -12,17 +13,13 @@ type ResponseSignUpEmail = {
     error?: string | string[];
 };
 
-type ResponseSignInEmail = {
-    success?: string;
-    error?: string;
-    redirectUrl: string;
-};
-
 export async function actionSignUpEmail(formData: FormData): Promise<ResponseSignUpEmail> {
     const name = formData.get("name") as string;
     const email = formData.get("email") as string;
     const password = formData.get("password") as string;
     const confirmedPassword = formData.get("confirm_password") as string;
+    const country = formData.get("country") as string;
+    const gender = formData.get("gender") === "0" ? 0 : 1;
     const agreements = formData.get("agreements") === "on";
     const errors: string[] = [];
 
@@ -42,6 +39,14 @@ export async function actionSignUpEmail(formData: FormData): Promise<ResponseSig
         errors.push("The passwords do not match.");
     }
 
+    if (!countryList.includes(country)) {
+        errors.push("Invalid country selected.");
+    }
+
+    if (gender !== 0 && gender !== 1) {
+        errors.push("Invalid gender selected.");
+    }
+
     if (!agreements) {
         errors.push("You must agree with our Terms and Conditions.");
     }
@@ -56,6 +61,8 @@ export async function actionSignUpEmail(formData: FormData): Promise<ResponseSig
                 name,
                 email,
                 password,
+                countryName: country,
+                gender,
             },
         });
 
