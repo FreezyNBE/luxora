@@ -201,7 +201,7 @@ h4 {
 }
 
 .apply-password-visibile {
-    @apply text-blue-800/70 hover:text-blue-800;
+    @apply text-gold hover:text-gold-dark;
 }
 
 .apply-password-hidden {

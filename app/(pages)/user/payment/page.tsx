@@ -1,13 +1,12 @@
+import { ButtonSave } from "@/app/components/misc/Button";
 import { Check, EyeOff, IdCard, SquarePen } from "lucide-react";
 
 export default function PaymentMethodsPage() {
     return (
         <div className="w-full space-y-5">
-            <div className="w-fit">
-                <div className="relative block text-lg font-medium tracking-wide group cursor-pointer">
-                    <span>Payment Methods</span>
-                    <div className="absolute bottom-0 w-0 group-hover:w-full h-0.5 bg-blue-800 transition-all duration-300 ease-in" />
-                </div>
+            <div className="w-fit relative block text-lg font-medium tracking-wide group cursor-pointer">
+                <span>Payment Methods</span>
+                <div className="absolute bottom-0 w-0 group-hover:w-full h-0.5 bg-blue-800 transition-all duration-300 ease-in" />
             </div>
 
             {/* Select method */}
@@ -105,10 +104,10 @@ export default function PaymentMethodsPage() {
                             </div>
                         </div>
                     </div>
-                    <div className="w-32 flex items-center justify-center gap-2 bg-blue-100 p-2 rounded-full cursor-pointer hover:bg-blue-200 transition-all duration-75">
+                    <ButtonSave className="flex items-center justify-center gap-2 bg-blue-100 hover:bg-blue-200">
                         <SquarePen size={"1.2rem"} className="text-blue-800" />
                         <span className="text-blue-800 font-medium text-xs">Save</span>
-                    </div>
+                    </ButtonSave>
                 </div>
             </div>
         </div>

@@ -5,11 +5,9 @@ import Link from "next/link";
 export default function WishlistPage() {
     return (
         <div className="w-full space-y-5">
-            <div className="w-fit">
-                <div className="relative block text-lg font-medium tracking-wide group cursor-pointer">
-                    <span>My Wishlist</span>
-                    <div className="absolute bottom-0 w-0 group-hover:w-full h-0.5 bg-gold-light transition-all duration-300 ease-in" />
-                </div>
+            <div className="w-fit relative block text-lg font-medium tracking-wide group cursor-pointer">
+                <span>My Wishlist</span>
+                <div className="absolute bottom-0 w-0 group-hover:w-full h-0.5 bg-gold-light transition-all duration-300 ease-in" />
             </div>
 
             <div className="w-full space-y-5">

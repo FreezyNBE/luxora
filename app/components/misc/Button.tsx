@@ -42,3 +42,16 @@ export function ButtonStream({ children, className = "", ...props }: ButtonType)
         </button>
     );
 }
+
+export function ButtonSave({ children, className = "", ...props }: ButtonType) {
+    return (
+        <button
+            className={`w-32 p-2 rounded-full cursor-pointer transition-all duration-75 ${
+                className.length ? className : ""
+            } truncate`}
+            {...props}
+        >
+            {children}
+        </button>
+    );
+}

@@ -22,6 +22,9 @@ model User {
   updatedAt     DateTime
   sessions      Session[]
   accounts      Account[]
+  phoneNumber   String?
+  countryName   String    @default("Romania")
+  gender        Int       @default(0)
 
   @@unique([email])
   @@map("user")
