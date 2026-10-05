@@ -258,8 +258,8 @@ export default function RegisterComponent() {
                                             setGender(Number(event.target.value));
                                         }}
                                     >
-                                        <option value="0">Men</option>
-                                        <option value="1">Women</option>
+                                        <option value="0">Male</option>
+                                        <option value="1">Female</option>
                                     </select>
                                 </div>
                             </div>

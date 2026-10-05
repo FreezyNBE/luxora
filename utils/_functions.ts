@@ -11,3 +11,7 @@ export const validateEmail = (email: string) => {
 export function getIndexByCountry(name = "Romania") {
     return countryList.findIndex((country) => country === name);
 }
+
+export function letterCapitalize(string: string) {
+    return String(string).charAt(0).toUpperCase() + String(string).slice(1);
+}

@@ -1,76 +1,188 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Get a free hosted Postgres database in seconds: `npx create-db`
-
 generator client {
-  provider = "prisma-client"
-  output   = "../generated/prisma"
+    provider = "prisma-client"
+    output   = "../generated/prisma"
 }
 
 datasource db {
-  provider = "postgresql"
+    provider = "postgresql"
 }
 
 model User {
-  id            String    @id
-  name          String
-  email         String
-  emailVerified Boolean
-  image         String?
-  createdAt     DateTime
-  updatedAt     DateTime
-  sessions      Session[]
-  accounts      Account[]
-  phoneNumber   String?
-  countryName   String    @default("Romania")
-  gender        Int       @default(0)
+    id            String    @id
+    name          String
+    email         String
+    emailVerified Boolean
+    image         String?
+    createdAt     DateTime
+    updatedAt     DateTime
+    sessions      Session[]
+    accounts      Account[]
+    phoneNumber   String?
+    countryName   String    @default("Romania")
+    gender        Int       @default(0)
 
-  @@unique([email])
-  @@map("user")
+    reservations Reservation[]
+    wishlists    Wishlist[]
+
+    @@unique([email])
+    @@map("user")
 }
 
 model Session {
-  id        String   @id
-  expiresAt DateTime
-  token     String
-  createdAt DateTime
-  updatedAt DateTime
-  ipAddress String?
-  userAgent String?
-  userId    String
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+    id        String   @id
+    expiresAt DateTime
+    token     String
+    createdAt DateTime
+    updatedAt DateTime
+    ipAddress String?
+    userAgent String?
+    userId    String
+    user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  @@unique([token])
-  @@map("session")
+    @@unique([token])
+    @@map("session")
 }
 
 model Account {
-  id                    String    @id
-  accountId             String
-  providerId            String
-  userId                String
-  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
-  accessToken           String?
-  refreshToken          String?
-  idToken               String?
-  accessTokenExpiresAt  DateTime?
-  refreshTokenExpiresAt DateTime?
-  scope                 String?
-  password              String?
-  createdAt             DateTime
-  updatedAt             DateTime
+    id                    String    @id
+    accountId             String
+    providerId            String
+    userId                String
+    user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+    accessToken           String?
+    refreshToken          String?
+    idToken               String?
+    accessTokenExpiresAt  DateTime?
+    refreshTokenExpiresAt DateTime?
+    scope                 String?
+    password              String?
+    createdAt             DateTime
+    updatedAt             DateTime
 
-  @@map("account")
+    @@map("account")
 }
 
 model Verification {
-  id         String    @id
-  identifier String
-  value      String
-  expiresAt  DateTime
-  createdAt  DateTime?
-  updatedAt  DateTime?
+    id         String    @id
+    identifier String
+    value      String
+    expiresAt  DateTime
+    createdAt  DateTime?
+    updatedAt  DateTime?
 
-  @@map("verification")
+    @@map("verification")
+}
+
+enum RoomView {
+    CITY
+    GARDEN
+    POOL
+    SEA
+    NONE
+}
+
+model Room {
+    id            String   @id
+    number        Int
+    areaSqm       Int
+    description   String?
+    type          String   @default("Standard")
+    view          RoomView @default(NONE)
+    pricePerNight Decimal  @db.Decimal(10, 2)
+    maxGuests     Int      @default(1)
+    image         String
+    images        String[]
+
+    availableFrom  DateTime?
+    availableUntil DateTime?
+    isActive       Boolean   @default(true)
+
+    reservations  Reservation[]
+    roomAmenities RoomAmenity[]
+
+    wishlist Wishlist[]
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+}
+
+enum ReservationStatus {
+    PENDING
+    CONFIRMED
+    COMPLETED
+    CANCELED
+}
+
+model Reservation {
+    id     String @id
+    userId String
+    user   User   @relation(fields: [userId], references: [id])
+    roomId String
+    room   Room   @relation(fields: [roomId], references: [id])
+
+    guestCount Int
+
+    checkIn  DateTime
+    checkOut DateTime
+
+    pricePerNight Decimal @db.Decimal(10, 2)
+    totalPrice    Decimal @db.Decimal(10, 2)
+
+    status ReservationStatus @default(PENDING)
+
+    payments Payment[]
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+}
+
+enum PaymentMethod {
+    MASTERCARD
+    VISA
+    PAYPAL
+}
+
+enum PaymentStatus {
+    PENDING
+    COMPLETED
+    FAILED
+    REFUNDED
+}
+
+model Payment {
+    id            String      @id
+    reservationId String
+    reservation   Reservation @relation(fields: [reservationId], references: [id])
+
+    method PaymentMethod
+    amount Decimal       @db.Decimal(10, 2)
+    status PaymentStatus
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+}
+
+model Amenity {
+    id   Int    @id @default(autoincrement())
+    name String
+
+    roomAmenity RoomAmenity[]
+}
+
+model RoomAmenity {
+    roomId    String
+    room      Room    @relation(fields: [roomId], references: [id])
+    amenityId Int
+    amenity   Amenity @relation(fields: [amenityId], references: [id])
+
+    @@id([roomId, amenityId])
+}
+
+model Wishlist {
+    userId String
+    user   User   @relation(fields: [userId], references: [id])
+    roomId String
+    room   Room   @relation(fields: [roomId], references: [id])
+
+    @@id([userId, roomId])
 }

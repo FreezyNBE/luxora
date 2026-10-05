@@ -2,6 +2,8 @@ import { betterAuth } from "better-auth";
 import { prismaAdapter } from "better-auth/adapters/prisma";
 import { prisma } from "./prisma";
 import { nextCookies } from "better-auth/next-js";
+import { customSessionClient } from "better-auth/client/plugins";
+import { customSession } from "better-auth/plugins";
 
 const appUrl = process.env.APP_URL;
 
@@ -49,5 +51,25 @@ export const auth = betterAuth({
         },
     },
     trustedOrigins: [appUrl],
-    plugins: [nextCookies()],
+    plugins: [
+        customSession(async ({ user, session }) => {
+            const account = await prisma.account.findFirst({
+                where: {
+                    userId: user.id,
+                },
+                select: {
+                    providerId: true,
+                },
+            });
+
+            return {
+                user: {
+                    ...user,
+                    authProvider: account?.providerId ?? null,
+                },
+                session,
+            };
+        }),
+        nextCookies(),
+    ],
 });

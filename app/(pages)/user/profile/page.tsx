@@ -1,11 +1,13 @@
 "use client";
 import { UserSettingsUpdateRes } from "@/app/api/user/profile/route";
 import { AlertError } from "@/app/components/alert/AlertError";
+import { AlertInfo } from "@/app/components/alert/AlertInfo";
 import { AlertLoading } from "@/app/components/alert/AlertLoading";
 import { AlertSuccess } from "@/app/components/alert/AlertSuccess";
 import { ButtonSave } from "@/app/components/misc/Button";
 import { useCurrentSession } from "@/lib/auth-session";
 import { CustomAlertType } from "@/types/_custom_alerts";
+import { letterCapitalize } from "@/utils/_functions";
 import { MAX_NAME_LENGTH, MIN_NAME_LENGTH } from "@/utils/_new_account_fields";
 import { API_URL } from "@/utils/_variables";
 import { countryList } from "@/utils/list_countries";
@@ -103,11 +105,18 @@ export default function ProfilePage() {
                 <div className="absolute bottom-0 w-0 group-hover:w-full h-0.5 bg-gold-light transition-all duration-300 ease-in" />
             </div>
 
-            {loading && <AlertLoading message={"Updating settings..."} />}
+            {loading && <AlertLoading>Updating settings...</AlertLoading>}
 
-            {status.success && <AlertSuccess message={status.message} />}
+            {status.success && <AlertSuccess>{status.message}</AlertSuccess>}
 
-            {status.error && <AlertError message={status.message} />}
+            {status.error && <AlertError>{status.message}</AlertError>}
+
+            {session.user.authProvider && session.user.authProvider !== "credential" && (
+                <AlertInfo>
+                    You are signed in using a provider (
+                    <span className="font-semibold">{letterCapitalize(session.user.authProvider)}</span>).
+                </AlertInfo>
+            )}
 
             {/* Fields */}
             <div>
@@ -199,8 +208,8 @@ export default function ProfilePage() {
                                     });
                                 }}
                             >
-                                <option value="0">Men</option>
-                                <option value="1">Women</option>
+                                <option value="0">Male</option>
+                                <option value="1">Female</option>
                             </select>
                         </div>
                     </div>
