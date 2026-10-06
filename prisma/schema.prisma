@@ -130,7 +130,22 @@ model Reservation {
 
     status ReservationStatus @default(PENDING)
 
+    guestDetails GuestDetails?
+
     payments Payment[]
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+}
+
+model GuestDetails {
+    id            String      @id
+    reservationId String      @unique
+    reservation   Reservation @relation(fields: [reservationId], references: [id])
+
+    name  String
+    email String
+    phone String
 
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt

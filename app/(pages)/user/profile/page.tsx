@@ -107,9 +107,13 @@ export default function ProfilePage() {
 
             {loading && <AlertLoading>Updating settings...</AlertLoading>}
 
-            {status.success && <AlertSuccess>{status.message}</AlertSuccess>}
+            {status.success && (
+                <AlertSuccess closeBtn={() => setStatus({ success: false, error: false })}>{status.message}</AlertSuccess>
+            )}
 
-            {status.error && <AlertError>{status.message}</AlertError>}
+            {status.error && (
+                <AlertError closeBtn={() => setStatus({ success: false, error: false })}>{status.message}</AlertError>
+            )}
 
             {session.user.authProvider && session.user.authProvider !== "credential" && (
                 <AlertInfo>
