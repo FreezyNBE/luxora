@@ -76,7 +76,7 @@ export default function RegisterComponent() {
                         {/* Fields */}
                         <div className="space-y-5">
                             <div className="flex flex-col gap-2">
-                                <label htmlFor="email" className="text-sm font-semibold">
+                                <label htmlFor="name" className="text-sm font-semibold">
                                     Full Name
                                 </label>
                                 <div className="w-full max-w-lg py-2 px-4 flex items-center gap-x-3 p-2 border border-border-light rounded-lg">

@@ -207,3 +207,19 @@ h4 {
 .apply-password-hidden {
     @apply text-gray-800/70 hover:text-gray-800;
 }
+
+.btn-w-sm {
+    @apply w-32;
+}
+
+.btn-w-md {
+    @apply w-54;
+}
+
+.btn-w-lg {
+    @apply w-72;
+}
+
+.btn-w-full {
+    @apply w-full;
+}

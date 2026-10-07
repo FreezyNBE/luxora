@@ -33,7 +33,7 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
 
     return (
         <html lang="en" className={`${roboto.variable} ${inter.variable} h-full antialiased`}>
-            <AuthSessionProvider initialSession={session}>
+            <AuthSessionProvider initialSession={session as any}>
                 <GlobalContextProvider>
                     <GalleryContextProvider>
                         <Navigation />

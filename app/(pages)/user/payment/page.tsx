@@ -1,5 +1,5 @@
 import { ButtonSave } from "@/app/components/misc/Button";
-import { Check, EyeOff, IdCard, SquarePen } from "lucide-react";
+import { Check, IdCard, Info, SquarePen } from "lucide-react";
 
 export default function PaymentMethodsPage() {
     return (
@@ -34,7 +34,7 @@ export default function PaymentMethodsPage() {
                     {/* Visa */}
                     <div className="relative flex items-center justify-center border-2 border-border-light rounded-lg px-5 pt-2 cursor-pointer hover:border-blue-900 transition-all duration-75">
                         <div className="w-6 h-6">
-                            <img src="/payment/visa.jpg" alt="MasterCard" />
+                            <img src="/payment/visa.jpg" alt="Visa" />
                         </div>
                     </div>
                 </div>
@@ -58,15 +58,15 @@ export default function PaymentMethodsPage() {
                     </div>
                     <div className="flex flex-col gap-2">
                         <label htmlFor="name" className="text-sm font-semibold">
-                            Name
+                            Card Name
                         </label>
                         <div className="w-full max-w-lg py-2 px-4 flex items-center gap-x-3 p-2 border border-border-light rounded-lg">
                             <input
                                 type="text"
-                                id="name"
-                                name="name"
+                                id="card_name"
+                                name="card_name"
                                 className="w-full max-w-72 outline-none text-ink text-sm placeholder:font-medium font-semibold"
-                                placeholder="Your name"
+                                placeholder="eg: Alex Johnson"
                                 autoComplete="true"
                             />
                         </div>
@@ -82,7 +82,7 @@ export default function PaymentMethodsPage() {
                                     id="expiration_date"
                                     name="expiration_date"
                                     className="w-full max-w-72 outline-none text-ink text-sm placeholder:font-medium font-semibold"
-                                    placeholder="12/2026"
+                                    placeholder="MM/YY"
                                     autoComplete="true"
                                 />
                             </div>
@@ -97,10 +97,10 @@ export default function PaymentMethodsPage() {
                                     id="cvv"
                                     name="cvv"
                                     className="w-full max-w-72 outline-none text-ink text-sm placeholder:font-medium font-semibold"
-                                    placeholder="0000"
+                                    placeholder="123"
                                     autoComplete="true"
                                 />
-                                <EyeOff size={"1.35rem"} className="text-gray-800/70 cursor-pointer hover:text-gray-800" />
+                                <Info size={"1.35rem"} className="text-gray-800/70 cursor-pointer hover:text-gray-800" />
                             </div>
                         </div>
                     </div>

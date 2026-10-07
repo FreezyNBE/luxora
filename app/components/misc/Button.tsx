@@ -1,5 +1,6 @@
 interface ButtonType extends React.ButtonHTMLAttributes<HTMLButtonElement> {
     children: React.ReactNode;
+    width?: "btn-w-sm" | "btn-w-md" | "btn-w-lg" | "btn-w-full";
     rounded?: "none" | "xs" | "sm" | "md" | "lg" | "xl" | "full";
     className?: string;
 }
@@ -43,10 +44,10 @@ export function ButtonStream({ children, className = "", ...props }: ButtonType)
     );
 }
 
-export function ButtonSave({ children, className = "", ...props }: ButtonType) {
+export function ButtonSave({ children, width = "btn-w-sm", className = "", ...props }: ButtonType) {
     return (
         <button
-            className={`w-32 p-2 rounded-full cursor-pointer transition-all duration-75 ${
+            className={`${width} p-2 rounded-full cursor-pointer transition-all duration-75 ${
                 className.length ? className : ""
             } truncate`}
             {...props}
