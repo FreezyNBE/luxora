@@ -3,12 +3,12 @@
 import { Calendar, Gem, Heart, LogOut, Menu, Plus, User, X } from "lucide-react";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import { Button } from "./misc/Button";
-import { useGlobal } from "../context/GlobalContext";
+import { useGlobal } from "@/app/context/GlobalContext";
 import { usePathname, useRouter } from "next/navigation";
 import { useCurrentSession } from "@/lib/auth-session";
 import { authClient } from "@/lib/auth-client";
 import toast from "react-hot-toast";
+import { Button } from "../misc/Button";
 
 function Navigation() {
     const { disableBodyOverflow, enableBodyOverflow } = useGlobal();
@@ -135,7 +135,7 @@ function Navigation() {
             {navMobileVisible && (
                 <div className="lg:hidden fixed inset-0 w-full h-full bg-black/50 z-20 text-white" onClick={() => closeMenu()}>
                     <div
-                        className={`w-full h-full overflow-auto fixed top-0 left-0 backdrop-blur-xl border-r border-r-border-dark px-5 ${navMobileStatus ? "translate-x-0" : "-translate-x-full"} transform duration-300 ease-in bg-black/90`}
+                        className={`w-full h-full fixed top-0 left-0 backdrop-blur-xl border-r border-r-border-dark px-5 ${navMobileStatus ? "overflow-auto translate-x-0" : "overflow-hidden -translate-x-full"} transform duration-300 ease-in bg-black/90`}
                         onClick={(event: React.MouseEvent<HTMLDivElement>) => event.stopPropagation()}
                     >
                         <div className="w-full">

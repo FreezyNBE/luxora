@@ -34,6 +34,7 @@
     --color-border: #e5e1d9;
     --color-border-light: #eeeae3;
     --color-border-dark: #3b3935;
+    --color-border-gray: #d8d8d8;
 
     /* Status */
     --color-success: #5c8a63;
@@ -51,6 +52,10 @@
 
     /* Navbar */
     --navbar-height: 80px;
+
+    /* Admin */
+    --navbar-admin-width: 256px;
+    --admin-header-height: 65px;
 }
 
 @theme inline {
@@ -89,6 +94,7 @@
     --color-border: #e5e1d9;
     --color-border-light: #eeeae3;
     --color-border-dark: #3b3935;
+    --color-border-gray: #d8d8d8;
 
     /* Status */
     --color-success: #5c8a63;
@@ -110,6 +116,42 @@ h2,
 h3,
 h4 {
     font-family: var(--font-heading), Arial, Helvetica, sans-serif;
+}
+
+input,
+textarea,
+select {
+    outline: none;
+}
+
+::-webkit-scrollbar {
+    @apply w-[5px] h-[5px];
+}
+
+::-webkit-scrollbar-track {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+div > *::-webkit-scrollbar {
+    @apply w-px h-px;
+}
+
+div > *::-webkit-scrollbar-track {
+    background-color: rgba(0, 0, 0, 0);
+    border-radius: 10px;
+}
+
+div > *::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+.heading {
+    @apply text-xs text-heading font-medium;
 }
 
 .min-border {
@@ -184,6 +226,10 @@ h4 {
     }
 }
 
+.admin-main {
+    @apply mt-(--admin-header-height) lg:ms-(--navbar-admin-width);
+}
+
 .link-text {
     @apply hover:text-gold hover:underline;
 }
@@ -222,4 +268,8 @@ h4 {
 
 .btn-w-full {
     @apply w-full;
+}
+
+.hh {
+    @apply p-2 rounded-md border border-transparent hover:bg-gray-400/10 hover:border-gray-400/20 cursor-pointer transition-all duration-100;
 }

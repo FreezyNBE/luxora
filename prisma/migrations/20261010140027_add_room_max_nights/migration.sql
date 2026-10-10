@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "Room" ADD COLUMN     "maxNights" INTEGER NOT NULL DEFAULT 1;

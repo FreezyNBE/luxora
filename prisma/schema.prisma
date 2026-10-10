@@ -90,8 +90,12 @@ model Room {
     view          RoomView @default(NONE)
     pricePerNight Decimal  @db.Decimal(10, 2)
     maxGuests     Int      @default(1)
+    maxNights     Int      @default(1)
     image         String
     images        String[]
+
+    doorNumber  Int
+    floorNumber Int
 
     availableFrom  DateTime?
     availableUntil DateTime?
