@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Button } from "./components/misc/Button";
+import { Button } from "../components/misc/Button";
 import {
     Bed,
     BedSingle,
@@ -14,7 +14,7 @@ import {
     Users,
 } from "lucide-react";
 import Image from "next/image";
-import HeroSlider from "./components/core/HeroSlider";
+import HeroSlider from "../components/core/HeroSlider";
 
 export default function Home() {
     return (

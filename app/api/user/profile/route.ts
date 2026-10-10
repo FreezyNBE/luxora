@@ -1,4 +1,4 @@
-import { UserSettingsDataUpd } from "@/app/(pages)/user/profile/page";
+import { UserSettingsDataUpd } from "@/app/(website)/user/profile/page";
 import { getUserSession } from "@/lib/auth.server";
 import { prisma } from "@/lib/prisma";
 import { validateEmail } from "@/utils/_functions";

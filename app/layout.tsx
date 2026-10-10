@@ -1,9 +1,7 @@
 import type { Metadata } from "next";
 import { Roboto_Condensed, Inter } from "next/font/google";
 import "./globals.css";
-import Navigation from "./components/Navigation";
 import GlobalContextProvider from "./context/GlobalContext";
-import Footer from "./components/Footer";
 import GalleryContextProvider from "./context/GalleryContext";
 import AuthSessionProvider from "./context/AuthSessionProvider";
 import { auth } from "@/lib/auth";
@@ -35,11 +33,7 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
         <html lang="en" className={`${roboto.variable} ${inter.variable} h-full antialiased`}>
             <AuthSessionProvider initialSession={session as any}>
                 <GlobalContextProvider>
-                    <GalleryContextProvider>
-                        <Navigation />
-                        {children}
-                        <Footer />
-                    </GalleryContextProvider>
+                    <GalleryContextProvider>{children}</GalleryContextProvider>
                 </GlobalContextProvider>
             </AuthSessionProvider>
         </html>
