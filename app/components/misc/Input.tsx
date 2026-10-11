@@ -7,11 +7,12 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
 }
 
 interface SelectProps extends React.SelectHTMLAttributes<HTMLSelectElement> {
-    children: React.ReactNode;
+    children?: React.ReactNode;
     id: string;
     name: string;
     className?: string;
     options: string[];
+    label?: boolean;
 }
 
 interface TextareaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
@@ -28,12 +29,12 @@ export function Input({ type, id, name, className, children, ...props }: InputPr
             <label htmlFor={id} className="text-xs text-heading font-medium">
                 {children}
             </label>
-            <div className="w-full py-2 px-4 flex items-center gap-x-3 p-2 border border-border-light rounded-lg focus-within:ring-[1.5px] focus-within:ring-gold-light transition-all duration-100">
+            <div className="w-full py-2 px-4 flex items-center gap-x-3 p-2 border border-border-gray rounded-md focus-within:ring-[1.5px] focus-within:ring-gold-light transition-all duration-100">
                 <input
                     type={type}
                     id={id}
                     name={name}
-                    className={`w-full text-gray-500 text-sm placeholder:text-xs placeholder:font-medium${className ? " " + className : ""}`}
+                    className={`w-full text-gray-500 text-sm placeholder:text-gray-500/65 placeholder:text-xs placeholder:font-medium${className ? " " + className : ""}`}
                     {...props}
                 />
             </div>
@@ -44,13 +45,13 @@ export function Input({ type, id, name, className, children, ...props }: InputPr
 export function InputSearch({ type, id, name, className, children, ...props }: InputProps) {
     return (
         <>
-            <div className="w-full py-2 px-4 flex items-center gap-x-3 p-2 border border-border-gray rounded-lg focus-within:ring-[1.5px] focus-within:ring-gold-light transition-all duration-100">
-                <div className="text-heading">{children}</div>
+            <div className="w-full py-2 px-4 flex items-center gap-x-3 p-2 border border-border-gray rounded-md focus-within:ring-[1.5px] focus-within:ring-gold-light transition-all duration-100">
+                <div className="text-gray-500">{children}</div>
                 <input
                     type={type}
                     id={id}
                     name={name}
-                    className={`w-full text-gray-500 text-sm placeholder:text-xs placeholder:font-medium${className ? " " + className : ""}`}
+                    className={`w-full text-gray-500 text-sm placeholder:text-gray-500/65 placeholder:text-xs placeholder:font-medium${className ? " " + className : ""}`}
                     {...props}
                 />
             </div>
@@ -64,12 +65,12 @@ export function InputDate({ id, name, className, children, ...props }: InputProp
             <label htmlFor={id} className="text-xs text-heading font-medium">
                 {children}
             </label>
-            <div className="w-full py-2 px-4 flex items-center gap-x-3 p-2 border border-border-light rounded-lg focus-within:ring-[1.5px] focus-within:ring-gold-light transition-all duration-100">
+            <div className="w-full py-2 px-4 flex items-center gap-x-3 p-2 border border-border-gray rounded-md focus-within:ring-[1.5px] focus-within:ring-gold-light transition-all duration-100">
                 <input
                     type="date"
                     id={id}
                     name={name}
-                    className={`w-full text-gray-500 text-sm placeholder:text-xs placeholder:font-medium${className ? " " + className : ""}`}
+                    className={`w-full text-gray-500 text-sm placeholder:text-gray-500/65 placeholder:text-xs placeholder:font-medium${className ? " " + className : ""}`}
                     {...props}
                 />
             </div>
@@ -77,13 +78,15 @@ export function InputDate({ id, name, className, children, ...props }: InputProp
     );
 }
 
-export function Select({ options, id, name, className, children, ...props }: SelectProps) {
+export function Select({ options, id, name, className, label = true, children, ...props }: SelectProps) {
     return (
         <>
-            <label htmlFor={id} className="text-xs text-heading font-medium">
-                {children}
-            </label>
-            <div className="w-full py-2 px-4 flex items-center gap-x-3 p-2 border border-border-light rounded-lg focus-within:ring-[1.5px] focus-within:ring-gold-light transition-all duration-100">
+            {label && (
+                <label htmlFor={id} className="text-xs text-heading font-medium">
+                    {children}
+                </label>
+            )}
+            <div className="w-full py-2 px-4 flex items-center gap-x-3 p-2 border border-border-gray rounded-md focus-within:ring-[1.5px] focus-within:ring-gold-light transition-all duration-100">
                 <select
                     id={id}
                     name={name}
@@ -108,11 +111,11 @@ export function Textarea({ type, id, name, className, children, ...props }: Text
             <label htmlFor={id} className="text-xs text-heading font-medium">
                 {children}
             </label>
-            <div className="w-full py-2 px-4 flex items-center gap-x-3 p-2 border border-border-light rounded-lg focus-within:ring-[1.5px] focus-within:ring-gold-light transition-all duration-100">
+            <div className="w-full py-2 px-4 flex items-center gap-x-3 p-2 border border-border-gray rounded-md focus-within:ring-[1.5px] focus-within:ring-gold-light transition-all duration-100">
                 <textarea
                     id={id}
                     name={name}
-                    className={`w-full text-gray-500 text-sm placeholder:text-xs placeholder:font-medium${className ? " " + className : ""}`}
+                    className={`w-full text-gray-500 text-sm placeholder:text-gray-500/65 placeholder:text-xs placeholder:font-medium${className ? " " + className : ""}`}
                     {...props}
                 />
             </div>

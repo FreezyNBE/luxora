@@ -8,6 +8,7 @@ import {
     Gem,
     Home,
     LayoutList,
+    ListChecks,
     Menu,
     Settings,
     SquareArrowOutUpRight,
@@ -15,6 +16,7 @@ import {
     Target,
     User,
     Users,
+    WandSparkles,
     X,
 } from "lucide-react";
 import Link from "next/link";
@@ -107,15 +109,15 @@ export default function AdminNavigation() {
                         </li>
                         <li
                             className={
-                                pathname.match("/admin/guests")
+                                pathname.match("/admin/users")
                                     ? "p-2 bg-gray-400/10 border border-gray-400/20 rounded-md cursor-pointer transition-all duration-100 group"
                                     : "p-2 border border-transparent rounded-md hover:bg-gray-400/10 hover:border-gray-400/20 cursor-pointer transition-all duration-100 group"
                             }
                         >
-                            <Link href="/admin/guests" className="block w-full">
+                            <Link href="/admin/users" className="block w-full">
                                 <Users size={"1.25rem"} className="inline-block text-gold-dark" />
                                 <span className="inline-block align-middle ms-3 text-gray-500 text-sm group-hover:text-gold">
-                                    Guests
+                                    Users
                                 </span>
                             </Link>
                         </li>
@@ -144,6 +146,20 @@ export default function AdminNavigation() {
                                 <LayoutList size={"1.25rem"} className="inline-block text-gold-dark" />
                                 <span className="inline-block align-middle ms-3 text-gray-500 text-sm group-hover:text-gold">
                                     Facilities
+                                </span>
+                            </Link>
+                        </li>
+                        <li
+                            className={
+                                pathname.match("/admin/amenities")
+                                    ? "p-2 bg-gray-400/10 border border-gray-400/20 rounded-md cursor-pointer transition-all duration-100 group"
+                                    : "p-2 border border-transparent rounded-md hover:bg-gray-400/10 hover:border-gray-400/20 cursor-pointer transition-all duration-100 group"
+                            }
+                        >
+                            <Link href="/admin/amenities" className="block w-full">
+                                <ListChecks size={"1.25rem"} className="inline-block text-gold-dark" />
+                                <span className="inline-block align-middle ms-3 text-gray-500 text-sm group-hover:text-gold">
+                                    Amenities
                                 </span>
                             </Link>
                         </li>
@@ -263,15 +279,15 @@ export default function AdminNavigation() {
                                 </li>
                                 <li
                                     className={
-                                        pathname.match("/admin/guests")
+                                        pathname.match("/admin/users")
                                             ? "p-2 bg-gray-400/10 border border-gray-400/20 rounded-md cursor-pointer transition-all duration-100 group"
                                             : "p-2 border border-transparent rounded-md hover:bg-gray-400/10 hover:border-gray-400/20 cursor-pointer transition-all duration-100 group"
                                     }
                                 >
-                                    <Link href="/admin/guests" className="block w-full">
+                                    <Link href="/admin/users" className="block w-full">
                                         <Users size={"1.25rem"} className="inline-block text-gold-dark" />
                                         <span className="inline-block align-middle ms-3 text-gray-500 text-sm group-hover:text-gold">
-                                            Guests
+                                            Users
                                         </span>
                                     </Link>
                                 </li>
@@ -300,6 +316,20 @@ export default function AdminNavigation() {
                                         <LayoutList size={"1.25rem"} className="inline-block text-gold-dark" />
                                         <span className="inline-block align-middle ms-3 text-gray-500 text-sm group-hover:text-gold">
                                             Facilities
+                                        </span>
+                                    </Link>
+                                </li>
+                                <li
+                                    className={
+                                        pathname.match("/admin/amenities")
+                                            ? "p-2 bg-gray-400/10 border border-gray-400/20 rounded-md cursor-pointer transition-all duration-100 group"
+                                            : "p-2 border border-transparent rounded-md hover:bg-gray-400/10 hover:border-gray-400/20 cursor-pointer transition-all duration-100 group"
+                                    }
+                                >
+                                    <Link href="/admin/amenities" className="block w-full">
+                                        <ListChecks size={"1.25rem"} className="inline-block text-gold-dark" />
+                                        <span className="inline-block align-middle ms-3 text-gray-500 text-sm group-hover:text-gold">
+                                            Amenities
                                         </span>
                                     </Link>
                                 </li>
@@ -363,11 +393,11 @@ function renderCurrentPathname(pathname: string) {
         );
     }
 
-    if (pathname.match("/admin/guests")) {
+    if (pathname.match("/admin/users")) {
         return (
             <>
                 <Users size={"1.25rem"} />
-                <span>Guests</span>
+                <span>Users</span>
             </>
         );
     }
@@ -386,6 +416,15 @@ function renderCurrentPathname(pathname: string) {
             <>
                 <LayoutList size={"1.25rem"} />
                 <span>Facilities</span>
+            </>
+        );
+    }
+
+    if (pathname.match("/admin/amenities")) {
+        return (
+            <>
+                <ListChecks size={"1.25rem"} />
+                <span>Amenities</span>
             </>
         );
     }

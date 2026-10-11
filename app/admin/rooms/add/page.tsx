@@ -1,22 +1,18 @@
 "use client";
-import { ButtonSave } from "@/app/components/misc/Button";
+import BackButton from "@/app/components/min/BackButton";
+import Knob from "@/app/components/min/Knob";
+import { ButtonMin } from "@/app/components/misc/Button";
 import { Input, InputDate, Select, Textarea } from "@/app/components/misc/Input";
 import { listMockAmenities, listViewRoomTypes } from "@/utils/_variables";
-import { Camera, Download, MoveLeft, SquarePen, X } from "lucide-react";
-import Link from "next/link";
+import { Camera, Download, SquarePen, X } from "lucide-react";
 import { useState } from "react";
 
 export default function CreateRoomPage() {
     const [activeRoom, setActiveRoom] = useState(false);
 
     return (
-        <div className="px-5 py-2 space-y-2">
-            <div className="w-fit hh text-gray-500">
-                <Link href="/admin/rooms" className="flex items-center justify-start">
-                    <MoveLeft size={"1.25rem"} className="inline-block" />
-                    <span className="inline-block align-middle ms-2 text-xs font-medium">Back to Rooms</span>
-                </Link>
-            </div>
+        <>
+            <BackButton url="/admin/rooms" text="Back to Rooms" />
             <div>
                 <h1 className="text-3xl tracking-wide">Add New Room</h1>
                 <span className="text-gray-600 text-sm">Fill in the details below to add a new room to your hotel.</span>
@@ -43,9 +39,9 @@ export default function CreateRoomPage() {
                         <div className="flex flex-col gap-2">
                             <Textarea
                                 type="text"
-                                id="room_name"
-                                name="room_name"
-                                placeholder="Lorem ipsum dolor sit amet consectetur adipisicing elit."
+                                id="room_description"
+                                name="room_description"
+                                placeholder="Enter a short description of this room..."
                                 className="h-15 lg:h-25 max-h-35"
                             >
                                 Description <span className="text-rose-700">*</span>
@@ -175,8 +171,8 @@ export default function CreateRoomPage() {
                 <div className="w-full flex flex-col lg:flex-row items-start gap-5 lg:gap-20">
                     <div className="flex-1 w-full space-y-5">
                         <div className="flex flex-col gap-2">
-                            <Input type="text" id="room_price" name="room_price" placeholder="2">
-                                Base Price (per night) <span className="text-rose-700">*</span>
+                            <Input type="text" id="room_price" name="room_price" placeholder="eg: 100">
+                                Price (per night) <span className="text-rose-700">*</span>
                             </Input>
                         </div>
                         <div className="flex flex-col gap-2">
@@ -186,20 +182,16 @@ export default function CreateRoomPage() {
                         </div>
                         <div className="flex flex-col gap-2">
                             <span className="heading">Status</span>
-                            <div className="flex items-center gap-3">
-                                <button
-                                    type="button"
-                                    role="switch"
-                                    aria-checked={activeRoom}
-                                    aria-label="Room Status"
-                                    onClick={() => setActiveRoom((prev) => !prev)}
-                                    className={`w-14 h-6 rounded-full inline-flex p-0.5 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-600/70 focus-visible:ring-offset-2 transition-colors duration-100 ${activeRoom ? "bg-green-600/70 hover:bg-green-600/90" : "bg-gray-600/30 hover:bg-gray-600/50"}`}
-                                >
-                                    <span
-                                        className={`w-5 h-5 bg-white ${activeRoom ? "translate-x-8" : "translate-x-0"} rounded-full transition-transform duration-200 ease-in-out`}
-                                    />
-                                </button>
-                                <span className="heading">{activeRoom ? "Available" : "Unavailable"}</span>
+                            <div className="flex items-start gap-3">
+                                <Knob onClick={() => setActiveRoom((prev) => !prev)} status={activeRoom} />
+                                <div className="flex flex-col gap-2">
+                                    <span className="heading">{activeRoom ? "Available" : "Unavailable"}</span>
+                                    <span className="text-xs text-gray-500/70">
+                                        {activeRoom
+                                            ? "Make this room be shown and available for booking."
+                                            : "Disable this room to be shown and available for booking."}
+                                    </span>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -218,17 +210,14 @@ export default function CreateRoomPage() {
                 </div>
             </div>
             <div className="w-full space-y-5 p-4 bg-cream border border-border-gray rounded-md">
-                <div className="max-w-64 flex flex-col gap-3">
+                <div className="flex flex-col gap-3">
                     <span className="block text-xs text-gray-600 font-medium">Click the button to add this room.</span>
-                    <ButtonSave
-                        width="btn-w-full"
-                        className="h-10 flex items-center justify-center gap-2 bg-gold hover:bg-gold-dark rounded-lg"
-                    >
-                        <SquarePen size={"1.2rem"} className="shrink-0 text-white" />
-                        <span className="text-white font-medium text-xs">Add New Room</span>
-                    </ButtonSave>
+                    <ButtonMin className="flex items-center justify-center gap-2">
+                        <SquarePen size={"1.25rem"} className="shrink-0 text-white" />
+                        <span className="text-white">Add New Room</span>
+                    </ButtonMin>
                 </div>
             </div>
-        </div>
+        </>
     );
 }

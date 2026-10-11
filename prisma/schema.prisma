@@ -194,6 +194,9 @@ model RoomAmenity {
     amenityId Int
     amenity   Amenity @relation(fields: [amenityId], references: [id])
 
+    description String
+    status      Boolean @default(true)
+
     @@id([roomId, amenityId])
 }
 
