@@ -60,7 +60,7 @@ export default function LoginComponent() {
         <div className="relative w-full bg-cream overflow-hidden">
             <div className="w-full flex items-center justify-center py-5 px-2">
                 {/* Container */}
-                <div className="w-full max-w-md space-y-5 bg-cream py-7 px-5 rounded-xs border border-border-light shadow-lg">
+                <div className="w-full max-w-md space-y-5 bg-cream py-7 px-5 rounded-md border border-border-light shadow-lg">
                     {/* Heading */}
                     <div className="w-full flex flex-col items-center justify-center gap-y-2 text-center">
                         <h1 className="text-3xl font-semibold">Sign in</h1>
@@ -89,15 +89,15 @@ export default function LoginComponent() {
                                 <label htmlFor="email" className="text-sm font-semibold">
                                     Email Address
                                 </label>
-                                <div className="w-full max-w-lg py-2 px-4 flex items-center gap-x-3 p-2 border border-border-light rounded-lg">
+                                <div className="w-full py-2 px-4 flex items-center gap-x-3 p-2 border border-border-gray rounded-md focus-within:ring-[1.5px] focus-within:ring-gray-800 focus-within:border-gray-800/10 transition-all duration-100">
                                     <Mail size={"1.35rem"} className="text-gray-800/70" />
                                     <input
                                         type="email"
                                         id="email"
                                         name="email"
-                                        className="w-full max-w-72 outline-none text-ink text-sm placeholder:font-medium font-semibold"
+                                        className="w-full text-gray-800 text-sm font-semibold placeholder:text-gray-500/65 placeholder:text-sm placeholder:font-medium"
                                         placeholder="Enter your email"
-                                        autoComplete="true"
+                                        autoComplete="email"
                                         value={emailAddress}
                                         onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
                                             setEmailAddress(event.target.value)
@@ -110,14 +110,15 @@ export default function LoginComponent() {
                                 <label htmlFor="password" className="text-sm font-semibold">
                                     Password
                                 </label>
-                                <div className="w-full max-w-lg py-2 px-4 flex items-center gap-x-3 p-2 border border-border-light rounded-lg">
+                                <div className="w-full py-2 px-4 flex items-center gap-x-3 p-2 border border-border-gray rounded-md focus-within:ring-[1.5px] focus-within:ring-gray-800 focus-within:border-gray-800/10 transition-all duration-100">
                                     <LockKeyhole size={"1.35rem"} className="text-gray-800/70" />
                                     <input
                                         type="password"
                                         id="password"
                                         name="password"
-                                        className="w-full max-w-72 outline-none text-ink text-sm placeholder:font-medium font-semibold"
+                                        className="w-full text-gray-800 text-sm font-semibold placeholder:text-gray-500/65 placeholder:text-sm placeholder:font-medium"
                                         placeholder="Enter your password"
+                                        autoComplete="off"
                                         value={password}
                                         onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
                                             setPassword(event.target.value)

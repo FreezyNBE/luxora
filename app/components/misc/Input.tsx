@@ -16,11 +16,11 @@ interface SelectProps extends React.SelectHTMLAttributes<HTMLSelectElement> {
 }
 
 interface TextareaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
-    children: React.ReactNode;
-    type: string;
+    children?: React.ReactNode;
     id: string;
     name: string;
     className?: string;
+    label?: boolean;
 }
 
 export function Input({ type, id, name, className, children, ...props }: InputProps) {
@@ -91,7 +91,7 @@ export function Select({ options, id, name, className, label = true, children, .
                     id={id}
                     name={name}
                     autoComplete="room_type"
-                    className="w-full text-gray-500 text-sm font-medium"
+                    className={`w-full text-gray-500 text-sm font-medium${className ? " " + className : ""}`}
                     {...props}
                 >
                     {options.map((option, index) => (
@@ -105,12 +105,14 @@ export function Select({ options, id, name, className, label = true, children, .
     );
 }
 
-export function Textarea({ type, id, name, className, children, ...props }: TextareaProps) {
+export function Textarea({ id, name, className, label = false, children, ...props }: TextareaProps) {
     return (
         <>
-            <label htmlFor={id} className="text-xs text-heading font-medium">
-                {children}
-            </label>
+            {label && (
+                <label htmlFor={id} className="text-xs text-heading font-medium">
+                    {children}
+                </label>
+            )}
             <div className="w-full py-2 px-4 flex items-center gap-x-3 p-2 border border-border-gray rounded-md focus-within:ring-[1.5px] focus-within:ring-gold-light transition-all duration-100">
                 <textarea
                     id={id}

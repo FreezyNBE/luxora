@@ -7,7 +7,7 @@ import { ListCheck } from "lucide-react";
 import { useState } from "react";
 
 export default function CreateAmenityPage() {
-    const [amenityStatus, setAmenityStatus] = useState(true);
+    const [amenityStatus, setAmenityStatus] = useState(false);
 
     return (
         <>
@@ -29,7 +29,6 @@ export default function CreateAmenityPage() {
                     </div>
                     <div className="flex flex-col gap-2">
                         <Textarea
-                            type="text"
                             id="amenity_description"
                             name="amenity_description"
                             placeholder="Enter a short description of this amenity..."

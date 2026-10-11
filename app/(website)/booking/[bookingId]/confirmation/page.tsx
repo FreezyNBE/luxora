@@ -4,10 +4,10 @@ import {
     CalendarDays,
     Check,
     Eye,
-    GitPullRequestArrow,
     Headphones,
     Mail,
     Moon,
+    NotepadText,
     Phone,
     SquareM,
     User,
@@ -165,12 +165,12 @@ export default function BookingConfirmationPage() {
                             </div>
                             <div className="w-full h-px bg-border-light my-3" />
                             <div className="flex items-start gap-2">
-                                <GitPullRequestArrow className="text-gold mt-1" />
+                                <NotepadText className="text-gold mt-1" />
                                 <div className="space-y-2">
                                     <span className="text-ink font-semibold">Special Requests</span>
                                     <div className="space-y-px">
-                                        <span className="block text-sm text-heading font-medium">
-                                            Late check-in (after 10 PM)
+                                        <span className="block text-xs text-gray-500 font-medium">
+                                            Late check-in (after 10 PM).
                                         </span>
                                     </div>
                                 </div>
@@ -263,13 +263,13 @@ export default function BookingConfirmationPage() {
                                                 contact us.
                                             </span>
                                             <div className="space-y-1">
-                                                <div className="w-fit text-gray-500 pb-px border-b border-b-transparent cursor-pointer hover:border-b-gray-300">
+                                                <div className="w-fit text-gray-500 pb-px cursor-pointer hover:text-gold">
                                                     <Phone size={"1rem"} className="inline-block shrink-0" />
                                                     <span className="inline-block align-middle ms-2 text-xs font-medium">
                                                         +1 234 567 8900
                                                     </span>
                                                 </div>
-                                                <div className="w-fit text-gray-500 pb-px border-b border-b-transparent cursor-pointer hover:border-b-gray-300">
+                                                <div className="w-fit text-gray-500 pb-px cursor-pointer hover:text-gold">
                                                     <Mail size={"1rem"} className="inline-block shrink-0" />
                                                     <span className="inline-block align-middle ms-2 text-xs font-medium">
                                                         luxora@example.com

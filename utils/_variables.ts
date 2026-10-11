@@ -16,3 +16,5 @@ export const listMockAmenities = [
     "Balcony",
     "Jacuzzi",
 ];
+
+export const genderSelections = ["Male", "Female"];

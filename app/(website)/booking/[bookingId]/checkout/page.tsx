@@ -1,4 +1,6 @@
+"use client";
 import { ButtonAction } from "@/app/components/misc/Button";
+import { Input, Select, Textarea } from "@/app/components/misc/Input";
 import { phonePrefixesByCountry } from "@/utils/phone_numbers";
 import { CalendarCheck2, CalendarClock, Check, Eye, MoveRight, ShieldCheck, SquareM, UserRound } from "lucide-react";
 import Link from "next/link";
@@ -6,6 +8,21 @@ import Link from "next/link";
 export default function CheckoutPage() {
     return (
         <>
+            <div className=" w-full flex flex-col max-md:mb-3">
+                <div className="relative w-full h-50">
+                    <img src="/img/tmp3.png" alt="Contact Us" className="w-full h-full object-cover" />
+
+                    <div className="absolute inset-0 bg-black/60" />
+                    <div className="absolute inset-0 w-full h-full text-white">
+                        <div className="h-full flex flex-col items-center justify-center gap-y-3 text-center">
+                            <h1 className="text-5xl tracking-wide font-semibold">Checkout</h1>
+                            <span className="w-full max-w-sm md:max-w-md text-sm">
+                                Complete your booking in just a few simple steps.
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div className="w-full flex flex-row items-center justify-center gap-2 cursor-default p-5">
                 <div className="flex flex-col lg:flex-row items-center justify-center text-center gap-2">
                     <div className="w-7 h-7 flex items-center justify-center bg-gold border border-transparent text-white text-xs font-medium rounded-full">
@@ -48,48 +65,41 @@ export default function CheckoutPage() {
                         <div className="w-full space-y-5">
                             <div className="w-full max-w-lg space-y-5">
                                 <div className="flex flex-col gap-2">
-                                    <label htmlFor="name" className="text-xs text-heading font-medium">
+                                    <Input
+                                        type="text"
+                                        id="name"
+                                        name="name"
+                                        autoComplete="name"
+                                        placeholder="eg: AlexJohnson"
+                                        required
+                                    >
                                         Full Name <span className="text-rose-700">*</span>
-                                    </label>
-                                    <div className="w-full py-2 px-4 flex items-center gap-x-3 p-2 border border-border-light rounded-lg">
-                                        <input
-                                            type="text"
-                                            id="name"
-                                            name="name"
-                                            className="w-full outline-none text-ink text-sm placeholder:text-xs"
-                                            placeholder="eg: Alex Johnson"
-                                            autoComplete="true"
-                                            required
-                                        />
-                                    </div>
+                                    </Input>
                                 </div>
                                 <div className="flex flex-col gap-2">
-                                    <label htmlFor="email" className="text-xs text-heading font-medium">
-                                        Email Address <span className="text-rose-700">*</span>
-                                    </label>
-                                    <div className="w-full py-2 px-4 flex items-center gap-x-3 p-2 border border-border-light rounded-lg">
-                                        <input
-                                            type="email"
-                                            id="email"
-                                            name="email"
-                                            className="w-full outline-none text-ink text-sm placeholder:text-xs"
-                                            placeholder="eg: alex.johnson@example.com"
-                                            autoComplete="true"
-                                            required
-                                        />
-                                    </div>
+                                    <Input
+                                        type="email"
+                                        id="email"
+                                        name="email"
+                                        autoComplete="email"
+                                        placeholder="eg: alex.johnson@example.com"
+                                        required
+                                    >
+                                        Email Adress <span className="text-rose-700">*</span>
+                                    </Input>
                                 </div>
                                 <div className="flex flex-col gap-2">
                                     <label htmlFor="phone_number" className="text-xs text-heading font-medium">
                                         Phone Number <span className="text-rose-700">*</span>
                                     </label>
                                     <div className="flex w-full">
-                                        <div className="w-fit py-2 px-4 flex items-center gap-x-3 p-2 border border-border-light rounded-l-lg border-r-transparent">
+                                        <div className="w-45 py-2 px-4 flex items-center gap-x-3 p-2 border border-r-transparent border-border-gray rounded-md rounded-r-none focus-within:ring-[1.5px] focus-within:ring-gold-light transition-all duration-100">
                                             <select
                                                 id="phone_prefix"
                                                 name="phone_prefix"
-                                                autoComplete="phone_prefix"
-                                                className="w-full text-muted-light text-xs font-medium"
+                                                autoComplete="off"
+                                                className="w-full text-gray-500 text-sm font-medium"
+                                                required
                                             >
                                                 {phonePrefixesByCountry.map((prefix, index) => (
                                                     <option key={index} value={prefix.code} className="w-fit">
@@ -98,14 +108,14 @@ export default function CheckoutPage() {
                                                 ))}
                                             </select>
                                         </div>
-                                        <div className="w-full max-w-md py-2 px-4 flex items-center gap-x-3 p-2 border border-border-light rounded-r-lg">
+                                        <div className="w-full py-2 px-4 flex items-center gap-x-3 p-2 border border-border-gray rounded-md rounded-l-none focus-within:ring-[1.5px] focus-within:ring-gold-light transition-all duration-100">
                                             <input
                                                 type="text"
                                                 id="phone_number"
                                                 name="phone_number"
-                                                className="w-full outline-none text-ink text-sm placeholder:text-xs"
-                                                placeholder="000 000 000"
-                                                autoComplete="true"
+                                                className="w-full text-gray-500 text-sm placeholder:text-gray-500/65 placeholder:text-xs placeholder:font-medium"
+                                                placeholder="1234 567 890"
+                                                autoComplete="tel"
                                                 required
                                             />
                                         </div>
@@ -119,14 +129,13 @@ export default function CheckoutPage() {
                                     <p className="text-xs text-muted-light">
                                         Any special requests? Let us know, and we'll do our best to accommodate you.
                                     </p>
-                                    <div className="w-full mt-5 py-2 px-4 flex items-center gap-x-3 p-2 border border-border-light rounded-lg">
-                                        <textarea
-                                            id="comments"
-                                            name="comments"
-                                            className="w-full h-25 max-h-35 outline-none text-ink text-sm placeholder:text-xs"
+                                    <div className="mt-5">
+                                        <Textarea
+                                            id="special_requests"
+                                            name="special_requests"
                                             placeholder="eg: Late arrival, extra pillows, special occassion.."
-                                            autoComplete="true"
-                                            required
+                                            label={false}
+                                            className="w-full h-25 max-h-35"
                                         />
                                     </div>
                                 </div>

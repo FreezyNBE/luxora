@@ -1,4 +1,5 @@
-import { ButtonAction } from "@/app/components/misc/Button";
+import { ButtonAction, ButtonMin } from "@/app/components/misc/Button";
+import { Input, Textarea } from "@/app/components/misc/Input";
 import { Mail, MapPin, Phone } from "lucide-react";
 
 export default function ContactPage() {
@@ -53,27 +54,34 @@ export default function ContactPage() {
                                 </div>
                             </div>
                         </div>
-                        <div className="w-full md:w-1/2 flex flex-col items-center justify-center gap-y-3 pt-5 px-5">
-                            <h1 className="text-xl text-center font-medium">Send us a message</h1>
-                            <div className="w-full max-w-lg py-2 px-4 flex items-center gap-x-3 p-2 border border-border-light rounded-lg">
-                                <input
+                        <div className="w-full md:w-1/2 flex flex-col items-start justify-center gap-y-3 pt-5 md:pb-2 xl:pb-0 px-5">
+                            <h1 className="w-full text-xl text-center font-medium">Send us a message</h1>
+                            <div className="w-full flex flex-col gap-2">
+                                <Input
                                     type="email"
                                     id="email"
                                     name="email"
-                                    className="w-full max-w-72 outline-none text-ink text-sm placeholder:font-medium font-semibold"
-                                    placeholder="Email Address"
-                                />
-                            </div>
-                            <div className="w-full max-w-lg ">
-                                <textarea
+                                    autoComplete="email"
+                                    placeholder="eg: alex.johnson@example.com"
+                                    required
+                                >
+                                    Email Address <span className="text-rose-700">*</span>
+                                </Input>
+
+                                <Textarea
                                     id="message"
                                     name="message"
-                                    rows={3}
-                                    className="w-full max-w-lg min-h-20 max-h-30 py-2 px-4 flex items-start gap-x-3 p-2 border border-border-light rounded-lg outline-none text-ink text-sm placeholder:font-medium font-semibold"
-                                    placeholder="Your Message"
-                                />
+                                    autoComplete="off"
+                                    placeholder="Enter a message you want to send us..."
+                                    className="min-h-20 max-h-30"
+                                    label={true}
+                                    required
+                                >
+                                    Message <span className="text-rose-700">*</span>
+                                </Textarea>
                             </div>
-                            <ButtonAction className="w-full max-w-lg">Send message</ButtonAction>
+
+                            <ButtonMin width="btn-w-full">Send message</ButtonMin>
                         </div>
                     </div>
                 </div>

@@ -2,7 +2,7 @@ interface KnobProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
     status: boolean;
 }
 
-export default function Knob({ status = false, ...props }: KnobProps) {
+export default function Knob({ status, ...props }: KnobProps) {
     return (
         <button
             type="button"

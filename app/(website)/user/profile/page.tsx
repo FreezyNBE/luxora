@@ -4,14 +4,17 @@ import { AlertError } from "@/app/components/alert/AlertError";
 import { AlertInfo } from "@/app/components/alert/AlertInfo";
 import { AlertLoading } from "@/app/components/alert/AlertLoading";
 import { AlertSuccess } from "@/app/components/alert/AlertSuccess";
+import BackButton from "@/app/components/min/BackButton";
 import { ButtonSave } from "@/app/components/misc/Button";
+import { Input, Select } from "@/app/components/misc/Input";
 import { useCurrentSession } from "@/lib/auth-session";
 import { CustomAlertType } from "@/types/_custom_alerts";
 import { letterCapitalize } from "@/utils/_functions";
 import { MAX_NAME_LENGTH, MIN_NAME_LENGTH } from "@/utils/_new_account_fields";
-import { API_URL } from "@/utils/_variables";
+import { API_URL, genderSelections } from "@/utils/_variables";
 import { countryList } from "@/utils/list_countries";
-import { LoaderCircle, MapPinned, Phone, SquarePen, User } from "lucide-react";
+import { phonePrefixesByCountry } from "@/utils/phone_numbers";
+import { LoaderCircle, SquarePen } from "lucide-react";
 import React, { useState } from "react";
 import toast from "react-hot-toast";
 
@@ -99,152 +102,137 @@ export default function ProfilePage() {
     };
 
     return (
-        <div className="w-full space-y-5">
-            <div className="w-fit relative block text-lg font-medium tracking-wide group cursor-pointer">
-                <span>My Profile</span>
-                <div className="absolute bottom-0 w-0 group-hover:w-full h-0.5 bg-gold-light transition-all duration-300 ease-in" />
+        <div className="w-full space-y-2">
+            <BackButton url="/" text="Back to Home" />
+
+            <div>
+                <h1 className="text-3xl tracking-wide">My Profile</h1>
+                <span className="text-gray-600 text-sm">Edit your profile informations.</span>
             </div>
 
-            {loading && <AlertLoading>Updating settings...</AlertLoading>}
-
-            {status.success && (
-                <AlertSuccess closeBtn={() => setStatus({ success: false, error: false })}>{status.message}</AlertSuccess>
-            )}
-
-            {status.error && (
-                <AlertError closeBtn={() => setStatus({ success: false, error: false })}>{status.message}</AlertError>
-            )}
-
-            {session.user.authProvider && session.user.authProvider !== "credential" && (
-                <AlertInfo>
-                    You are signed in using a provider (
-                    <span className="font-semibold">{letterCapitalize(session.user.authProvider)}</span>).
-                </AlertInfo>
-            )}
-
             {/* Fields */}
-            <div>
+            <div className="w-full space-y-5 p-4 bg-cream border border-border-gray rounded-md">
+                <div className="space-y-2">
+                    {loading && <AlertLoading>Updating settings...</AlertLoading>}
+
+                    {status.success && (
+                        <AlertSuccess closeBtn={() => setStatus({ success: false, error: false })}>
+                            {status.message}
+                        </AlertSuccess>
+                    )}
+
+                    {status.error && (
+                        <AlertError closeBtn={() => setStatus({ success: false, error: false })}>{status.message}</AlertError>
+                    )}
+
+                    {session.user.authProvider && session.user.authProvider !== "credential" && (
+                        <AlertInfo>
+                            You are signed in using a provider (
+                            <span className="font-semibold">{letterCapitalize(session.user.authProvider)}</span>).
+                        </AlertInfo>
+                    )}
+                </div>
+
                 <div className="grid grid-cols-1 gap-x-2 gap-y-5 pb-5">
-                    <div className="flex flex-col gap-2">
-                        <label htmlFor="name" className="text-sm font-semibold">
-                            Full Name
-                        </label>
-                        <div className="w-full max-w-lg py-2 px-4 flex items-center gap-x-3 p-2 border border-border-light rounded-lg">
-                            <User size={"1.35rem"} className="text-gray-800/70" />
-                            <input
-                                type="text"
-                                id="name"
-                                name="name"
-                                className="w-full outline-none text-ink text-sm placeholder:font-medium font-semibold"
-                                placeholder="Your Full Name"
-                                autoComplete="true"
-                                min={MIN_NAME_LENGTH}
-                                max={MAX_NAME_LENGTH}
-                                value={userSettings.name}
-                                onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-                                    setUserSettings((prev) => {
-                                        return { ...prev, name: event.target.value };
-                                    })
-                                }
-                                required
-                            />
-                        </div>
+                    <div className="w-full max-w-lg flex flex-col gap-2">
+                        <Input
+                            type="text"
+                            id="name"
+                            name="name"
+                            autoComplete="name"
+                            placeholder="eg: Alex Johnson"
+                            className="text-ink"
+                            min={MIN_NAME_LENGTH}
+                            max={MAX_NAME_LENGTH}
+                            value={userSettings.name}
+                            onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+                                setUserSettings((prev) => {
+                                    return { ...prev, name: event.target.value };
+                                })
+                            }
+                            required
+                        >
+                            Full Name <span className="text-rose-700">*</span>
+                        </Input>
                     </div>
-                    <div className="flex flex-col gap-2">
-                        <label htmlFor="email" className="text-sm font-semibold">
-                            Email Address
-                        </label>
-                        <div className="w-full max-w-lg py-2 px-4 flex items-center gap-x-3 p-2 border border-border-light rounded-lg">
-                            <User size={"1.35rem"} className="text-gray-800/70" />
-                            <input
-                                type="email"
-                                id="email"
-                                name="email"
-                                className="w-full outline-none text-ink text-sm placeholder:font-medium font-semibold"
-                                placeholder="Your Email address"
-                                autoComplete="true"
-                                value={userSettings.email}
-                                onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-                                    setUserSettings((prev) => {
-                                        return { ...prev, email: event.target.value };
-                                    })
-                                }
-                            />
-                        </div>
+                    <div className="w-full max-w-lg flex flex-col gap-2">
+                        <Input
+                            type="email"
+                            id="email"
+                            name="email"
+                            autoComplete="email"
+                            placeholder="eg: alex.johnson@example.com"
+                            className="text-ink"
+                            value={userSettings.email}
+                            onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+                                setUserSettings((prev) => {
+                                    return { ...prev, email: event.target.value };
+                                })
+                            }
+                            required
+                        >
+                            Email Address <span className="text-rose-700">*</span>
+                        </Input>
                     </div>
-                    <div className="flex flex-col gap-2">
-                        <label htmlFor="phone_number" className="text-sm font-semibold">
+                    <div className="w-full max-w-lg flex flex-col gap-2">
+                        <label htmlFor="phone_number" className="text-xs text-heading font-medium">
                             Phone Number
                         </label>
-                        <div className="w-full max-w-lg py-2 px-4 flex items-center gap-x-3 p-2 border border-border-light rounded-lg">
-                            <Phone size={"1.35rem"} className="text-gray-800/70" />
-                            <input
-                                type="text"
-                                id="phone_number"
-                                name="phone_number"
-                                className="w-full outline-none text-ink text-sm placeholder:font-medium font-semibold"
-                                placeholder="+0 000 000 000"
-                                autoComplete="true"
-                                value={userSettings.phoneNumber ?? ""}
-                                onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-                                    setUserSettings((prev) => {
-                                        return { ...prev, phoneNumber: event.target.value };
-                                    })
-                                }
-                            />
+                        <div className="flex w-full">
+                            <div className="w-45 py-2 px-4 flex items-center gap-x-3 p-2 border border-r-transparent border-border-gray rounded-md rounded-r-none focus-within:ring-[1.5px] focus-within:ring-gold-light transition-all duration-100">
+                                <select
+                                    id="phone_prefix"
+                                    name="phone_prefix"
+                                    autoComplete="off"
+                                    className="w-full text-gray-500 text-sm font-medium"
+                                >
+                                    {phonePrefixesByCountry.map((prefix, index) => (
+                                        <option key={index} value={prefix.code} className="w-fit">
+                                            {prefix.shortname}:{prefix.code}
+                                        </option>
+                                    ))}
+                                </select>
+                            </div>
+                            <div className="w-full py-2 px-4 flex items-center gap-x-3 p-2 border border-border-gray rounded-md rounded-l-none focus-within:ring-[1.5px] focus-within:ring-gold-light transition-all duration-100">
+                                <input
+                                    type="text"
+                                    id="phone_number"
+                                    name="phone_number"
+                                    className="w-full text-ink text-sm placeholder:text-gray-500/65 placeholder:text-xs placeholder:font-medium"
+                                    placeholder="1234 567 890"
+                                    autoComplete="tel"
+                                    value={userSettings.phoneNumber ?? ""}
+                                    onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+                                        setUserSettings((prev) => {
+                                            return { ...prev, phoneNumber: event.target.value };
+                                        })
+                                    }
+                                />
+                            </div>
                         </div>
                     </div>
-                    <div className="flex flex-col gap-2">
-                        <label htmlFor="gender" className="text-sm font-semibold">
-                            Gender
-                        </label>
-                        <div className="w-full max-w-lg py-2 px-4 flex items-center gap-x-3 p-2 border border-border-light rounded-lg">
-                            <User size={"1.35rem"} className="text-gray-800/70" />
-                            <select
-                                id="gender"
-                                name="gender"
-                                autoComplete="gender"
-                                className="w-full text-muted"
-                                value={userSettings.gender}
-                                onChange={(event: React.ChangeEvent<HTMLSelectElement>) => {
-                                    setUserSettings((prev) => {
-                                        return { ...prev, gender: Number(event.target.value) };
-                                    });
-                                }}
-                            >
-                                <option value="0">Male</option>
-                                <option value="1">Female</option>
-                            </select>
-                        </div>
+                    <div className="w-full max-w-lg flex flex-col gap-2">
+                        <Select id="gender" name="gender" options={genderSelections}>
+                            Gender <span className="text-rose-700">*</span>
+                        </Select>
                     </div>
-                    <div className="flex flex-col gap-2">
-                        <label htmlFor="country" className="text-sm font-semibold">
-                            Country
-                        </label>
-                        <div className="w-full max-w-lg py-2 px-4 flex items-center gap-x-3 p-2 border border-border-light rounded-lg">
-                            <MapPinned size={"1.35rem"} className="text-gray-800/70" />
-                            <select
-                                id="country"
-                                name="country"
-                                autoComplete="country"
-                                className="w-full text-muted"
-                                value={userSettings.country}
-                                onChange={(event: React.ChangeEvent<HTMLSelectElement>) => {
-                                    setUserSettings((prev) => {
-                                        if (countryList.includes(event.target.value)) {
-                                            return { ...prev, country: event.target.value };
-                                        }
-                                        return prev;
-                                    });
-                                }}
-                            >
-                                {countryList.map((country, index) => (
-                                    <option key={index} value={country}>
-                                        {country}
-                                    </option>
-                                ))}
-                            </select>
-                        </div>
+                    <div className="w-full max-w-lg flex flex-col gap-2">
+                        <Select
+                            id="country"
+                            name="country"
+                            options={countryList}
+                            value={userSettings.country}
+                            onChange={(event: React.ChangeEvent<HTMLSelectElement>) => {
+                                setUserSettings((prev) => {
+                                    if (countryList.includes(event.target.value)) {
+                                        return { ...prev, country: event.target.value };
+                                    }
+                                    return prev;
+                                });
+                            }}
+                        >
+                            Country <span className="text-rose-700">*</span>
+                        </Select>
                     </div>
                 </div>
                 {!loading ? (

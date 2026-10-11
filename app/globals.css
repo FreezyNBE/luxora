@@ -51,6 +51,7 @@
     --color-info-bg: #eef4f8;
 
     /* Navbar */
+    --navbar-width: 300px;
     --navbar-height: 80px;
 
     /* Admin */

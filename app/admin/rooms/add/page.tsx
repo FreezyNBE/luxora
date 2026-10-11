@@ -38,7 +38,6 @@ export default function CreateRoomPage() {
                         </div>
                         <div className="flex flex-col gap-2">
                             <Textarea
-                                type="text"
                                 id="room_description"
                                 name="room_description"
                                 placeholder="Enter a short description of this room..."

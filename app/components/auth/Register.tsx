@@ -10,6 +10,7 @@ import { useRouter } from "next/navigation";
 import ErrorSignUp from "./ErrorSignUp";
 import { countryList } from "@/utils/list_countries";
 import { getIndexByCountry } from "@/utils/_functions";
+import { Select } from "../misc/Input";
 
 export default function RegisterComponent() {
     const router = useRouter();
@@ -60,7 +61,7 @@ export default function RegisterComponent() {
         <div className="relative w-full bg-cream overflow-hidden">
             <div className="w-full flex items-center justify-center py-5 px-2">
                 {/* Container */}
-                <div className="w-full max-w-md bg-cream py-7 px-5 rounded-xs border border-border-light shadow-lg">
+                <div className="w-full max-w-md bg-cream py-7 px-5 rounded-md border border-border-light shadow-lg">
                     <form action={handleSignUpEmail} className="space-y-5">
                         {/* Heading */}
                         <div className="w-full flex flex-col items-center justify-center gap-y-2 text-center">
@@ -79,15 +80,15 @@ export default function RegisterComponent() {
                                 <label htmlFor="name" className="text-sm font-semibold">
                                     Full Name
                                 </label>
-                                <div className="w-full max-w-lg py-2 px-4 flex items-center gap-x-3 p-2 border border-border-light rounded-lg">
+                                <div className="w-full py-2 px-4 flex items-center gap-x-3 p-2 border border-border-gray rounded-md focus-within:ring-[1.5px] focus-within:ring-gray-800 focus-within:border-gray-800/10 transition-all duration-100">
                                     <User size={"1.35rem"} className="text-gray-800/70" />
                                     <input
                                         type="text"
                                         id="name"
                                         name="name"
-                                        className="w-full max-w-72 outline-none text-ink text-sm placeholder:font-medium font-semibold"
-                                        placeholder="Enter your full name"
-                                        autoComplete="true"
+                                        className="w-full text-gray-800 text-sm font-semibold placeholder:text-gray-500/65 placeholder:text-sm placeholder:font-medium"
+                                        placeholder="eg: Alex Johnson"
+                                        autoComplete="name"
                                         value={name}
                                         onChange={(event: React.ChangeEvent<HTMLInputElement>) => setName(event.target.value)}
                                         min={MIN_NAME_LENGTH}
@@ -100,15 +101,15 @@ export default function RegisterComponent() {
                                 <label htmlFor="email" className="text-sm font-semibold">
                                     Email Address
                                 </label>
-                                <div className="w-full max-w-lg py-2 px-4 flex items-center gap-x-3 p-2 border border-border-light rounded-lg">
+                                <div className="w-full py-2 px-4 flex items-center gap-x-3 p-2 border border-border-gray rounded-md focus-within:ring-[1.5px] focus-within:ring-gray-800 focus-within:border-gray-800/10 transition-all duration-100">
                                     <Mail size={"1.35rem"} className="text-gray-800/70" />
                                     <input
                                         type="email"
                                         id="email"
                                         name="email"
-                                        className="w-full max-w-72 outline-none text-ink text-sm placeholder:font-medium font-semibold"
-                                        placeholder="Enter your email"
-                                        autoComplete="true"
+                                        className="w-full text-gray-800 text-sm font-semibold placeholder:text-gray-500/65 placeholder:text-sm placeholder:font-medium"
+                                        placeholder="eg: alex.johnson@example.com"
+                                        autoComplete="email"
                                         value={emailAddress}
                                         onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
                                             setEmailAddress(event.target.value)
@@ -122,15 +123,16 @@ export default function RegisterComponent() {
                                     Password
                                 </label>
                                 <div>
-                                    <div className="w-full max-w-lg py-2 px-4 flex items-center gap-x-3 p-2 border border-border-light rounded-lg">
+                                    <div className="w-full py-2 px-4 flex items-center gap-x-3 p-2 border border-border-gray rounded-md focus-within:ring-[1.5px] focus-within:ring-gray-800 focus-within:border-gray-800/10 transition-all duration-100">
                                         <LockKeyhole size={"1.35rem"} className="text-gray-800/70" />
                                         <input
                                             hidden
                                             type="password"
                                             id="password"
                                             name="password"
-                                            className="w-full max-w-72 outline-none text-ink text-sm placeholder:font-medium font-semibold"
+                                            className="w-full text-gray-800 text-sm font-semibold placeholder:text-gray-500/65 placeholder:text-sm placeholder:font-medium"
                                             placeholder="Enter your password"
+                                            autoComplete="off"
                                             value={password}
                                             onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
                                                 setPassword(event.target.value)
@@ -142,8 +144,9 @@ export default function RegisterComponent() {
                                                 type="text"
                                                 id="pvisibile"
                                                 name="pvisibile"
-                                                className="w-full max-w-72 outline-none text-ink text-sm placeholder:font-medium font-semibold"
+                                                className="w-full text-gray-800 text-sm font-semibold placeholder:text-gray-500/65 placeholder:text-sm placeholder:font-medium"
                                                 placeholder="Enter your password"
+                                                autoComplete="off"
                                                 value={password}
                                                 onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
                                                     setPassword(event.target.value)
@@ -155,8 +158,9 @@ export default function RegisterComponent() {
                                                 type="password"
                                                 id="phidden"
                                                 name="phidden"
-                                                className="w-full max-w-72 outline-none text-ink text-sm placeholder:font-medium font-semibold"
+                                                className="w-full text-gray-800 text-sm font-semibold placeholder:text-gray-500/65 placeholder:text-sm placeholder:font-medium"
                                                 placeholder="Enter your password"
+                                                autoComplete="off"
                                                 value={password}
                                                 onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
                                                     setPassword(event.target.value)
@@ -185,15 +189,16 @@ export default function RegisterComponent() {
                                 <label htmlFor="password" className="text-sm font-semibold">
                                     Confirm Password
                                 </label>
-                                <div className="w-full max-w-lg py-2 px-4 flex items-center gap-x-3 p-2 border border-border-light rounded-lg">
+                                <div className="w-full py-2 px-4 flex items-center gap-x-3 p-2 border border-border-gray rounded-md focus-within:ring-[1.5px] focus-within:ring-gray-800 focus-within:border-gray-800/10 transition-all duration-100">
                                     <LockKeyhole size={"1.35rem"} className="text-gray-800/70" />
                                     <input
                                         hidden
                                         type="password"
                                         id="confirm_password"
                                         name="confirm_password"
-                                        className="w-full max-w-72 outline-none text-ink text-sm placeholder:font-medium font-semibold"
+                                        className="w-full text-gray-800 text-sm font-semibold placeholder:text-gray-500/65 placeholder:text-sm placeholder:font-medium"
                                         placeholder="Confirm your password"
+                                        autoComplete="off"
                                         value={confirmedPassword}
                                         onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
                                             setConfirmedPassword(event.target.value)
@@ -205,8 +210,9 @@ export default function RegisterComponent() {
                                             type="text"
                                             id="cpvisibile"
                                             name="cpvisibile"
-                                            className="w-full max-w-72 outline-none text-ink text-sm placeholder:font-medium font-semibold"
+                                            className="w-full text-gray-800 text-sm font-semibold placeholder:text-gray-500/65 placeholder:text-sm placeholder:font-medium"
                                             placeholder="Confirm your password"
+                                            autoComplete="off"
                                             value={confirmedPassword}
                                             onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
                                                 setConfirmedPassword(event.target.value)
@@ -218,8 +224,9 @@ export default function RegisterComponent() {
                                             type="password"
                                             id="cphidden"
                                             name="cphidden"
-                                            className="w-full max-w-72 outline-none text-ink text-sm placeholder:font-medium font-semibold"
+                                            className="w-full text-gray-800 text-sm font-semibold placeholder:text-gray-500/65 placeholder:text-sm placeholder:font-medium"
                                             placeholder="Confirm your password"
+                                            autoComplete="off"
                                             value={confirmedPassword}
                                             onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
                                                 setConfirmedPassword(event.target.value)
@@ -246,13 +253,13 @@ export default function RegisterComponent() {
                                 <label htmlFor="gender" className="text-sm font-semibold">
                                     Gender
                                 </label>
-                                <div className="w-full max-w-lg py-2 px-4 flex items-center gap-x-3 p-2 border border-border-light rounded-lg">
+                                <div className="w-full py-2 px-4 flex items-center gap-x-3 p-2 border border-border-gray rounded-md focus-within:ring-[1.5px] focus-within:ring-gray-800 focus-within:border-gray-800/10 transition-all duration-100">
                                     <User size={"1.35rem"} className="text-gray-800/70" />
                                     <select
                                         id="gender"
                                         name="gender"
                                         autoComplete="gender"
-                                        className="w-full text-muted"
+                                        className="w-full text-gray-500 text-sm font-medium"
                                         value={gender}
                                         onChange={(event: React.ChangeEvent<HTMLSelectElement>) => {
                                             setGender(Number(event.target.value));
@@ -267,13 +274,13 @@ export default function RegisterComponent() {
                                 <label htmlFor="country" className="text-sm font-semibold">
                                     Country
                                 </label>
-                                <div className="w-full max-w-lg py-2 px-4 flex items-center gap-x-3 p-2 border border-border-light rounded-lg">
+                                <div className="w-full py-2 px-4 flex items-center gap-x-3 p-2 border border-border-gray rounded-md focus-within:ring-[1.5px] focus-within:ring-gray-800 focus-within:border-gray-800/10 transition-all duration-100">
                                     <MapPinned size={"1.35rem"} className="text-gray-800/70" />
                                     <select
                                         id="country"
                                         name="country"
                                         autoComplete="country"
-                                        className="w-full text-muted"
+                                        className="w-full text-gray-500 text-sm font-medium"
                                         value={country}
                                         onChange={(event: React.ChangeEvent<HTMLSelectElement>) => {
                                             if (countryList.includes(event.target.value)) {

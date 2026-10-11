@@ -1,6 +1,7 @@
 "use client";
 
 import { Button, ButtonSave } from "@/app/components/misc/Button";
+import { Input } from "@/app/components/misc/Input";
 import {
     CalendarCheck2,
     CalendarClock,
@@ -23,6 +24,21 @@ export default function PaymentPage() {
 
     return (
         <>
+            <div className=" w-full flex flex-col max-md:mb-3">
+                <div className="relative w-full h-50">
+                    <img src="/img/tmp3.png" alt="Contact Us" className="w-full h-full object-cover" />
+
+                    <div className="absolute inset-0 bg-black/60" />
+                    <div className="absolute inset-0 w-full h-full text-white">
+                        <div className="h-full flex flex-col items-center justify-center gap-y-3 text-center">
+                            <h1 className="text-5xl tracking-wide font-semibold">Payment</h1>
+                            <span className="w-full max-w-sm md:max-w-md text-sm">
+                                Choose your preferred payment method and complete your booking.
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div className="w-full flex flex-row items-center justify-center gap-2 cursor-default p-5">
                 <div className="flex flex-col lg:flex-row items-center justify-center text-center gap-2">
                     <div className="w-7 h-7 flex items-center justify-center bg-gold text-white rounded-full">
@@ -103,78 +119,63 @@ export default function PaymentPage() {
                                 >
                                     <div className="min-h-0 space-y-5 overflow-hidden">
                                         <div className="w-full h-px bg-border-light" />
-                                        <div className="w-full max-w-lg space-y-5">
+                                        <div className="w-full max-w-lg space-y-5 p-1">
                                             <div className="flex flex-col gap-2">
-                                                <label htmlFor="card_number" className="text-xs text-heading font-medium">
+                                                <Input
+                                                    type="text"
+                                                    id="card_number"
+                                                    name="card_number"
+                                                    placeholder="1234 5678 9012 3456"
+                                                    autoComplete="cc-number"
+                                                    required
+                                                >
                                                     Card Number <span className="text-rose-700">*</span>
-                                                </label>
-                                                <div className="w-full py-2 px-4 flex items-center gap-x-3 p-2 border border-border-light rounded-lg">
-                                                    <input
-                                                        type="text"
-                                                        id="card_number"
-                                                        name="card_number"
-                                                        className="w-full outline-none text-ink text-sm placeholder:text-xs"
-                                                        placeholder="1234 5678 9012 3456"
-                                                        autoComplete="true"
-                                                        required
-                                                    />
-                                                </div>
+                                                </Input>
                                             </div>
                                             <div className="flex flex-col gap-2">
-                                                <label htmlFor="card_name" className="text-xs text-heading font-medium">
+                                                <Input
+                                                    type="text"
+                                                    id="card_name"
+                                                    name="card_name"
+                                                    placeholder="eg: Alex Johnson"
+                                                    autoComplete="cc-name"
+                                                    required
+                                                >
                                                     Card Name <span className="text-rose-700">*</span>
-                                                </label>
-                                                <div className="w-full py-2 px-4 flex items-center gap-x-3 p-2 border border-border-light rounded-lg">
-                                                    <input
-                                                        type="text"
-                                                        id="card_name"
-                                                        name="card_name"
-                                                        className="w-full outline-none text-ink text-sm placeholder:text-xs"
-                                                        placeholder="eg: Alex Johnson"
-                                                        autoComplete="true"
-                                                        required
-                                                    />
-                                                </div>
+                                                </Input>
                                             </div>
                                             <div className="w-full flex gap-5">
                                                 <div className="w-full flex flex-col gap-2">
-                                                    <label
-                                                        htmlFor="expiration_date"
-                                                        className="text-xs text-heading font-medium"
+                                                    <Input
+                                                        type="text"
+                                                        id="expiration_date"
+                                                        name="expiration_date"
+                                                        placeholder="MM/YY"
+                                                        autoComplete="cc-exp"
+                                                        required
                                                     >
                                                         Expiration Date <span className="text-rose-700">*</span>
-                                                    </label>
-                                                    <div className="w-full py-2 px-4 flex items-center gap-x-3 p-2 border border-border-light rounded-lg">
-                                                        <input
-                                                            type="text"
-                                                            id="expiration_date"
-                                                            name="expiration_date"
-                                                            className="w-full outline-none text-ink text-sm placeholder:text-xs"
-                                                            placeholder="MM/YY"
-                                                            autoComplete="true"
-                                                            required
-                                                        />
-                                                    </div>
+                                                    </Input>
                                                 </div>
                                                 <div className="w-full flex flex-col gap-2">
-                                                    <label htmlFor="cvv" className="text-xs text-heading font-medium">
-                                                        CVV <span className="text-rose-700">*</span>
-                                                    </label>
-                                                    <div className="w-full py-2 px-4 flex items-center gap-x-3 p-2 border border-border-light rounded-lg">
-                                                        <input
-                                                            type="password"
-                                                            id="cvv"
-                                                            name="cvv"
-                                                            className="w-full outline-none text-ink text-sm placeholder:text-xs"
-                                                            placeholder="123"
-                                                            autoComplete="true"
-                                                            required
-                                                        />
-                                                        <Info
-                                                            size={"1.35rem"}
-                                                            className="text-gray-800/70 cursor-pointer hover:text-gray-800"
-                                                        />
-                                                    </div>
+                                                    <Input
+                                                        type="text"
+                                                        id="cvv"
+                                                        name="cvv"
+                                                        placeholder="MM/YY"
+                                                        autoComplete="cc-csc"
+                                                        required
+                                                    >
+                                                        <div className="flex items-end justify-between">
+                                                            <div>
+                                                                CVV <span className="text-rose-700">*</span>
+                                                            </div>
+                                                            <Info
+                                                                size={"1rem"}
+                                                                className="text-gray-800/70 cursor-pointer hover:text-gray-800"
+                                                            />
+                                                        </div>
+                                                    </Input>
                                                 </div>
                                             </div>
                                         </div>

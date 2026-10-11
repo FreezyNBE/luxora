@@ -201,7 +201,7 @@ function RoomsPage() {
                         {[0, 1, 2, 3, 4, 5].map((i, index) => (
                             <div
                                 key={index}
-                                className="flex flex-col lg:flex-row w-full h-full border border-border-light overflow-hidden"
+                                className="flex flex-col lg:flex-row w-full h-full border border-border-light rounded-lg overflow-hidden"
                             >
                                 <img
                                     src="/img/hero2.png"
@@ -258,55 +258,32 @@ function RoomsPage() {
                             </div>
                         ))}
                     </div>
-                    {/* Pages */}
-                    <div className="w-full flex items-end justify-center gap-x-2">
-                        {/* Back */}
-                        <Link
-                            href="/"
-                            className="max-h-5 flex items-center justify-center px-2 py-4 bg-bg-light border border-border-dark/10 rounded-sm text-ink cursor-pointer hover:border-gold hover:bg-gold hover:text-white"
-                        >
-                            <ChevronLeft size={"1rem"} />
-                        </Link>
-                        {/* Page No */}
-                        <div className="flex gap-x-1">
+                    <div className="flex items-start justify-between">
+                        <div className="text-heading text-sm font-medium">Showing 1-8 of 8 bookings</div>
+                        {/* Pages */}
+                        <div className="flex items-center gap-1">
+                            {/* Arrow Back */}
                             <Link
                                 href="/"
-                                className="w-10 h-5 flex items-center justify-center p-4 bg-bg-light border border-border-dark/10 rounded-sm text-ink cursor-pointer hover:border-gold hover:bg-gold hover:text-white"
+                                className="w-8 h-8 flex items-center justify-center text-gray-400 bg-gray-300/10 border border-gray-400/20 hover:text-gray-500 hover:bg-gold-light/20 hover:border-gold/50 rounded-md"
                             >
-                                <span>1</span>
+                                <ChevronLeft size={"1.25rem"} />
                             </Link>
+                            <div className="flex items-center gap-1">
+                                <Link
+                                    href="/"
+                                    className="w-8 h-8 flex items-center justify-center text-gray-500 bg-gray-300/30 border border-gray-500/20 hover:bg-gold-light/20 hover:border-gold/50 rounded-md"
+                                >
+                                    <span>1</span>
+                                </Link>
+                            </div>
                             <Link
                                 href="/"
-                                className="w-10 h-5 flex items-center justify-center p-4 bg-bg-light border border-border-dark/10 rounded-sm text-ink cursor-pointer hover:border-gold hover:bg-gold hover:text-white"
+                                className="w-8 h-8 flex items-center justify-center text-gray-400 bg-gray-300/10 border border-gray-400/20 hover:text-gray-500 hover:bg-gold-light/20 hover:border-gold/50 rounded-md"
                             >
-                                <span>2</span>
-                            </Link>
-                            <Link
-                                href="/"
-                                className="w-10 h-5 flex items-center justify-center p-4 bg-bg-light border border-border-dark/10 rounded-sm text-ink cursor-pointer hover:border-gold hover:bg-gold hover:text-white"
-                            >
-                                <span>3</span>
-                            </Link>
-                            <Link
-                                href="/"
-                                className="w-10 h-5 flex items-center justify-center p-4 bg-bg-light border border-border-dark/10 rounded-sm text-ink cursor-default select-none hover:border-gold hover:bg-gold hover:text-white"
-                            >
-                                <span>...</span>
-                            </Link>
-                            <Link
-                                href="/"
-                                className="w-10 h-5 flex items-center justify-center p-4 bg-bg-light border border-border-dark/10 rounded-sm text-ink cursor-pointer hover:border-gold hover:bg-gold hover:text-white"
-                            >
-                                <span>10</span>
+                                <ChevronRight size={"1.25rem"} />
                             </Link>
                         </div>
-                        {/* Forward */}
-                        <Link
-                            href="/"
-                            className="max-h-5 flex items-center justify-center px-2 py-4 bg-bg-light border border-border-dark/10 rounded-sm text-ink cursor-pointer hover:border-gold hover:bg-gold hover:text-white"
-                        >
-                            <ChevronRight size={"1rem"} />
-                        </Link>
                     </div>
                 </div>
             </div>
