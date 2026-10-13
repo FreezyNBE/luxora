@@ -183,7 +183,7 @@ export default function AdminNavigation() {
 
             {/* Admin TopHeader */}
             <div className="absolute top-0 left-0 lg:left-(--navbar-admin-width) w-full lg:w-[calc(100%-var(--navbar-admin-width))] h-(--admin-header-height) flex items-center justify-center min-[470px]:justify-between px-5 py-2 bg-cream border-b border-b-border-gray">
-                <h1 className="text-gray-500 tracking-widest cursor-default after-effect hover:text-gold transition-all duration-100">
+                <h1 className="text-gray-500 tracking-widest cursor-default after-effect transition-all duration-100">
                     {/* <Gem size={"1.5rem"} className="text-gold" />
                     <span>Luxora</span> */}
                     <div className="hidden min-[470px]:flex items-center gap-2">{renderCurrentPathname(pathname)}</div>

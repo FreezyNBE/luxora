@@ -1,4 +1,5 @@
 import { Button } from "@/app/components/misc/Button";
+import TopLayout from "@/app/components/TopLayout";
 import { Calendar, Clock } from "lucide-react";
 import Link from "next/link";
 
@@ -8,18 +9,7 @@ export default function OffersPage() {
 
     return (
         <div className="w-full space-y-10">
-            {/* Top */}
-            <div className="relative w-full h-50">
-                <img src="/img/hero2.png" alt="Tmp2" className="w-full h-full object-cover" />
-
-                <div className="absolute inset-0 bg-black/60" />
-                <div className="absolute inset-0 w-full h-full text-white">
-                    <div className="h-full flex flex-col items-center justify-center gap-y-3">
-                        <h1 className="text-5xl tracking-wide font-semibold">Special Offers</h1>
-                        <span className="text-sm">Exclusive deals for unforgettable stays.</span>
-                    </div>
-                </div>
-            </div>
+            <TopLayout imgUrl="/img/hero2.png" title="Special Offers" description="Exclusive deals for unforgettable stays." />
 
             {/* Filters */}
             <div className="w-full flex flex-wrap items-center justify-center gap-4">

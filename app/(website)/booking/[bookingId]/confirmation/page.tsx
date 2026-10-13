@@ -1,10 +1,12 @@
 import { Button } from "@/app/components/misc/Button";
+import ProgressBooking from "@/app/components/ProgressBooking";
 import {
     CalendarCheck2,
     CalendarDays,
     Check,
     Eye,
     Headphones,
+    Info,
     Mail,
     Moon,
     NotepadText,
@@ -19,7 +21,7 @@ import Link from "next/link";
 export default function BookingConfirmationPage() {
     return (
         <>
-            <div className="relative w-full py-5 text-ink overflow-hidden">
+            <div className="relative w-full py-5 text-white overflow-hidden">
                 {/* Hero Slider */}
                 <div className="absolute inset-0 w-full h-full">
                     {/* <img src="/img/confirmation.png" alt="Confirmation" className="object-cover" /> */}
@@ -34,25 +36,41 @@ export default function BookingConfirmationPage() {
                 </div>
 
                 {/* Dark overlay */}
-                <div className="absolute inset-0 bg-linear-to-r from-cream via-cream-soft to-transparent" />
+                <div
+                    className="absolute inset-0 backdrop-blur-[3px]"
+                    style={{
+                        maskImage: "linear-gradient(90deg, black 0%, black 28%, trasparent 72%)",
+                        WebkitMaskImage: "linear-gradient(90deg, black 0%, black 28%, transparent 72%)",
+                    }}
+                />
 
+                {/* <div className="absolute inset-0 bg-black/60" /> */}
+
+                <div
+                    className="absolute inset-0"
+                    style={{
+                        background:
+                            "linear-gradient(90deg, rgba(38, 23, 13, 0.88) 0%, rgba(38, 23, 13, 0.68) 10%, rgba(38, 23, 13, 0.22) 35%, transparent 82%)",
+                    }}
+                />
                 {/* Content */}
-                <div className="relative w-full h-full flex flex-col items-start justify-start ms-5 md:ms-20 overflow-hidden">
+                <div className="relative w-full h-full flex flex-col items-start justify-start ms-8 md:ms-20 overflow-hidden">
                     <div className="space-y-5">
-                        <div className="w-12 h-12 flex items-center justify-center border-2 border-gold rounded-full">
-                            <Check size={"2rem"} className="text-gold" />
+                        <div className="w-12 h-12 flex items-center justify-center bg-gold border-2 border-gold rounded-full">
+                            <Check size={"2rem"} className="text-white" />
                         </div>
-                        <div className="text-sm text-heading font-semibold uppercase tracking-widest">Booking Confirmed</div>
+                        <div className="text-sm font-semibold uppercase tracking-widest">Booking Confirmed</div>
                         <div className="space-y-2">
                             <h1 className="text-3xl font-medium tracking-wide">Your Stay Is Confirmed!</h1>
-                            <p className="w-full max-w-82 lg:max-w-120 text-sm text-heading">
+                            <p className="w-full max-w-100 lg:max-w-120 text-sm">
                                 Thank you for choosing Luxora Hotel. Your booking has been succesfully confirmed and your
                                 payment has been processed.
                             </p>
                         </div>
-                        <div className="space-x-2 tracking-wide py-2">
-                            <span className="text-heading font-medium">Booking Reference:</span>
-                            <span className="text-gold font-medium">LX-2026-0047</span>
+                        <div className="flex items-center gap-x-2 tracking-wide px-4 py-2 bg-cream-dark/10 border border-cream-dark/20 rounded-lg w-fit">
+                            <Info size={"1.25rem"} />
+                            <span className="font-medium">Booking Reference:</span>
+                            <span className="text-gold-light font-medium">LX-2026-0047</span>
                         </div>
                         <div className="w-full flex flex-col md:flex-row items-start gap-4">
                             <Link href="/user/booking">
@@ -60,16 +78,17 @@ export default function BookingConfirmationPage() {
                             </Link>
                             <Link
                                 href="/"
-                                className="w-52 px-8 py-3 bg-white/70 border border-border-dark/20 rounded-md flex items-center justify-center hover:bg-transparent transition-all duration-100"
+                                className="w-52 px-8 py-3 bg-gray-200 border border-border-dark/20 rounded-md flex items-center justify-center hover:bg-gray-200/80 transition-all duration-100"
                             >
-                                <span className="text-black/50 font-medium text-sm">Back to Home</span>
+                                <span className="text-gray-600 font-medium text-sm">Back to Home</span>
                             </Link>
                         </div>
                     </div>
                 </div>
             </div>
-            <div className="w-full flex items-start justify-center p-5">
-                <div className="w-full max-w-250 lg:max-w-300 flex flex-col md:flex-row gap-x-3 mt-5 border-t border-t-border-light">
+            <ProgressBooking step="Confirmation" />
+            <div className="w-full flex items-start justify-center px-5 pb-5">
+                <div className="w-full max-w-250 lg:max-w-300 flex flex-col md:flex-row gap-x-3 border-t border-t-border-light">
                     {/* Left */}
                     {/* Container */}
                     <div className="flex-1 mt-5 space-y-5">
@@ -178,7 +197,7 @@ export default function BookingConfirmationPage() {
                         </div>
                     </div>
                     {/* Right */}
-                    <div className="flex-1 max-w-full md:max-w-80 lg:max-w-100 mt-5 space-y-5 border border-border-light rounded-sm">
+                    <div className="flex-1 max-w-full md:max-w-80 lg:max-w-100 mt-5 space-y-5 border border-border-light rounded-md">
                         <div className="p-3">
                             {/* Pricing */}
                             <div className="space-y-2">

@@ -70,3 +70,16 @@ export function ButtonMin({ width = "btn-w-md", className = "", children, ...pro
         </button>
     );
 }
+
+export function ButtonMask({ width = "btn-w-md", className = "", children, ...props }: ButtonType) {
+    return (
+        <button
+            className={`${width} h-10 p-2 bg-transparent border border-gold rounded-md text-sm tracking-wide text-gold-dark hover:bg-gold-dark/10 hover:border-gold/50 transition-all duration-100 ease-in cursor-pointer ${
+                className.length ? className : ""
+            } truncate`}
+            {...props}
+        >
+            {children}
+        </button>
+    );
+}

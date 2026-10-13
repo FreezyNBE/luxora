@@ -1,58 +1,24 @@
 "use client";
 import { ButtonAction } from "@/app/components/misc/Button";
-import { Input, Select, Textarea } from "@/app/components/misc/Input";
+import { Input, Textarea } from "@/app/components/misc/Input";
+import ProgressBooking from "@/app/components/ProgressBooking";
+import TopLayout from "@/app/components/TopLayout";
 import { phonePrefixesByCountry } from "@/utils/phone_numbers";
-import { CalendarCheck2, CalendarClock, Check, Eye, MoveRight, ShieldCheck, SquareM, UserRound } from "lucide-react";
+import { CalendarCheck2, CalendarClock, Eye, MoveRight, ShieldCheck, SquareM, UserRound } from "lucide-react";
 import Link from "next/link";
 
 export default function CheckoutPage() {
     return (
         <>
-            <div className=" w-full flex flex-col max-md:mb-3">
-                <div className="relative w-full h-50">
-                    <img src="/img/tmp3.png" alt="Contact Us" className="w-full h-full object-cover" />
-
-                    <div className="absolute inset-0 bg-black/60" />
-                    <div className="absolute inset-0 w-full h-full text-white">
-                        <div className="h-full flex flex-col items-center justify-center gap-y-3 text-center">
-                            <h1 className="text-5xl tracking-wide font-semibold">Checkout</h1>
-                            <span className="w-full max-w-sm md:max-w-md text-sm">
-                                Complete your booking in just a few simple steps.
-                            </span>
-                        </div>
-                    </div>
+            <TopLayout imgUrl="/img/tmp3.png" title="Checkout" description="Complete your booking in just a few simple steps.">
+                <div className="flex items-center gap-1">
+                    <ShieldCheck size={"1.25rem"} className="shrink-0" />
+                    <span className="text-sm">Secure Your Stay</span>
                 </div>
-            </div>
-            <div className="w-full flex flex-row items-center justify-center gap-2 cursor-default p-5">
-                <div className="flex flex-col lg:flex-row items-center justify-center text-center gap-2">
-                    <div className="w-7 h-7 flex items-center justify-center bg-gold border border-transparent text-white text-xs font-medium rounded-full">
-                        1
-                    </div>
-                    <span className="text-xs lg:text-sm font-semibold text-heading">Checkout</span>
-                </div>
-                <div className="w-58 flex">
-                    <div className="flex-1 h-0.5 bg-linear-to-r from-transparent via-border-dark/20 to-border-dark/20" />
-                    <div className="flex-1 h-0.5 bg-linear-to-l from-transparent via-border-dark/20 to-border-dark/20" />
-                </div>
-                <div className="flex flex-col lg:flex-row items-center justify-center text-center gap-2">
-                    <div className="w-7 h-7 flex items-center justify-center bg-bg-light/50 border border-border-dark/20 text-heading text-xs font-medium rounded-full">
-                        2
-                    </div>
-                    <span className="text-xs lg:text-sm font-medium text-heading">Payment</span>
-                </div>
-                <div className="w-58 flex">
-                    <div className="flex-1 h-0.5 bg-linear-to-r from-transparent via-border-dark/20 to-border-dark/20" />
-                    <div className="flex-1 h-0.5 bg-linear-to-l from-transparent via-border-dark/20 to-border-dark/20" />
-                </div>
-                <div className="flex flex-col lg:flex-row items-center justify-center text-center gap-2">
-                    <div className="w-7 h-7 flex items-center justify-center bg-bg-light/50 border border-border-dark/20 text-heading text-xs font-medium rounded-full">
-                        3
-                    </div>
-                    <span className="text-xs lg:text-sm font-medium text-heading">Confirmation</span>
-                </div>
-            </div>
-            <div className="w-full flex items-start justify-center p-5">
-                <div className="w-full max-w-250 flex flex-col sm:flex-row gap-x-3 mt-5 border-t border-t-border-light">
+            </TopLayout>
+            <ProgressBooking step="Checkout" />
+            <div className="w-full flex items-start justify-center px-5 pb-5">
+                <div className="w-full max-w-250 flex flex-col sm:flex-row gap-x-3 border-t border-t-border-light">
                     {/* Left */}
                     {/* Container */}
                     <div className="flex-1 mt-5 space-y-5">
@@ -174,34 +140,36 @@ export default function CheckoutPage() {
                         </div>
                     </div>
                     {/* Right */}
-                    <div className="flex-1 w-full sm:max-w-80 space-y-5">
-                        <div className="w-full mt-5 border border-border-light rounded-sm">
-                            <div className="p-3">
+                    <div className="flex-1 w-full sm:max-w-90 space-y-5">
+                        <div className="w-full mt-5 border border-border-light rounded-md">
+                            <div className="pb-3">
                                 {/* Room Details */}
                                 <div className="space-y-1">
-                                    <div className="relative w-full h-auto max-h-38 rounded-lg overflow-hidden">
+                                    <div className="relative w-full h-auto max-h-38 rounded-md rounded-b-none overflow-hidden">
                                         <img src="/img/tmp3.png" alt="Contact Us" className="w-full h-full object-cover" />
                                         <div className="absolute inset-0 bg-black/20" />
                                     </div>
-                                    <div className="mt-2 font-medium text-ink">Deluxe Ocean View Room</div>
-                                    <div className="flex flex-col sm:flex-row items-start sm:items-center gap-1 sm:gap-5">
-                                        <div className="text-muted-light">
-                                            <SquareM size="1rem" className="inline-block" />
-                                            <div className="inline-block align-middle ms-1 text-xs">
-                                                28 <span className="font-semibold">&#13217;</span>
+                                    <div className="px-3 space-y-1">
+                                        <div className="mt-2 font-medium text-ink">Deluxe Ocean View Room</div>
+                                        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-1 sm:gap-5">
+                                            <div className="text-muted-light">
+                                                <SquareM size="1rem" className="inline-block" />
+                                                <div className="inline-block align-middle ms-1 text-xs">
+                                                    28 <span className="font-semibold">&#13217;</span>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div className="text-muted-light">
-                                            <Eye size="1rem" className="inline-block" />
-                                            <span className="inline-block align-middle ms-1 text-xs">City View</span>
-                                        </div>
-                                        <div className="text-muted-light">
-                                            <UserRound size="1rem" className="inline-block" />
-                                            <span className="inline-block align-middle ms-1 text-xs">2 Guests</span>
+                                            <div className="text-muted-light">
+                                                <Eye size="1rem" className="inline-block" />
+                                                <span className="inline-block align-middle ms-1 text-xs">City View</span>
+                                            </div>
+                                            <div className="text-muted-light">
+                                                <UserRound size="1rem" className="inline-block" />
+                                                <span className="inline-block align-middle ms-1 text-xs">2 Guests</span>
+                                            </div>
                                         </div>
                                     </div>
                                     <div className="w-full h-px bg-border-light my-3" />
-                                    <div className="w-full h-full flex flex-wrap items-start max-sm:justify-around">
+                                    <div className="w-full h-full flex flex-wrap items-start max-sm:justify-around justify-center px-3">
                                         <div className="flex flex-col sm:flex-row items-start justify-center gap-2 p-2 border-r border-transparent sm:border-r-border-light">
                                             <CalendarClock size={"1.25rem"} className="text-gold-light" />
                                             <div>
@@ -222,7 +190,7 @@ export default function CheckoutPage() {
                                 </div>
                                 <div className="w-full h-px bg-border-light my-3" />
                                 {/* Pricing */}
-                                <div className="space-y-2">
+                                <div className="space-y-2 px-3">
                                     <h1 className="text-lg font-medium text-ink">Price Details</h1>
                                     <div className="w-full space-y-3">
                                         <div className="text-xs text-heading font-medium">
@@ -248,14 +216,18 @@ export default function CheckoutPage() {
                                     </div>
                                 </div>
                                 {/* Notice */}
-                                <div className="mt-5 bg-gold-light/30 border border-gold-light/40 rounded-lg">
-                                    <div className="flex items-start gap-2 p-3">
-                                        <ShieldCheck size={"1.5rem"} className="shrink-0 text-gold" />
-                                        <div className="flex flex-col gap-y-1">
-                                            <span className="text-sm text-black/90">Your information is safe and secure.</span>
-                                            <span className="text-xs text-black/40">
-                                                We use industry-standard encryption to protect your data.
-                                            </span>
+                                <div className="px-3">
+                                    <div className="mt-5 bg-gold-light/30 border border-gold-light/40 rounded-lg">
+                                        <div className="flex items-start gap-2 p-3">
+                                            <ShieldCheck size={"1.5rem"} className="shrink-0 text-gold" />
+                                            <div className="flex flex-col gap-y-1">
+                                                <span className="text-sm text-black/90">
+                                                    Your information is safe and secure.
+                                                </span>
+                                                <span className="text-xs text-black/40">
+                                                    We use industry-standard encryption to protect your data.
+                                                </span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

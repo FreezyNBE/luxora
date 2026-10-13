@@ -24,7 +24,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { useCurrentSession } from "@/lib/auth-session";
 import { authClient } from "@/lib/auth-client";
 import toast from "react-hot-toast";
-import { Button, ButtonMin } from "../misc/Button";
+import { ButtonMin } from "../misc/Button";
 
 function Navigation() {
     const { disableBodyOverflow, enableBodyOverflow } = useGlobal();
@@ -76,18 +76,18 @@ function Navigation() {
     };
 
     return (
-        <div className={`h-(--navbar-height) ${pathname === "/" ? "text-white" : "text-heading"}`}>
-            <nav className="relative inset-0 w-full h-fit flex items-center justify-between gap-4 px-5 sm:px-10 py-5 z-10">
+        <div className="h-(--navbar-height)">
+            <nav className="relative inset-0 w-full h-full bg-cream border-b border-border-gray flex items-center justify-between gap-4 px-5 sm:px-10 py-5 z-10 text-gray-600">
                 <Link href="/">
-                    <h1 className="flex items-center justify-center gap-1 text-2xl tracking-widest cursor-default">
+                    <h1 className="flex items-center justify-center gap-1 text-2xl tracking-widest cursor-pointer">
                         <Gem size={"1.5rem"} className="text-gold" />
-                        <span className={pathname === "/" ? "text-white" : "text-heading"}>Luxora</span>
+                        <span className="text-gray-800">Luxora</span>
                     </h1>
                 </Link>
                 {!navMobileVisible && (
-                    <ul className="flex uppercase text-sm max-lg:hidden gap-6 xl:gap-10">
+                    <ul className="flex uppercase text-sm max-lg:hidden gap-6 xl:gap-16 tracking-wide font-medium">
                         <li>
-                            <Link href="/" className="after-effect">
+                            <Link href="/" className="after-effect hover:text-gold">
                                 Home
                             </Link>
                         </li>
@@ -137,14 +137,16 @@ function Navigation() {
                                 </Link>
                             </>
                         )}
-                        <div onClick={() => (navMobileVisible ? closeMenu() : openMenu())}>
-                            <Menu className="lg:hidden hover:opacity-70" />
+                        <div
+                            onClick={() => (navMobileVisible ? closeMenu() : openMenu())}
+                            className="lg:hidden hover:opacity-70"
+                        >
+                            <Menu />
                         </div>
                     </div>
-                    <Link href="/rooms" className="hidden sm:block w-45">
-                        <ButtonMin width="btn-w-full" className="flex items-center justify-center gap-2 uppercase">
-                            <span>Book now</span>
-                            <MoveRight />
+                    <Link href="/rooms" className="hidden sm:block w-35">
+                        <ButtonMin width="btn-w-full" className="h-9">
+                            Book Now
                         </ButtonMin>
                     </Link>
                 </div>
