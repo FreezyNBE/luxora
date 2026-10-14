@@ -68,8 +68,8 @@ export default function BookingConfirmationPage() {
                             </p>
                         </div>
                         <div className="flex items-center gap-x-2 tracking-wide px-4 py-2 bg-cream-dark/10 border border-cream-dark/20 rounded-lg w-fit">
-                            <Info size={"1.25rem"} />
-                            <span className="font-medium">Booking Reference:</span>
+                            <Info size={"1.25rem"} className="cursor-default" />
+                            <span className="font-medium cursor-default">Booking Reference:</span>
                             <span className="text-gold-light font-medium">LX-2026-0047</span>
                         </div>
                         <div className="w-full flex flex-col md:flex-row items-start gap-4">

@@ -11,7 +11,7 @@ export default function BreadCrumbs({ links, usePadding = false }: { links: Brea
     if (usePadding) {
         return (
             <div className="px-10 py-5">
-                <div className="w-full flex items-center gap-x-3 py-2 text-sm font-medium text-(--color-text-secondary)">
+                <div className="w-full flex items-center flex-wrap gap-x-2 md:gap-x-3 text-sm font-medium text-(--color-text-secondary)">
                     <Link href={"/"} className="link-border">
                         Home
                     </Link>
@@ -19,7 +19,10 @@ export default function BreadCrumbs({ links, usePadding = false }: { links: Brea
                         links.map((link, index) => (
                             <Fragment key={index}>
                                 <ChevronRight size={"1rem"} />
-                                <Link href={link.url} className="link-border">
+                                <Link
+                                    href={link.url}
+                                    className={`link-border${index === links.length - 1 ? " text-gold" : ""}`}
+                                >
                                     {link.name}
                                 </Link>
                             </Fragment>
@@ -30,7 +33,7 @@ export default function BreadCrumbs({ links, usePadding = false }: { links: Brea
     }
 
     return (
-        <div className="w-full flex items-center gap-x-3 py-2 text-sm font-medium text-(--color-text-secondary)">
+        <div className="w-full flex items-center flex-wrap gap-x-2 md:gap-x-3 text-sm font-medium text-(--color-text-secondary)">
             <Link href={"/"} className="link-border">
                 Home
             </Link>
@@ -38,7 +41,7 @@ export default function BreadCrumbs({ links, usePadding = false }: { links: Brea
                 links.map((link, index) => (
                     <Fragment key={index}>
                         <ChevronRight size={"1rem"} />
-                        <Link href={link.url} className="link-border">
+                        <Link href={link.url} className={`link-border${index === links.length - 1 ? " text-gold" : ""}`}>
                             {link.name}
                         </Link>
                     </Fragment>

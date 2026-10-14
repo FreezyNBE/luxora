@@ -77,7 +77,7 @@ function Navigation() {
 
     return (
         <div className="h-(--navbar-height)">
-            <nav className="relative inset-0 w-full h-full bg-cream border-b border-border-gray flex items-center justify-between gap-4 px-5 sm:px-10 py-5 z-10 text-gray-600">
+            <nav className="relative inset-0 w-full h-full bg-cream-soft border-b border-border-gray flex items-center justify-between gap-4 px-5 sm:px-10 py-5 z-10 text-gray-600">
                 <Link href="/">
                     <h1 className="flex items-center justify-center gap-1 text-2xl tracking-widest cursor-pointer">
                         <Gem size={"1.5rem"} className="text-gold" />

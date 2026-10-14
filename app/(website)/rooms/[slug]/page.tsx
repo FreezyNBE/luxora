@@ -1,29 +1,30 @@
 "use client";
 
 import ImageSlider from "@/app/components/core/ImageSlider";
-import { Button, ButtonStream } from "@/app/components/misc/Button";
+import { ButtonMask, ButtonMin } from "@/app/components/misc/Button";
 import { useGallery } from "@/app/context/GalleryContext";
 import {
-    AlarmClock,
     BadgeCheck,
-    BookmarkCheck,
     BrickWallShield,
+    CalendarCog,
+    CalendarPlus2,
     Coffee,
     Eye,
     Fan,
+    Flower,
     GlassWater,
     Heart,
     Joystick,
-    ShieldCheck,
-    SquareM,
-    SquarePen,
+    MoveRight,
+    RefreshCwOff,
+    SquareKanban,
     Toilet,
     TvMinimal,
-    UserRound,
+    Users,
     Wifi,
     Wind,
 } from "lucide-react";
-import Image from "next/image";
+import Link from "next/link";
 
 export default function RoomPage() {
     const { createGallery } = useGallery();
@@ -33,250 +34,221 @@ export default function RoomPage() {
     };
 
     return (
-        <div className="w-full flex flex-col 2xl:flex-row gap-5 py-2 overflow-hidden">
-            {/* Content Left */}
-            <div className="flex flex-col">
-                {/* Sliding images */}
-                <div className="w-full h-full flex flex-col items-start justify-center 2xl:flex-row gap-x-3 overflow-hidden">
-                    {/* Big image sliding */}
-                    <ImageSlider />
-
-                    {/* Small images top-bottom */}
-                    <div className="mt-2 2xl:mt-0 w-full 2xl:w-xs max-2xl:overflow-y-auto rounded-lg">
-                        <div className="flex 2xl:flex-col gap-2">
-                            <div className="relative shrink-0 w-52 2xl:w-80 h-32 2xl:h-42">
-                                <Image
-                                    src="/img/img4.jpg"
-                                    alt={`Image gallery 1`}
-                                    fill
-                                    sizes="(min-width: 1536px) 320px, 208px"
-                                    className="w-full h-full object-cover rounded-lg"
-                                />
-                                <div className="absolute inset-0 flex items-center justify-center bg-black/30 rounded-lg " />
-                            </div>
-                            <div className="relative shrink-0 w-52 2xl:w-80 h-32 2xl:h-42">
-                                <Image
-                                    src="/img/img2.jpg"
-                                    alt={`Image gallery 2`}
-                                    fill
-                                    sizes="(min-width: 1536px) 320px, 208px"
-                                    className="w-full h-full object-cover rounded-lg"
-                                />
-                                <div className="absolute inset-0 flex items-center justify-center bg-black/30 rounded-lg " />
-                            </div>
+        <div className="w-full pt-4">
+            {/* Container Heading */}
+            <div className="w-full flex flex-col xl:flex-row items-start gap-2 overflow-hidden">
+                {/* Pictures */}
+                <div className="w-full 2xl:w-fit flex flex-col lg:flex-row xl:flex-col 2xl:flex-row gap-2">
+                    <div className="w-full 2xl:w-250 h-full rounded-xl overflow-hidden">
+                        <ImageSlider />
+                    </div>
+                    <div className="grid grid-cols-2 sm:grid-cols-3 lg:flex lg:flex-col xl:flex-row 2xl:flex-col gap-2">
+                        <div className="relative w-full lg:max-w-34 xl:max-w-full 2xl:max-w-34 h-full rounded-lg aspect-video overflow-hidden">
+                            <img src="/img/tmp3.png" alt="Img 4" className="w-full h-full object-cover rounded-lg" />
                             <div
-                                className="relative shrink-0 w-52 2xl:w-80 h-32 2xl:h-42 cursor-pointer group"
-                                onClick={displayGallery}
+                                className="absolute inset-0"
+                                style={{
+                                    background:
+                                        "linear-gradient(90deg, rgba(255, 255, 255, 0.10) 0%, rgba(255, 255, 255, 0.10) 100%, rgba(255, 255, 255, 0.10) 35%, transparent 82%)",
+                                }}
+                            />
+                        </div>
+                        <div className="relative w-full lg:max-w-34 xl:max-w-full 2xl:max-w-34 h-full rounded-lg aspect-video overflow-hidden">
+                            <img src="/img/hero.png" alt="Img 4" className="w-full h-full object-cover rounded-lg" />
+                            <div
+                                className="absolute inset-0"
+                                style={{
+                                    background:
+                                        "linear-gradient(90deg, rgba(255, 255, 255, 0.10) 0%, rgba(255, 255, 255, 0.10) 100%, rgba(255, 255, 255, 0.10) 35%, transparent 82%)",
+                                }}
+                            />
+                        </div>
+                        <div className="relative w-full lg:max-w-34 xl:max-w-full 2xl:max-w-34 h-full rounded-lg aspect-video overflow-hidden">
+                            <img src="/img/hero.png" alt="Img 4" className="w-full h-full object-cover rounded-lg" />
+                            <div
+                                className="absolute inset-0"
+                                style={{
+                                    background:
+                                        "linear-gradient(90deg, rgba(255, 255, 255, 0.10) 0%, rgba(255, 255, 255, 0.10) 100%, rgba(255, 255, 255, 0.10) 35%, transparent 82%)",
+                                }}
+                            />
+                        </div>
+                        <div className="relative w-full lg:max-w-34 xl:max-w-full 2xl:max-w-34 h-full rounded-lg aspect-video overflow-hidden">
+                            <img src="/img/img4.jpg" alt="Img 4" className="w-full h-full object-cover rounded-lg" />
+                            <div
+                                className="absolute inset-0"
+                                style={{
+                                    background:
+                                        "linear-gradient(90deg, rgba(255, 255, 255, 0.10) 0%, rgba(255, 255, 255, 0.10) 100%, rgba(255, 255, 255, 0.10) 35%, transparent 82%)",
+                                }}
+                            />
+                        </div>
+                        <div
+                            onClick={displayGallery}
+                            className="relative w-full lg:max-w-34 xl:max-w-full 2xl:max-w-34 h-full rounded-lg aspect-video cursor-pointer overflow-hidden"
+                        >
+                            <img src="/img/hero.png" alt="Img 4" className="w-full h-full object-cover rounded-lg" />
+                            <div
+                                className="absolute inset-0 flex items-center justify-center hover:opacity-90 transition-all duration-100 ease-in"
+                                style={{
+                                    background:
+                                        "linear-gradient(90deg, rgba(0, 0, 0, 0.50) 0%, rgba(0, 0, 0, 0.50) 100%, rgba(0, 0, 0, 0.50) 35%, transparent 82%)",
+                                }}
                             >
-                                <Image
-                                    src="/img/img4.jpg"
-                                    alt={`Image gallery 3`}
-                                    fill
-                                    sizes="(min-width: 1536px) 320px, 208px"
-                                    className="w-full h-full object-cover rounded-lg"
-                                />
-                                <div className="absolute inset-0 flex items-center justify-center bg-black/50 rounded-lg group-hover:bg-black/70 transition-all duration-100 ease-in-out">
-                                    <div className="w-fit h-fit flex items-end justify-center px-5 py-2.5 rounded-lg text-white/80 bg-bg-dark/30 border border-border-light/30">
-                                        +3 Photos
-                                    </div>
-                                </div>
+                                <span className="text-lg text-gray-100 font-medium">More</span>
                             </div>
                         </div>
                     </div>
                 </div>
-
-                {/* Informations */}
-                <div className="pt-8">
-                    <div className="flex flex-col xl:flex-row gap-5">
-                        <div className="w-full max-w-4xl">
-                            {/* About current item */}
-                            <div className="space-y-3">
-                                <h1 className="text-3xl font-medium">About This Room</h1>
-                                <p className="w-full max-w-xl md:max-w-3xl xl:max-w-4xl text-under text-sm">
-                                    Our Deluxe Room offers the perfect blend of comfort and style. Enjoy modern decor, a plush
-                                    king-size bed, a spacious work area, and a luxurious bathroom with premium toiletries. Ideal
-                                    for both business and leisure travelers.
-                                </p>
+                {/* Details */}
+                <div className="w-full lg:max-w-[75%] xl:max-w-140 text-gray-700 overflow-hidden">
+                    <div className="p-3 space-y-3">
+                        <div className="w-fit px-3.5 py-1 text-xs bg-orange-200/60 text-orange-900 font-medium tracking-wide rounded-full cursor-default">
+                            Best Value
+                        </div>
+                        <div className="w-fit">
+                            <h1 className="text-4xl font-medium">Deluxe Ocean View Room</h1>
+                        </div>
+                        <div className="flex flex-wrap gap-3 md:gap-6 text-xs font-medium">
+                            <div className="flex items-center gap-2">
+                                <Users size={"1.25rem"} className="text-gold-dark" />
+                                <span>2 Guests</span>
                             </div>
-
-                            {/* Amenities */}
-                            <div className="w-full border-t-2 border-t-border-light mt-5">
-                                <div className="space-y-3 pt-5">
-                                    <h1 className="text-3xl font-medium">About This Room</h1>
-                                    <div className="flex items-center gap-2 3xl:gap-4 flex-wrap">
-                                        <div className="w-full sm:w-fit sm:flex-3/8 md:flex-4/10 2xl:flex-3/10 space-x-2 text-sm font-medium">
-                                            <Wifi className="inline-block text-gold" />
-                                            <span className="inline-block align-middle">Free Wi-Fi</span>
-                                        </div>
-                                        <div className="w-full sm:w-fit sm:flex-3/8 md:flex-4/10 2xl:flex-3/10 space-x-2 text-sm font-medium">
-                                            <Fan className="inline-block text-gold" />
-                                            <span className="inline-block align-middle">Air Conditioning</span>
-                                        </div>
-                                        <div className="w-full sm:w-fit sm:flex-3/8 md:flex-4/10 2xl:flex-3/10 space-x-2 text-sm font-medium">
-                                            <TvMinimal className="inline-block text-gold" />
-                                            <span className="inline-block align-middle">Flat Screen TV</span>
-                                        </div>
-                                        <div className="w-full sm:w-fit sm:flex-3/8 md:flex-4/10 2xl:flex-3/10 space-x-2 text-sm font-medium">
-                                            <GlassWater className="inline-block text-gold" />
-                                            <span className="inline-block align-middle">Mini Bar</span>
-                                        </div>
-                                        <div className="w-full sm:w-fit sm:flex-3/8 md:flex-4/10 2xl:flex-3/10 space-x-2 text-sm font-medium">
-                                            <Coffee className="inline-block text-gold" />
-                                            <span className="inline-block align-middle">Coffee Maker</span>
-                                        </div>
-                                        <div className="w-full sm:w-fit sm:flex-3/8 md:flex-4/10 2xl:flex-3/10 space-x-2 text-sm font-medium">
-                                            <BrickWallShield className="inline-block text-gold" />
-                                            <span className="inline-block align-middle">In-room Safe</span>
-                                        </div>
-                                        <div className="w-full sm:w-fit sm:flex-3/8 md:flex-4/10 2xl:flex-3/10 space-x-2 text-sm font-medium">
-                                            <Joystick className="inline-block text-gold" />
-                                            <span className="inline-block align-middle">Work Desk</span>
-                                        </div>
-                                        <div className="w-full sm:w-fit sm:flex-3/8 md:flex-4/10 2xl:flex-3/10 space-x-2 text-sm font-medium">
-                                            <Toilet className="inline-block text-gold" />
-                                            <span className="inline-block align-middle">Premium Toiletries</span>
-                                        </div>
-                                        <div className="w-full sm:w-fit sm:flex-3/8 md:flex-4/10 2xl:flex-3/10 space-x-2 text-sm font-medium">
-                                            <Wind className="inline-block text-gold" />
-                                            <span className="inline-block align-middle">Hair Dryer</span>
-                                        </div>
-                                    </div>
-                                </div>
+                            <div className="flex items-center gap-2">
+                                <Eye size={"1.25rem"} className="text-gold-dark" />
+                                <span>Ocean View</span>
+                            </div>
+                            <div className="flex items-center gap-2">
+                                <SquareKanban size={"1.25rem"} className="text-gold-dark" />
+                                <span>36 m&sup2;</span>
                             </div>
                         </div>
-
-                        <div className="w-full bg-cream-soft border border-border-light shadow-xs rounded-lg flex flex-col justify-center gap-y-10 xl:gap-y-15 p-5 lg:p-8 xl:p-10">
-                            <div className="flex items-center gap-2">
-                                <div className="w-fit h-fit p-2 border-2 border-border-light rounded-full">
-                                    <AlarmClock size={"2rem"} className="text-gold" />
-                                </div>
-                                <div className="w-full max-w-sm">
-                                    <h1 className="text-xl font-medium text-ink">Free cancellation</h1>
-                                    <p className="text-xs font-medium text-heading">
-                                        Cancel up to 24 hours before check-in for a full refund.
-                                    </p>
-                                </div>
+                        <div className="xl:max-w-140 text-sm tracking-wide py-2">
+                            Enjoy breathtaking ocean views from the comfort of our Deluxe Ocean View Room. This spacious and
+                            elegantly designed room features a king-size bed, a modern sitting area, and a private balcony where
+                            you can relax and take in the stunning coastal scenery.
+                        </div>
+                        <div className="w-full space-y-3 pt-3">
+                            <div className="w-full space-x-1">
+                                <div className="inline-block text-4xl font-medium text-gray-800">$120</div>
+                                <div className="inline-block text-xs font-medium tracking-wide"> / night</div>
                             </div>
-                            <div className="flex items-center gap-2">
-                                <div className="w-fit h-fit p-2 border-2 border-border-light rounded-full">
-                                    <SquarePen size={"2rem"} className="text-gold" />
-                                </div>
-                                <div className="w-full max-w-sm truncate">
-                                    <h1 className="text-xl font-medium text-ink">Flexible Booking</h1>
-                                    <p className="text-xs font-medium text-heading">
-                                        Change your dates anytime subject to availability.
-                                    </p>
-                                </div>
-                            </div>
-                            <div className="flex items-center gap-2">
-                                <div className="w-fit h-fit p-2 border-2 border-border-light rounded-full">
-                                    <BadgeCheck size={"2rem"} className="text-gold" />
-                                </div>
-                                <div className="w-full max-w-sm truncate">
-                                    <h1 className="text-xl font-medium text-ink">Instant Confirmation</h1>
-                                    <p className="text-xs font-medium text-heading">
-                                        Book now and receive instant confirmation.
-                                    </p>
-                                </div>
-                            </div>
+                            <div className="font-medium text-xs">Includes breakfast &#8226; Free cancellation up to 24h</div>
+                        </div>
+                        <div className="w-full space-y-2 pt-5">
+                            <ButtonMin width="btn-w-full" className="h-12 flex items-center justify-center gap-2 font-medium">
+                                <CalendarPlus2 size={"1.25rem"} />
+                                <span>Book Now</span>
+                            </ButtonMin>
+                            <ButtonMask width="btn-w-full" className="h-12 flex items-center justify-center gap-2 font-medium">
+                                <Heart size={"1.25rem"} />
+                                <span>Add to Wishlist</span>
+                            </ButtonMask>
                         </div>
                     </div>
                 </div>
             </div>
-
-            {/* Content Right */}
-            <div className="w-full 2xl:max-w-sm">
-                <div className="border border-border-light shadow-lg rounded-lg p-6">
-                    <section className="w-full flex flex-col items-start justify-center">
-                        <h1 className="text-2xl font-semibold">Deluxe Room</h1>
-                        <div className="flex flex-col 2xl:flex-row gap-x-8 gap-y-2 mt-1">
-                            <div className="text-muted-light">
-                                <SquareM size="1rem" className="inline-block" />
-                                <div className="inline-block align-middle ms-1 text-xs font-medium">
-                                    28 <span className="font-semibold">&#13217;</span>
-                                </div>
+            <div className="w-full mt-5 pt-5 border-t border-t-border-light">
+                <div className="w-full flex flex-col xl:flex-row items-center gap-10 xl:gap-5">
+                    <div className="w-full space-y-8">
+                        <h1 className="text-3xl font-medium">Room Amenities</h1>
+                        <div className="w-full grid grid-cols-1 md:grid-cols-3 items-center gap-4">
+                            <div className="text-sm">
+                                <Wifi className="inline-block text-gold" />
+                                <span className="inline-block align-middle ms-3 text-heading font-medium">Free Wi-Fi</span>
                             </div>
-                            <div className="text-muted-light">
-                                <Eye size="1rem" className="inline-block" />
-                                <span className="inline-block align-middle ms-1 text-xs font-medium">City View</span>
+                            <div className="text-sm">
+                                <Fan size={"1.25rem"} className="inline-block text-gold" />
+                                <span className="inline-block align-middle ms-3 text-heading font-medium">
+                                    Air Conditioning
+                                </span>
                             </div>
-                            <div className="text-muted-light">
-                                <UserRound size="1rem" className="inline-block" />
-                                <span className="inline-block align-middle ms-1 text-xs font-medium">2 Guests</span>
+                            <div className="text-sm">
+                                <TvMinimal size={"1.25rem"} className="inline-block text-gold" />
+                                <span className="inline-block align-middle ms-3 text-heading font-medium">Flat Screen TV</span>
                             </div>
-                        </div>
-                        <p className="w-full xl:max-w-xs text-muted-light text-xs font-medium my-5 ">
-                            Relax in our Deluxe Room featuring elegant interios and all the essential amenities.
-                        </p>
-                    </section>
-
-                    <div className="w-full h-0.5 bg-border-light" />
-
-                    <div className="py-4 space-y-5">
-                        <div className="flex items-center justify-between">
-                            <h1 className="text-3xl font-semibold">$150</h1>
-                            <span className="text-xs font-semibold text-muted-light cursor-default">/ night</span>
-                        </div>
-
-                        <div className="py-2 space-y-4">
-                            <div className="text-sm text-muted font-semibold">
-                                <label htmlFor="checkin" className="text-muted-light uppercase text-xs">
-                                    Check-In
-                                </label>
-                                <input
-                                    type="date"
-                                    name="checkin"
-                                    id="checkin"
-                                    className="w-full border border-border-light px-8 py-2 mt-1"
-                                />
+                            <div className="text-sm">
+                                <GlassWater size={"1.25rem"} className="inline-block text-gold" />
+                                <span className="inline-block align-middle ms-3 text-heading font-medium">Mini Bar</span>
                             </div>
-                            <div className="text-sm text-muted font-semibold">
-                                <label htmlFor="checkin" className="text-muted-light uppercase text-xs">
-                                    Check-Out
-                                </label>
-                                <input
-                                    type="date"
-                                    name="checkin"
-                                    id="checkin"
-                                    className="w-full border border-border-light px-8 py-2 mt-1"
-                                />
+                            <div className="text-sm">
+                                <Coffee size={"1.25rem"} className="inline-block text-gold" />
+                                <span className="inline-block align-middle ms-3 text-heading font-medium">Coffee Maker</span>
                             </div>
-                            <div className="text-sm text-muted font-semibold">
-                                <span className="text-muted-light uppercase text-xs">Guests</span>
-                                <div className="space-x-1 text-sm border border-border-light rounded-md px-6 py-2 mt-1">
-                                    <select
-                                        name="guests"
-                                        id="guests"
-                                        defaultValue={"one person"}
-                                        className="w-[calc(100%-(0.25rem*2))] outline-none"
-                                    >
-                                        <option value="recommanded">one person</option>
-                                        <option value="recommanded">two persons</option>
-                                        <option value="recommanded">three or more persons</option>
-                                    </select>
-                                </div>
+                            <div className="text-sm">
+                                <BrickWallShield size={"1.25rem"} className="inline-block text-gold" />
+                                <span className="inline-block align-middle ms-3 text-heading font-medium">In-room Safe</span>
+                            </div>
+                            <div className="text-sm">
+                                <Joystick size={"1.25rem"} className="inline-block text-gold" />
+                                <span className="inline-block align-middle ms-3 text-heading font-medium">Work Desk</span>
+                            </div>
+                            <div className="text-sm">
+                                <Toilet size={"1.25rem"} className="inline-block text-gold" />
+                                <span className="inline-block align-middle ms-3 text-heading font-medium">
+                                    Premium Toiletries
+                                </span>
+                            </div>
+                            <div className="text-sm">
+                                <Wind size={"1.25rem"} className="inline-block text-gold" />
+                                <span className="inline-block align-middle ms-3 text-heading font-medium">Hair Dryer</span>
                             </div>
                         </div>
-
-                        <Button className="w-full flex items-center justify-center gap-x-2">
-                            <BookmarkCheck />
-                            <span className="font-semibold">Book this room</span>
-                        </Button>
-                        <ButtonStream className="w-full flex items-center justify-center gap-x-2">
-                            <Heart />
-                            <span>Save to wishlist</span>
-                        </ButtonStream>
                     </div>
-
-                    <div className="w-full h-0.5 bg-border-light" />
-
-                    <div className="w-full pt-4 flex items-center gap-2">
-                        <ShieldCheck className="text-muted" />
-                        <div>
-                            <span className="block font-semibold text-sm text-muted">Best Price Guarantee</span>
-                            <span className="block font-medium text-xs text-muted-light">
-                                You won't find a better price anywhere else.
-                            </span>
+                    <div className="w-full">
+                        <div className="w-full flex flex-col sm:flex-row items-center justify-between max-sm:gap-5 p-4 bg-cream-dark border border-border-gray rounded-lg">
+                            <div className="flex flex-col min-[320px]:flex-row items-center gap-1 min-[320px]:gap-5 cursor-default">
+                                <Flower size={"1.7rem"} className="shrink-0 text-gold" />
+                                <div className="*:block">
+                                    <h1 className="text-lg md:text-xl font-medium">Need a different room type?</h1>
+                                    <span className="text-sm md:text-xs text-gray-500">
+                                        Explore our other rooms and fine the perfect fit for your stay.
+                                    </span>
+                                </div>
+                            </div>
+                            <Link href="/rooms" className="w-full sm:w-45">
+                                <ButtonMask width="btn-w-full" className="h-11 flex items-center justify-center gap-1">
+                                    <span>View All Rooms</span>
+                                    <MoveRight size={"1.25rem"} />
+                                </ButtonMask>
+                            </Link>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div className="w-full mt-5 pt-5 border-t border-t-border-light">
+                <div className="w-full flex flex-col xl:flex-row bg-cream-dark border border-gold/10 rounded-lg overflow-hidden">
+                    <div className="w-full h-full flex flex-col min-[320px]:flex-row items-start md:items-center justify-start gap-4 p-10 border-b border-b-black/10 xl:border-b-transparent">
+                        <div className="w-fit h-fit p-2 bg-gold rounded-full">
+                            <CalendarCog size={"2rem"} className="text-gray-100" />
+                        </div>
+                        <div className="w-full max-w-sm">
+                            <h1 className="text-xl font-medium text-ink">Flexible Booking</h1>
+                            <div className="text-xs font-medium text-gray-800 wrap-break-word">
+                                Change your dates anytime subject to availability.
+                            </div>
+                        </div>
+                    </div>
+                    <div className="w-full h-full flex flex-col min-[320px]:flex-row items-start md:items-center justify-start gap-4 p-10 border-b border-b-black/10 xl:border-b-transparent">
+                        <div className="w-fit h-fit p-2 bg-gold rounded-full">
+                            <BadgeCheck size={"2rem"} className="text-gray-100" />
+                        </div>
+                        <div className="w-full max-w-sm">
+                            <h1 className="text-xl font-medium text-ink">Instant Confirmation</h1>
+                            <div className="text-xs font-medium text-gray-800 wrap-break-word">
+                                Book now and receive instant confirmation.
+                            </div>
+                        </div>
+                    </div>
+                    <div className="w-full h-full flex flex-col min-[320px]:flex-row items-start md:items-center justify-start gap-4 p-10">
+                        <div className="w-fit h-fit p-2 bg-gold rounded-full">
+                            <RefreshCwOff size={"2rem"} className="text-gray-100" />
+                        </div>
+                        <div className="w-full max-w-sm">
+                            <h1 className="text-xl font-medium text-ink">Free cancellation</h1>
+                            <div className="text-xs font-medium text-gray-800 wrap-break-word">
+                                Cancel up to 24 hours before check-in for a full refund.
+                            </div>
                         </div>
                     </div>
                 </div>

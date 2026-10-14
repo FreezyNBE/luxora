@@ -46,7 +46,7 @@ export default function ImageSlider({ showCounting = true }: ImageSliderTypes) {
     };
 
     return (
-        <div className="relative w-full h-full rounded-lg overflow-hidden">
+        <div className="relative w-full h-full rounded-xl overflow-hidden">
             {/* Image container */}
             <div className="relative aspect-video">
                 {/* Current / Old Image */}
@@ -85,32 +85,40 @@ export default function ImageSlider({ showCounting = true }: ImageSliderTypes) {
                     </div>
                 )}
 
+                <div
+                    className="absolute inset-0"
+                    style={{
+                        background:
+                            "linear-gradient(90deg, rgba(255, 255, 255, 0.10) 0%, rgba(255, 255, 255, 0.10) 100%, rgba(255, 255, 255, 0.10) 35%, transparent 82%)",
+                    }}
+                />
+
                 <div className="w-full absolute top-1/2 -translate-y-1/2 flex items-center justify-between">
                     {/* Prev */}
                     <button
-                        className="flex items-center justify-center ms-5 bg-bg-light/80 p-3 rounded-full text-muted cursor-pointer hover:bg-white hover:text-ink transition-all duration-75 ease-in"
+                        className="flex items-center justify-center ms-3 bg-white p-2 rounded-full text-muted cursor-pointer hover:bg-white/80 hover:text-ink transition-colors duration-75 ease-in"
                         onClick={previous}
                         disabled={isAnimating}
                     >
-                        <ChevronLeft />
+                        <ChevronLeft size={"1.25rem"} className="shrink-0 -translate-x-px" />
                     </button>
 
                     {/* Next */}
                     <button
-                        className="flex items-center justify-center me-5 bg-bg-light/80 p-3 rounded-full text-muted cursor-pointer hover:bg-white hover:text-ink transition-all duration-75 ease-in"
+                        className="flex items-center justify-center me-3 bg-white p-2 rounded-full text-muted cursor-pointer hover:bg-white/80 hover:text-ink transition-colors duration-75 ease-in"
                         onClick={next}
                         disabled={isAnimating}
                     >
-                        <ChevronRight />
+                        <ChevronRight size={"1.25rem"} className="shrink-0 translate-x-px" />
                     </button>
                 </div>
 
                 {/* Counting */}
                 {showCounting && (
                     <div className="absolute bottom-5 left-5">
-                        <div className="bg-bg-dark/50 border border-border-light/50 rounded-lg px-6 py-2">
-                            <span className="text-white tracking-widest">
-                                {currentIndex + 1}/{images.length}
+                        <div className="bg-black/50 rounded-full px-5 py-1">
+                            <span className="text-gray-200 text-sm font-medium tracking-wide">
+                                {currentIndex + 1} / {images.length}
                             </span>
                         </div>
                     </div>
