@@ -90,7 +90,6 @@ export function Select({ options, id, name, className, label = true, children, .
                 <select
                     id={id}
                     name={name}
-                    autoComplete="room_type"
                     className={`w-full text-gray-500 text-sm font-medium${className ? " " + className : ""}`}
                     {...props}
                 >

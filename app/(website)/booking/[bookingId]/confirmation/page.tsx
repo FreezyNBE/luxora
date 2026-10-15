@@ -2,7 +2,7 @@ import { Button } from "@/app/components/misc/Button";
 import ProgressBooking from "@/app/components/ProgressBooking";
 import {
     CalendarCheck2,
-    CalendarDays,
+    CalendarClock,
     Check,
     Eye,
     Headphones,
@@ -11,9 +11,11 @@ import {
     Moon,
     NotepadText,
     Phone,
+    SquareKanban,
     SquareM,
     User,
     UserRound,
+    Users,
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -97,21 +99,21 @@ export default function BookingConfirmationPage() {
                             <h1 className="font-medium text-xl">Booking Details</h1>
                             <div className="flex flex-col md:flex-row items-start md:items-center gap-5 md:gap-12 text-xs">
                                 <div className="flex items-center gap-2">
-                                    <CalendarDays size={"1.25rem"} className="text-heading" />
+                                    <CalendarClock size={"1.25rem"} className="text-gold-light" />
                                     <div>
                                         <span className="block text-muted-light cursor-default">Check-in</span>
                                         <span className="block text-heading font-medium">Apr 25, 2025</span>
                                     </div>
                                 </div>
                                 <div className="flex items-center gap-2">
-                                    <CalendarCheck2 size={"1.25rem"} className="text-heading" />
+                                    <CalendarCheck2 size={"1.25rem"} className="text-gold-dark" />
                                     <div>
                                         <span className="block text-muted-light cursor-default">Check-out</span>
                                         <span className="block text-heading font-medium">Apr 28, 2025</span>
                                     </div>
                                 </div>
                                 <div className="flex items-center gap-2 cursor-default">
-                                    <Moon size={"1.25rem"} className="text-heading" />
+                                    <Moon size={"1.25rem"} className="text-gold" />
                                     <span className="block text-heading font-medium">3 nights</span>
                                 </div>
                             </div>
@@ -138,31 +140,31 @@ export default function BookingConfirmationPage() {
                                             Spacious room with a king-size bed, private balcony and stunning ocean views.
                                         </span>
                                     </div>
-                                    <div className="flex flex-col sm:flex-row items-start sm:items-center gap-1 sm:gap-5">
-                                        <div className="text-muted-light">
-                                            <SquareM size="1rem" className="inline-block" />
-                                            <div className="inline-block align-middle ms-1 text-xs">
-                                                28 <span className="font-semibold">&#13217;</span>
-                                            </div>
+                                    <div className="flex flex-col sm:flex-row items-start sm:items-center gap-1 sm:gap-5 text-xs font-medium text-muted">
+                                        <div className="flex items-center gap-2">
+                                            <Users size={"1.25rem"} className="text-gold" />
+                                            <span>2 Guests</span>
                                         </div>
-                                        <div className="text-muted-light">
-                                            <Eye size="1rem" className="inline-block" />
-                                            <span className="inline-block align-middle ms-1 text-xs">City View</span>
+                                        <div className="flex items-center gap-2">
+                                            <Eye size={"1.25rem"} className="text-gold" />
+                                            <span>Ocean View</span>
                                         </div>
-                                        <div className="text-muted-light">
-                                            <UserRound size="1rem" className="inline-block" />
-                                            <span className="inline-block align-middle ms-1 text-xs">2 Guests</span>
+                                        <div className="flex items-center gap-2">
+                                            <SquareKanban size={"1.25rem"} className="text-gold" />
+                                            <span>36 m&sup2;</span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div className="w-full h-px bg-border-light my-3" />
-                            <div className="relative bg-gray-100 border border-gray-300 p-2 rounded-sm cursor-pointer hover:bg-gray-200 hover:border-gray-400 transition-all duration-100">
+                            <div className="relative bg-cream-soft border border-border-gray p-2 rounded-sm">
                                 <div className="w-full flex items-center justify-between px-3 py-2">
                                     <div className="flex items-start gap-2">
                                         <User className="text-gray-700 mt-1" />
                                         <div className="space-y-2">
-                                            <span className="text-gray-700 font-semibold">Details Informations</span>
+                                            <span className="text-gray-700 font-semibold cursor-default">
+                                                Details Informations
+                                            </span>
                                             <div className="space-y-px">
                                                 <span className="block text-sm text-gray-700 font-medium">Alex Johnson</span>
                                                 <span className="block text-sm text-gray-600 font-medium">
@@ -172,12 +174,12 @@ export default function BookingConfirmationPage() {
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="hidden w-10 h-10 md:flex items-center justify-center bg-gray-300 rounded-full">
+                                    <div className="hidden w-10 h-10 md:flex items-center justify-center bg-gold-dark rounded-full">
                                         <Check className="text-white" />
                                     </div>
                                 </div>
                                 <div className="block md:hidden absolute -top-1 -right-1">
-                                    <div className="flex items-center justify-center bg-gray-300 rounded-full">
+                                    <div className="flex items-center justify-center bg-gold-dark rounded-full">
                                         <Check size={"0.7rem"} className="text-white" />
                                     </div>
                                 </div>
@@ -212,18 +214,18 @@ export default function BookingConfirmationPage() {
                                         </div>
                                         <div>
                                             <span className="text-xs text-heading/50 tracking-wider">
-                                                3 nights &#xB7; $108.33 / night
+                                                3 nights &times; $108.33 / night
                                             </span>
                                         </div>
                                     </div>
-                                    <div className="text-xs text-heading font-medium">
-                                        <span>Taxes & fees</span>
+                                    <div className="text-sm text-heading font-medium">
+                                        <span>Taxes &#038; fees</span>
                                         <span className="max-sm:block sm:float-right me-2 font-medium text-green-800">$21</span>
                                     </div>
                                 </div>
                                 <div className="w-full h-px bg-border-light my-3" />
                                 <div className="w-full space-y-2">
-                                    <div className="text-lg text-ink">
+                                    <div className="text-xl text-ink">
                                         <span>Total Paid</span>
                                         <span className="max-sm:block float-right me-2 font-medium text-green-800">$346</span>
                                     </div>

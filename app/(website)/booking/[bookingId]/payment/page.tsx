@@ -13,8 +13,10 @@ import {
     LockKeyhole,
     MoveRight,
     ShieldCheck,
+    SquareKanban,
     SquareM,
     UserRound,
+    Users,
 } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
@@ -315,7 +317,7 @@ export default function PaymentPage() {
                             </p>
                             <Button className="w-[70%] flex items-center justify-center gap-2">
                                 <LockKeyhole size={"1rem"} />
-                                <span className="text-sm">Complete Booking</span>
+                                <span className="text-sm">Pay $346.00</span>
                             </Button>
                         </div>
                     </div>
@@ -329,41 +331,46 @@ export default function PaymentPage() {
                                         <img src="/img/tmp3.png" alt="Contact Us" className="w-full h-full object-cover" />
                                         <div className="absolute inset-0 bg-black/20" />
                                     </div>
-                                    <div className="px-3 space-y-1">
+                                    <div className="px-3 space-y-2">
                                         <div className="mt-2 font-medium text-ink">Deluxe Ocean View Room</div>
-                                        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-1 sm:gap-5">
-                                            <div className="text-muted-light">
-                                                <SquareM size="1rem" className="inline-block" />
-                                                <div className="inline-block align-middle ms-1 text-xs">
-                                                    28 <span className="font-semibold">&#13217;</span>
-                                                </div>
+                                        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-1 sm:gap-5 text-xs font-medium text-muted">
+                                            <div className="flex items-center gap-2">
+                                                <Users size={"1.25rem"} className="text-gold" />
+                                                <span>2 Guests</span>
                                             </div>
-                                            <div className="text-muted-light">
-                                                <Eye size="1rem" className="inline-block" />
-                                                <span className="inline-block align-middle ms-1 text-xs">City View</span>
+                                            <div className="flex items-center gap-2">
+                                                <Eye size={"1.25rem"} className="text-gold" />
+                                                <span>Ocean View</span>
                                             </div>
-                                            <div className="text-muted-light">
-                                                <UserRound size="1rem" className="inline-block" />
-                                                <span className="inline-block align-middle ms-1 text-xs">2 Guests</span>
+                                            <div className="flex items-center gap-2">
+                                                <SquareKanban size={"1.25rem"} className="text-gold" />
+                                                <span>36 m&sup2;</span>
                                             </div>
                                         </div>
                                     </div>
                                     <div className="w-full h-px bg-border-light my-3" />
-                                    <div className="w-full h-full flex flex-wrap items-start max-sm:justify-around justify-center px-3">
-                                        <div className="flex flex-col sm:flex-row items-start justify-center gap-2 p-2 border-r border-transparent sm:border-r-border-light">
-                                            <CalendarClock size={"1.25rem"} className="text-gold-light" />
-                                            <div>
-                                                <span className="block text-xs text-muted-light">Check-in</span>
-                                                <span className="block text-sm text-ink">Apr 25, 2025</span>
+                                    <div className="w-full flex">
+                                        <div className="flex-1 border-r border-r-border-light">
+                                            <div className="mx-auto">
+                                                <div className="flex items-center justify-center gap-1">
+                                                    <CalendarClock size={"1.25rem"} className="text-gold-light" />
+                                                    <div>
+                                                        <span className="block text-xs text-muted-light">Check-in</span>
+                                                        <span className="block text-sm text-ink">Apr 25, 2025</span>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
 
-                                        <div className="flex flex-col sm:flex-row items-start justify-center gap-2 p-2">
-                                            <CalendarCheck2 size={"1.25rem"} className="text-gold-dark" />
-                                            <div>
-                                                <span className="block text-xs text-muted-light">Check-out</span>
-                                                <span className="block text-sm text-ink">Apr 28, 2025</span>
-                                                <span className="block text-xs text-muted-light">(3 nights)</span>
+                                        <div className="flex-1">
+                                            <div className="mx-auto">
+                                                <div className="flex items-center justify-center gap-1">
+                                                    <CalendarCheck2 size={"1.25rem"} className="text-gold-dark" />
+                                                    <div>
+                                                        <span className="block text-xs text-muted-light">Check-out</span>
+                                                        <span className="block text-sm text-ink">Apr 28, 2025</span>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -371,16 +378,23 @@ export default function PaymentPage() {
                                 <div className="w-full h-px bg-border-light my-3" />
                                 {/* Pricing */}
                                 <div className="space-y-2 px-3">
-                                    <h1 className="text-lg font-medium text-ink">Price Details</h1>
+                                    <h1 className="text-xl font-medium text-ink">Price Details</h1>
                                     <div className="w-full space-y-3">
-                                        <div className="text-xs text-heading font-medium">
-                                            <span>Room price (3 nights)</span>
-                                            <span className="max-sm:block sm:float-right me-2 font-medium text-green-800">
-                                                $325
-                                            </span>
+                                        <div className="text-heading font-medium">
+                                            <div className="text-sm">
+                                                <span>Room price</span>
+                                                <span className="max-sm:block sm:float-right me-2 font-medium text-green-800">
+                                                    $325
+                                                </span>
+                                            </div>
+                                            <div>
+                                                <span className="text-xs text-heading/50 tracking-wider">
+                                                    3 nights &times; $108.33 / night
+                                                </span>
+                                            </div>
                                         </div>
-                                        <div className="text-xs text-heading font-medium">
-                                            <span>Taxes & fees</span>
+                                        <div className="text-sm text-heading">
+                                            <span>Taxes &#038; fees</span>
                                             <span className="max-sm:block sm:float-right me-2 font-medium text-green-800">
                                                 $21
                                             </span>
@@ -428,7 +442,7 @@ export default function PaymentPage() {
                             </p>
                             <Button className="w-[70%] flex items-center justify-center gap-2">
                                 <LockKeyhole size={"1rem"} />
-                                <span className="text-sm">Complete Booking</span>
+                                <span className="text-sm">Pay $346.00</span>
                             </Button>
                         </div>
                     </div>
