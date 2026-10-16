@@ -198,7 +198,7 @@ export default function RoomPage() {
                     <div className="w-full">
                         <div className="w-full flex flex-col sm:flex-row items-center justify-between max-sm:gap-5 p-4 bg-cream-dark border border-border-gray rounded-lg">
                             <div className="flex flex-col min-[320px]:flex-row items-center gap-1 min-[320px]:gap-5 cursor-default">
-                                <Flower size={"1.7rem"} className="shrink-0 text-gold" />
+                                <Flower size={"1.7rem"} className="text-gold" />
                                 <div className="*:block">
                                     <h1 className="text-lg md:text-xl font-medium">Need a different room type?</h1>
                                     <span className="text-sm md:text-xs text-gray-500">

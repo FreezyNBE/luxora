@@ -100,7 +100,7 @@ export default function ImageSlider({ showCounting = true }: ImageSliderTypes) {
                         onClick={previous}
                         disabled={isAnimating}
                     >
-                        <ChevronLeft size={"1.25rem"} className="shrink-0 -translate-x-px" />
+                        <ChevronLeft size={"1.25rem"} className="-translate-x-px" />
                     </button>
 
                     {/* Next */}
@@ -109,7 +109,7 @@ export default function ImageSlider({ showCounting = true }: ImageSliderTypes) {
                         onClick={next}
                         disabled={isAnimating}
                     >
-                        <ChevronRight size={"1.25rem"} className="shrink-0 translate-x-px" />
+                        <ChevronRight size={"1.25rem"} className="translate-x-px" />
                     </button>
                 </div>
 

@@ -57,7 +57,7 @@ export default function CreateAmenityPage() {
                 <div className="flex flex-col gap-3">
                     <span className="block text-xs text-gray-600 font-medium">Click the button to add this amenity.</span>
                     <ButtonMin className="flex items-center justify-center gap-2">
-                        <ListCheck size={"1.25rem"} className="shrink-0 text-white" />
+                        <ListCheck size={"1.25rem"} className="text-white" />
                         <span className="text-white">Add Amenity</span>
                     </ButtonMin>
                 </div>

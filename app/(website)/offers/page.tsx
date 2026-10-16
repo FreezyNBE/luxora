@@ -1,6 +1,9 @@
-import { Button } from "@/app/components/misc/Button";
+import { CardContainer, CardHeader } from "@/app/components/core/Card";
+import { CardNotice } from "@/app/components/core/CardNotice";
+import { CardRoomOffer } from "@/app/components/core/CardRoom";
+import { ButtonMask } from "@/app/components/misc/Button";
 import TopLayout from "@/app/components/TopLayout";
-import { Calendar, Clock } from "lucide-react";
+import { CalendarDays, CalendarRange, Gift, Hourglass, MoveLeft, MoveRight } from "lucide-react";
 import Link from "next/link";
 
 export default function OffersPage() {
@@ -8,67 +11,103 @@ export default function OffersPage() {
     validUntil.setDate(validUntil.getDate() + 1);
 
     return (
-        <div className="w-full space-y-10">
-            <TopLayout imgUrl="/img/hero2.png" title="Special Offers" description="Exclusive deals for unforgettable stays." />
+        <div className="w-full flex flex-col items-center justify-center gap-y-10 pb-5">
+            <TopLayout
+                imgUrl="/img/hero2.png"
+                title="Exclusive Offers for Your Perfect Stay"
+                description="Discover our handpicked offers and enjoy exceptional experiences, greater comfort and more value during your stay."
+            >
+                <div className="flex items-center gap-2">
+                    <CalendarRange size={"1rem"} />
+                    <span className="text-sm">Special Offers</span>
+                </div>
+            </TopLayout>
 
-            {/* Filters */}
-            <div className="w-full flex flex-wrap items-center justify-center gap-4">
-                <div className="w-50 py-1 bg-gold-dark border border-transparent font-medium text-sm tracking-wide text-center text-white rounded-xs cursor-pointer hover:bg-black hover:border-transparent hover:text-white transition-all duration-75 ease-in">
-                    <span>All Offers</span>
-                </div>
-                <div className="w-50 py-1 bg-cream-soft border border-border-dark/10 font-medium text-sm tracking-wide text-center text-ink rounded-xs cursor-pointer hover:bg-black hover:border-transparent hover:text-white transition-all duration-75 ease-in">
-                    <span>Room Offers</span>
-                </div>
-                <div className="w-50 py-1 bg-cream-soft border border-border-dark/10 font-medium text-sm tracking-wide text-center text-ink rounded-xs cursor-pointer hover:bg-black hover:border-transparent hover:text-white transition-all duration-75 ease-in">
-                    <span>Seasonal Offers</span>
-                </div>
-                <div className="w-50 py-1 bg-cream-soft border border-border-dark/10 font-medium text-sm tracking-wide text-center text-ink rounded-xs cursor-pointer hover:bg-black hover:border-transparent hover:text-white transition-all duration-75 ease-in">
-                    <span>Packages</span>
-                </div>
-            </div>
-
-            {/* Sections */}
-            <div className="pb-10 px-5 lg:px-20 w-full flex flex-col items-center justify-center gap-5">
-                {[0, 1, 2, 3, 4, 5].map((i, index) => (
-                    <div
-                        key={index}
-                        className="w-full max-w-400 flex flex-col lg:flex-row h-full border border-border-light shadow-lg rounded-lg overflow-hidden"
+            <div className="w-full max-w-350 space-y-4 px-5">
+                <div className="w-full max-w-350 grid grid-cols-1 xl:grid-cols-3 items-center gap-2">
+                    <CardNotice
+                        title="Limited Time"
+                        description="Take advantage of our special packages and seasonal promotions crafted to make your stay even more
+                            memorable."
                     >
-                        <img
-                            src="/img/tmp2.png"
-                            alt={`Deluxe Room`}
-                            className="w-full lg:w-65 max-lg:max-h-30 h-auto object-cover"
-                        />
-                        <div className="w-full flex flex-col lg:flex-row gap-y-3 lg:gap-y-0 lg:ms-5 py-2 ps-2 lg:ps-0">
-                            <div className="w-full flex flex-col items-start justify-center">
-                                <h1 className="text-2xl font-semibold">Weekend Getaway</h1>
-                                <p className="w-5/6 max-w-xs text-muted-light text-xs font-medium my-5 ">
-                                    Enjoy up to 20% OFF on all room types for stays over the weekend.
-                                </p>
-                                <div className="flex flex-col sm:flex-row gap-x-8 mt-1">
-                                    <div className="text-muted-light">
-                                        <Clock size="1rem" className="inline-block" />
-                                        <span className="inline-block align-middle ms-1 text-xs font-medium">
-                                            2 Days / 1 Night
-                                        </span>
-                                    </div>
-                                    <div className="text-muted-light">
-                                        <Calendar size="1rem" className="inline-block" />
-                                        <span className="inline-block align-middle ms-1 text-xs font-medium">
-                                            Valid Until {validUntil.toLocaleString()}
-                                        </span>
-                                    </div>
+                        <Hourglass size={"1.5rem"} />
+                    </CardNotice>
+                    <CardNotice
+                        title="Plan Your Perfect Getaway"
+                        description="Find the ideal offer for your next visit, whether you're planning a quick escape or an extended retreat filled with comfort and relaxation."
+                    >
+                        <CalendarRange size={"1.5rem"} />
+                    </CardNotice>
+                    <CardNotice
+                        title="More Value for Your Stay"
+                        description="Make the most of your visit with carefully selected offers that bring together exceptional comfort, thoughtful extras, and memorable experiences."
+                    >
+                        <CalendarRange size={"1.5rem"} />
+                    </CardNotice>
+                </div>
+                <CardContainer>
+                    <CardHeader>
+                        <div className="flex items-center gap-2">
+                            <h1 className="text-xl font-medium text-ink">Current Offers</h1>
+                        </div>
+                    </CardHeader>
+                    <div className="p-4 space-y-4">
+                        {/* Sections */}
+                        <div className="w-full grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 gap-5">
+                            {[0, 1, 2, 3, 4, 5].map((i, index) => (
+                                <div key={i}>
+                                    <CardRoomOffer imageUrl="/img/tmp2.png" tag={i < 2 ? "Summer Special" : null} />
+                                </div>
+                            ))}
+                        </div>
+                        <div className="w-full flex items-center justify-center gap-5">
+                            {/* Arrow Back */}
+                            <Link href="/" className="text-gray-400/70 hover:text-gold transition-colors duration-100">
+                                <MoveLeft size={"1.25rem"} />
+                            </Link>
+                            <div className="flex items-center gap-3">
+                                <div className="flex items-center gap-1">
+                                    <Link
+                                        href="/"
+                                        className="w-8 h-8.5 flex items-center justify-center text-white bg-gold hover:bg-gold-dark rounded-sm transition-colors duration-100"
+                                    >
+                                        <span className="text-sm font-medium">1</span>
+                                    </Link>
+                                </div>
+                                <div className="flex items-center gap-1">
+                                    <Link
+                                        href="/"
+                                        className="w-8 h-8.5 flex items-center justify-center text-gray-500 bg-gray-300/40 hover:bg-gray-300/70 rounded-sm transition-colors duration-100"
+                                    >
+                                        <span className="text-sm font-medium">2</span>
+                                    </Link>
                                 </div>
                             </div>
-                            <div className="lg:flex flex-col items-center justify-center space-y-5 me-5">
-                                <h1 className="text-gold text-xl font-semibold">20% OFF</h1>
-                                <Link href={"/rooms/test"}>
-                                    <Button className="uppercase">View details</Button>
-                                </Link>
-                            </div>
+                            <Link href="/" className="text-gray-400/70 hover:text-gold transition-colors duration-100">
+                                <MoveRight size={"1.25rem"} />
+                            </Link>
                         </div>
                     </div>
-                ))}
+                </CardContainer>
+                <div className="w-full relative inset-0 flex">
+                    <div className="w-full max-w-350 mt-auto mx-auto flex flex-col sm:flex-row items-center justify-between max-sm:gap-5 p-10 bg-cream border border-border-gray shadow-xl rounded-xl">
+                        <div className="flex flex-col min-[320px]:flex-row items-center gap-1 min-[320px]:gap-5 cursor-default">
+                            <Gift size={"2rem"} className="text-gold" />
+                            <div className="*:block">
+                                <h1 className="text-lg font-medium">Have a Special Requests?</h1>
+                                <span className="text-sm text-neutral-500">
+                                    Contact us and let us create a personalized offer just for you.
+                                </span>
+                            </div>
+                        </div>
+                        <Link href="/contact" className="w-full sm:w-45">
+                            <ButtonMask width="btn-w-full" className="h-11 flex items-center justify-center gap-1">
+                                <span>Contact Us</span>
+                                <MoveRight size={"1.25rem"} />
+                            </ButtonMask>
+                        </Link>
+                    </div>
+                </div>
             </div>
         </div>
     );

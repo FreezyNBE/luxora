@@ -1,3 +1,5 @@
+import { CardContainer, CardHeader } from "@/app/components/core/Card";
+import { CardNotice } from "@/app/components/core/CardNotice";
 import { Button } from "@/app/components/misc/Button";
 import ProgressBooking from "@/app/components/ProgressBooking";
 import {
@@ -88,129 +90,142 @@ export default function BookingConfirmationPage() {
                     </div>
                 </div>
             </div>
-            <ProgressBooking step="Confirmation" />
+            {/* <div className="w-full flex items-center justify-center p-5">
+                <div className="w-full max-w-270 flex items-center justify-center">
+                    <CardContainer>
+                        <div className="flex items-center justify-center p-4">
+                            <ProgressBooking step="Confirmation" />
+                        </div>
+                    </CardContainer>
+                </div>
+            </div> */}
             <div className="w-full flex items-start justify-center px-5 pb-5">
-                <div className="w-full max-w-250 lg:max-w-300 flex flex-col md:flex-row gap-x-3 border-t border-t-border-light">
+                <div className="w-full lg:max-w-300 flex flex-col lg:flex-row gap-x-5">
                     {/* Left */}
                     {/* Container */}
                     <div className="flex-1 mt-5 space-y-5">
                         {/* Heading */}
-                        <div className="flex flex-col lg:flex-row items-start justify-between gap-y-3">
-                            <h1 className="font-medium text-xl">Booking Details</h1>
-                            <div className="flex flex-col md:flex-row items-start md:items-center gap-5 md:gap-12 text-xs">
-                                <div className="flex items-center gap-2">
-                                    <CalendarClock size={"1.25rem"} className="text-gold-light" />
-                                    <div>
-                                        <span className="block text-muted-light cursor-default">Check-in</span>
-                                        <span className="block text-heading font-medium">Apr 25, 2025</span>
+                        <CardContainer>
+                            <CardHeader>
+                                <div className="flex flex-col sm:flex-row items-start justify-between gap-y-3">
+                                    <h1 className="font-medium text-xl">Booking Details</h1>
+                                    <div className="flex flex-row items-center gap-8 lg:gap-12 text-xs">
+                                        <div className="flex items-center gap-2">
+                                            <CalendarClock size={"1.25rem"} className="text-gold-light" />
+                                            <div>
+                                                <span className="block text-muted-light cursor-default">Check-in</span>
+                                                <span className="block text-heading font-medium">Apr 25, 2025</span>
+                                            </div>
+                                        </div>
+                                        <div className="flex items-center gap-2">
+                                            <CalendarCheck2 size={"1.25rem"} className="text-gold-dark" />
+                                            <div>
+                                                <span className="block text-muted-light cursor-default">Check-out</span>
+                                                <span className="block text-heading font-medium">Apr 28, 2025</span>
+                                            </div>
+                                        </div>
+                                        <div className="flex items-center gap-2 cursor-default">
+                                            <Moon size={"1.25rem"} className="text-gold" />
+                                            <span className="block text-heading font-medium">3 nights</span>
+                                        </div>
                                     </div>
                                 </div>
-                                <div className="flex items-center gap-2">
-                                    <CalendarCheck2 size={"1.25rem"} className="text-gold-dark" />
-                                    <div>
-                                        <span className="block text-muted-light cursor-default">Check-out</span>
-                                        <span className="block text-heading font-medium">Apr 28, 2025</span>
-                                    </div>
-                                </div>
-                                <div className="flex items-center gap-2 cursor-default">
-                                    <Moon size={"1.25rem"} className="text-gold" />
-                                    <span className="block text-heading font-medium">3 nights</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="w-full h-px bg-border-light my-3" />
+                            </CardHeader>
 
-                        {/* Content */}
-                        <div className="w-full space-y-5">
-                            <div className="flex flex-col lg:flex-row gap-5">
-                                <div className="relative w-full lg:max-w-72 h-auto max-h-50 lg:max-h-38 rounded-lg overflow-hidden">
-                                    <img
-                                        src="/img/tmp3.png"
-                                        alt="Deluxe Ocean View Room"
-                                        className="w-full h-full object-cover"
-                                    />
-                                    <div className="absolute inset-0 bg-black/20" />
-                                </div>
-                                <div className="w-full mt-2 space-y-4">
-                                    <div className="w-full space-y-1">
-                                        <div className="font-semibold text-lg text-ink tracking-wide">
-                                            Deluxe Ocean View Room
-                                        </div>
-                                        <span className="block w-full max-w-82 text-xs text-heading/80 font-medium">
-                                            Spacious room with a king-size bed, private balcony and stunning ocean views.
-                                        </span>
+                            {/* Content */}
+                            <div className="w-full space-y-5 p-4">
+                                <div className="flex flex-col lg:flex-row gap-5">
+                                    <div className="relative w-full lg:max-w-72 h-auto max-h-50 lg:max-h-38 rounded-lg overflow-hidden">
+                                        <img src="/img/tmp3.png" alt="Deluxe Ocean View Room" className="w-full object-cover" />
+                                        <div className="absolute inset-0 bg-black/20" />
                                     </div>
-                                    <div className="flex flex-col sm:flex-row items-start sm:items-center gap-1 sm:gap-5 text-xs font-medium text-muted">
-                                        <div className="flex items-center gap-2">
-                                            <Users size={"1.25rem"} className="text-gold" />
-                                            <span>2 Guests</span>
-                                        </div>
-                                        <div className="flex items-center gap-2">
-                                            <Eye size={"1.25rem"} className="text-gold" />
-                                            <span>Ocean View</span>
-                                        </div>
-                                        <div className="flex items-center gap-2">
-                                            <SquareKanban size={"1.25rem"} className="text-gold" />
-                                            <span>36 m&sup2;</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="w-full h-px bg-border-light my-3" />
-                            <div className="relative bg-cream-soft border border-border-gray p-2 rounded-sm">
-                                <div className="w-full flex items-center justify-between px-3 py-2">
-                                    <div className="flex items-start gap-2">
-                                        <User className="text-gray-700 mt-1" />
-                                        <div className="space-y-2">
-                                            <span className="text-gray-700 font-semibold cursor-default">
-                                                Details Informations
+                                    <div className="w-full mt-2 space-y-4">
+                                        <div className="w-full space-y-1">
+                                            <div className="font-semibold text-lg text-ink tracking-wide">
+                                                Deluxe Ocean View Room
+                                            </div>
+                                            <span className="block w-full max-w-82 text-xs text-heading/80 font-medium">
+                                                Enjoy breathtaking ocean views from the comfort of our Deluxe Ocean View Room.
+                                                This spacious and elegantly designed room features a king-size bed, a modern
+                                                sitting area, and a private balcony where you can relax and take in the stunning
+                                                coastal scenery.
                                             </span>
-                                            <div className="space-y-px">
-                                                <span className="block text-sm text-gray-700 font-medium">Alex Johnson</span>
-                                                <span className="block text-sm text-gray-600 font-medium">
-                                                    alex.johnson@example.com
-                                                </span>
-                                                <span className="block text-sm text-gray-600 font-medium">+1 234 567 8900</span>
+                                        </div>
+                                        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-1 sm:gap-5 text-xs font-medium text-muted">
+                                            <div className="flex items-center gap-2">
+                                                <Users size={"1.25rem"} className="text-gold" />
+                                                <span>2 Guests</span>
+                                            </div>
+                                            <div className="flex items-center gap-2">
+                                                <Eye size={"1.25rem"} className="text-gold" />
+                                                <span>Ocean View</span>
+                                            </div>
+                                            <div className="flex items-center gap-2">
+                                                <SquareKanban size={"1.25rem"} className="text-gold" />
+                                                <span>36 m&sup2;</span>
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="hidden w-10 h-10 md:flex items-center justify-center bg-gold-dark rounded-full">
-                                        <Check className="text-white" />
+                                </div>
+                                <div className="w-full h-px bg-border-light my-3" />
+                                <div className="relative bg-cream-soft border border-border-gray p-2 rounded-xl">
+                                    <div className="w-full flex items-center justify-between px-3 py-2">
+                                        <div className="flex items-start gap-2">
+                                            <User className="text-gray-700 mt-1" />
+                                            <div className="space-y-2">
+                                                <span className="text-gray-700 font-semibold cursor-default">
+                                                    Details Informations
+                                                </span>
+                                                <div className="space-y-px">
+                                                    <span className="block text-sm text-gray-700 font-medium">
+                                                        Alex Johnson
+                                                    </span>
+                                                    <span className="block text-sm text-gray-600 font-medium">
+                                                        alex.johnson@example.com
+                                                    </span>
+                                                    <span className="block text-sm text-gray-600 font-medium">
+                                                        +1 234 567 8900
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="hidden w-10 h-10 md:flex items-center justify-center bg-gold-dark rounded-full">
+                                            <Check className="text-white" />
+                                        </div>
+                                    </div>
+                                    <div className="block md:hidden absolute -top-1 -right-1">
+                                        <div className="flex items-center justify-center bg-gold-dark rounded-full">
+                                            <Check size={"0.7rem"} className="text-white" />
+                                        </div>
                                     </div>
                                 </div>
-                                <div className="block md:hidden absolute -top-1 -right-1">
-                                    <div className="flex items-center justify-center bg-gold-dark rounded-full">
-                                        <Check size={"0.7rem"} className="text-white" />
+                                <div className="w-full h-px bg-border-light my-3" />
+                                <div className="flex items-start gap-2">
+                                    <NotepadText className="text-gold mt-1" />
+                                    <div className="space-y-2">
+                                        <span className="text-ink font-semibold">Special Requests</span>
+                                        <div className="space-y-px">
+                                            <span className="block text-xs text-gray-500 font-medium">
+                                                Late check-in (after 10 PM).
+                                            </span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <div className="w-full h-px bg-border-light my-3" />
-                            <div className="flex items-start gap-2">
-                                <NotepadText className="text-gold mt-1" />
-                                <div className="space-y-2">
-                                    <span className="text-ink font-semibold">Special Requests</span>
-                                    <div className="space-y-px">
-                                        <span className="block text-xs text-gray-500 font-medium">
-                                            Late check-in (after 10 PM).
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        </CardContainer>
                     </div>
                     {/* Right */}
-                    <div className="flex-1 max-w-full md:max-w-80 lg:max-w-100 mt-5 space-y-5 border border-border-light rounded-md">
-                        <div className="p-3">
-                            {/* Pricing */}
-                            <div className="space-y-2">
-                                <h1 className="text-lg font-medium text-ink tracking-wide">Payment Summary</h1>
+                    <div className="flex-1 w-full lg:max-w-100 space-y-5 mt-5">
+                        <CardContainer>
+                            <CardHeader>
+                                <h1 className="text-xl font-medium text-ink">Payment Summary</h1>
+                            </CardHeader>
+                            <div className="space-y-2 py-5 px-4">
                                 <div className="w-full space-y-3">
                                     <div className="text-heading font-medium">
                                         <div className="text-sm">
-                                            <span>Deluxe Ocean View Room</span>
-                                            <span className="max-sm:block sm:float-right me-2 font-medium text-green-800">
-                                                $325
-                                            </span>
+                                            <span>Room price</span>
+                                            <span className="max-sm:block sm:float-right me-2 font-medium text-ink">$325</span>
                                         </div>
                                         <div>
                                             <span className="text-xs text-heading/50 tracking-wider">
@@ -218,27 +233,23 @@ export default function BookingConfirmationPage() {
                                             </span>
                                         </div>
                                     </div>
-                                    <div className="text-sm text-heading font-medium">
+                                    <div className="text-sm text-heading">
                                         <span>Taxes &#038; fees</span>
-                                        <span className="max-sm:block sm:float-right me-2 font-medium text-green-800">$21</span>
+                                        <span className="max-sm:block sm:float-right me-2 font-medium text-ink">$21</span>
                                     </div>
                                 </div>
                                 <div className="w-full h-px bg-border-light my-3" />
-                                <div className="w-full space-y-2">
-                                    <div className="text-xl text-ink">
-                                        <span>Total Paid</span>
-                                        <span className="max-sm:block float-right me-2 font-medium text-green-800">$346</span>
-                                    </div>
-                                    <div className="w-full flex cursor-default">
-                                        <span className="ms-auto bg-green-700/20 px-3.5 py-1.25 rounded-lg text-green-800 text-sm font-semibold">
-                                            Paid
-                                        </span>
-                                    </div>
+                                <div className="text-xl text-ink">
+                                    <span>Total</span>
+                                    <span className="max-sm:block float-right me-2 font-bold text-ink">$346</span>
                                 </div>
                             </div>
-                            <div className="w-full h-px bg-border-light my-3" />
-                            <div className="space-y-2">
-                                <h1 className="text-lg font-medium text-ink tracking-wide">Payment Method</h1>
+                        </CardContainer>
+                        <CardContainer>
+                            <CardHeader>
+                                <h1 className="text-xl font-medium text-ink">Payment Method</h1>
+                            </CardHeader>
+                            <div className="p-4 space-y-2">
                                 <div className="w-full flex items-center justify-between gap-5 px-5 py-3 bg-gold/10 border border-gold/20 rounded-md cursor-pointer hover:bg-gold/20 hover:border-gold/30 transition-all duration-100">
                                     <div className="w-7 h-7 flex items-center justify-center">
                                         <img src="/payment/mastercard.svg" alt="Mastercard" />
@@ -273,35 +284,32 @@ export default function BookingConfirmationPage() {
                                     </div>
                                     <div className="text-xs text-heading font-medium space-y-1">Paid with Google Pay</div>
                                 </div>
-                                <div className="w-full h-px bg-border-light my-3" />
-                                <div className="space-y-2">
-                                    <div className="flex items-start gap-3">
-                                        <Headphones className="shrink-0 mt-1" />
-                                        <div className="space-y-3">
-                                            <h1 className="text-lg font-medium tracking-wide">Need Help?</h1>
-                                            <span className="block w-full max-w-64 text-xs text-gray-500 font-medium leading-5">
-                                                If you have any questions or need to make changes to your booking, please
-                                                contact us.
-                                            </span>
-                                            <div className="space-y-1">
-                                                <div className="w-fit text-gray-500 pb-px cursor-pointer hover:text-gold">
-                                                    <Phone size={"1rem"} className="inline-block shrink-0" />
-                                                    <span className="inline-block align-middle ms-2 text-xs font-medium">
-                                                        +1 234 567 8900
-                                                    </span>
-                                                </div>
-                                                <div className="w-fit text-gray-500 pb-px cursor-pointer hover:text-gold">
-                                                    <Mail size={"1rem"} className="inline-block shrink-0" />
-                                                    <span className="inline-block align-middle ms-2 text-xs font-medium">
-                                                        luxora@example.com
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </div>
+                            </div>
+                        </CardContainer>
+                        <CardContainer>
+                            <CardHeader>
+                                <h1 className="text-xl font-medium text-ink">Need Help?</h1>
+                            </CardHeader>
+                            <div className="p-4 space-y-2">
+                                <div className="text-xs text-gray-500 font-medium">
+                                    If you have any questions or need to make changes to your booking, please contact us.
+                                </div>
+                                <div className="space-y-1">
+                                    <div className="w-fit text-gray-500 pb-px cursor-pointer hover:text-gold transition-colors duration-100">
+                                        <Phone size={"1rem"} className="inline-block" />
+                                        <span className="inline-block align-middle ms-2 text-xs font-medium">
+                                            +1 234 567 8900
+                                        </span>
+                                    </div>
+                                    <div className="w-fit text-gray-500 pb-px cursor-pointer hover:text-gold transition-colors duration-100">
+                                        <Mail size={"1rem"} className="inline-block" />
+                                        <span className="inline-block align-middle ms-2 text-xs font-medium">
+                                            luxora@example.com
+                                        </span>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </CardContainer>
                     </div>
                 </div>
             </div>

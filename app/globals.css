@@ -125,8 +125,12 @@ select {
     outline: none;
 }
 
+svg {
+    flex-shrink: 0;
+}
+
 ::-webkit-scrollbar {
-    @apply w-[5px] h-[5px];
+    @apply w-1.25 h-1.25;
 }
 
 ::-webkit-scrollbar-track {

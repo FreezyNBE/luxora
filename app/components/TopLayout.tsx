@@ -1,4 +1,4 @@
-import { ShieldCheck } from "lucide-react";
+import { Divide, ShieldCheck } from "lucide-react";
 
 type TopLayoutProps = {
     imgUrl: string;
@@ -10,7 +10,7 @@ type TopLayoutProps = {
 export default function TopLayout({ imgUrl, title, description, children }: TopLayoutProps) {
     return (
         <div className=" w-full flex flex-col max-md:mb-3 border-b border-b-border-light">
-            <div className="relative w-full h-50 lg:h-65">
+            <div className="relative w-full h-65 lg:h-70">
                 <img src={imgUrl} alt="Contact Us" className="w-full h-full object-cover" />
 
                 <div
@@ -32,10 +32,10 @@ export default function TopLayout({ imgUrl, title, description, children }: TopL
                 />
 
                 <div className="absolute inset-0 w-full h-full text-gray-100 cursor-default">
-                    <div className="h-full flex flex-col items-start justify-center gap-y-2 px-3 sm:ps-7.5 lg:ps-15 tracking-wide">
-                        {children && children}
-                        <span className="text-5xl font-medium text-gray-100">{title}</span>
-                        <span className="max-w-120 text-sm">{description}</span>
+                    <div className="w-full h-full flex flex-col items-start justify-center gap-y-2 px-3 sm:ps-7.5 lg:ps-15 tracking-wide">
+                        {children && <div className="text-neutral-200">{children}</div>}
+                        <div className="max-w-130 text-2xl lg:text-4xl font-semibold text-gray-100">{title}</div>
+                        <div className="max-w-110 text-sm text-neutral-300">{description}</div>
                     </div>
                 </div>
             </div>

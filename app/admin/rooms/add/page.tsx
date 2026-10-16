@@ -212,7 +212,7 @@ export default function CreateRoomPage() {
                 <div className="flex flex-col gap-3">
                     <span className="block text-xs text-gray-600 font-medium">Click the button to add this room.</span>
                     <ButtonMin className="flex items-center justify-center gap-2">
-                        <SquarePen size={"1.25rem"} className="shrink-0 text-white" />
+                        <SquarePen size={"1.25rem"} className="text-white" />
                         <span className="text-white">Add New Room</span>
                     </ButtonMin>
                 </div>

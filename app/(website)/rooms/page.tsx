@@ -36,7 +36,7 @@ export default function TestRoomsPage() {
             <main className="bg-cream">
                 <div className="w-full flex flex-col lg:flex-row p-5 max-lg:gap-y-5 gap-x-10">
                     {/* Filters */}
-                    <div className="w-full lg:max-w-80 h-fit text-sm bg-cream-soft border border-border-gray rounded-md p-3">
+                    <div className="w-full lg:max-w-80 h-fit text-sm bg-cream-soft border border-border-gray shadow-xl rounded-xl p-3">
                         <h1 className="flex flex-col min-[340px]:flex-row items-start min-[340px]:items-center justify-between gap-y-2 font-medium cursor-default lg:pt-2">
                             <div>
                                 <SlidersHorizontal className="inline-block text-gold" />
@@ -212,7 +212,7 @@ export default function TestRoomsPage() {
 
                     {/* n Rooms found */}
                     <div className="w-full space-y-5">
-                        <div className="flex items-center justify-between">
+                        <div className="flex flex-col min-[445px]:flex-row items-start min-[445px]:items-center justify-between gap-2">
                             <div>
                                 <span className="text-sm font-medium cursor-default select-none">8 rooms available</span>
                             </div>
@@ -231,7 +231,7 @@ export default function TestRoomsPage() {
                             {[0, 1, 2, 3, 4, 5].map((room) => (
                                 <div
                                     key={room}
-                                    className="relative w-full text-gray-700 border border-border-gray rounded-xl overflow-hidden group"
+                                    className="relative w-full border border-border-gray shadow-xl rounded-xl overflow-hidden group"
                                 >
                                     {room < 2 && (
                                         <div className="absolute top-3 left-3 z-2">
@@ -244,7 +244,7 @@ export default function TestRoomsPage() {
                                         <img
                                             src={(room + 1) % 2 ? "/img/hero2.png" : "/img/img5.jpg"}
                                             alt={`Deluxe Room`}
-                                            className="w-full aspect-video overflow-hidden object-cover"
+                                            className="w-full overflow-hidden object-cover"
                                         />
                                         <div
                                             className="opacity-0 group-hover:opacity-100 absolute inset-0 transition-all duration-300 ease-in"
@@ -254,13 +254,13 @@ export default function TestRoomsPage() {
                                             }}
                                         />
                                     </Link>
-                                    <div className="p-3 space-y-2">
+                                    <div className="p-4 space-y-2">
                                         <div className="w-fit hover:text-gold transition-colors duration-100">
                                             <Link href={`/rooms/${room}`}>
                                                 <h1 className="text-xl font-medium">Standard Room</h1>
                                             </Link>
                                         </div>
-                                        <div className="flex items-center gap-6 md:gap-4 xl:gap-6 text-xs font-medium text-gray-600">
+                                        <div className="flex flex-col min-[400px]:flex-row items-start min-[400px]:items-center gap-3 min-[400px]:gap-6 md:gap-4 xl:gap-6 text-xs text-neutral-700 font-medium">
                                             <div className="flex items-center gap-2">
                                                 <Users size={"1.25rem"} />
                                                 <span>2 Guests</span>
@@ -274,17 +274,17 @@ export default function TestRoomsPage() {
                                                 <span>36 m&sup2;</span>
                                             </div>
                                         </div>
-                                        <div className="max-md:max-w-125 text-xs tracking-wide text-gray-600 py-2">
+                                        <div className="max-md:max-w-125 text-xs text-neutral-700 tracking-wide py-2">
                                             A comfortable and stylish room with modern amenities and a relaxing atmosphere.
                                             Perfect for couples or solo travelers.
                                         </div>
-                                        <div className="w-full flex items-center justify-between pt-5">
+                                        <div className="w-full flex flex-col min-[400px]:flex-row items-start min-[400px]:justify-between gap-2 pt-5">
                                             <div className="w-full space-x-1">
                                                 <div className="inline-block text-xl font-medium">$120</div>
                                                 <div className="inline-block text-xs font-medium tracking-wide"> / night</div>
                                             </div>
-                                            <Link href={`/rooms/${room}`}>
-                                                <Button className="h-10 flex items-center justify-center gap-2">
+                                            <Link href={`/rooms/${room}`} className="max-[400px]:w-full">
+                                                <Button className="max-[400px]:w-full h-10 flex items-center justify-center gap-2">
                                                     <span className="text-xs">View Details</span>
                                                     <MoveRight size={"1.25rem"} />
                                                 </Button>

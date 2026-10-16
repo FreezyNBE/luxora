@@ -8,7 +8,7 @@ export default async function BookingPageLayout({
     const { bookingId } = await params;
 
     return (
-        <div className="w-full bg-cream">
+        <div className="w-full bg-cream-soft">
             <div className="w-full">{children}</div>
         </div>
     );

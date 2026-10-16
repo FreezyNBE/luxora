@@ -97,7 +97,7 @@ export default function GalleryContextProvider({ children }: { children: React.R
     return (
         <GalleryContext.Provider value={{ createGallery }}>
             {galleryStatus && galleryImages.length && (
-                <div className="w-full fixed inset-0 bg-black/80 z-50 py-5 px-2 lg:px-8 flex items-center justify-center overflow-auto">
+                <div className="w-full h-full fixed inset-0 bg-black/80 z-50 py-5 px-2 lg:px-8 overflow-auto">
                     {/* Gallery Container */}
                     <div className="w-full bg-cream rounded-lg">
                         {/* Heading */}
