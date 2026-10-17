@@ -202,7 +202,7 @@ export default function RoomPage() {
                                 <div className="*:block">
                                     <h1 className="text-lg md:text-xl font-medium">Need a different room type?</h1>
                                     <span className="text-sm md:text-xs text-gray-500">
-                                        Explore our other rooms and fine the perfect fit for your stay.
+                                        Explore our other rooms and find the perfect fit for your stay.
                                     </span>
                                 </div>
                             </div>

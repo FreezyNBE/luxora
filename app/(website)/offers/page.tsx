@@ -3,7 +3,7 @@ import { CardNotice } from "@/app/components/core/CardNotice";
 import { CardRoomOffer } from "@/app/components/core/CardRoom";
 import { ButtonMask } from "@/app/components/misc/Button";
 import TopLayout from "@/app/components/TopLayout";
-import { CalendarDays, CalendarRange, Gift, Hourglass, MoveLeft, MoveRight } from "lucide-react";
+import { CalendarRange, Gift, Hourglass, MoveLeft, MoveRight, Percent } from "lucide-react";
 import Link from "next/link";
 
 export default function OffersPage() {
@@ -18,7 +18,7 @@ export default function OffersPage() {
                 description="Discover our handpicked offers and enjoy exceptional experiences, greater comfort and more value during your stay."
             >
                 <div className="flex items-center gap-2">
-                    <CalendarRange size={"1rem"} />
+                    <Percent size={"1rem"} />
                     <span className="text-sm">Special Offers</span>
                 </div>
             </TopLayout>

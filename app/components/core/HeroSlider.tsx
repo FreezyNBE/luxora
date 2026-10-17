@@ -9,7 +9,15 @@ type HeroSliderTypes = {
     images?: string[];
 };
 
-const imgs = ["/img/hero.png", "/img/img1.jpg", "/img/img2.jpg", "/img/img3.jpg", "/img/img4.jpg", "/img/img5.jpg"];
+const imgs = [
+    "/img/hero3.png",
+    "/img/hero.png",
+    "/img/hero2.png",
+    "/img/img2.jpg",
+    "/img/img3.jpg",
+    "/img/img4.jpg",
+    "/img/img5.jpg",
+];
 
 export default function HeroSlider({ images = imgs }: HeroSliderTypes) {
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -68,13 +76,10 @@ export default function HeroSlider({ images = imgs }: HeroSliderTypes) {
                             : "absolute inset-0"
                     }
                 >
-                    <Image
+                    <img
                         src={images[currentIndex]}
                         alt={`Image ${currentIndex + 1}`}
-                        fill
-                        sizes="(max-width: 1536px) 100vw, 100%"
-                        className="object-cover"
-                        priority
+                        className="w-full h-full aspect-video object-cover"
                     />
                 </div>
 
@@ -84,12 +89,10 @@ export default function HeroSlider({ images = imgs }: HeroSliderTypes) {
                         onAnimationEnd={handleAnimationEnd}
                         className={direction === "next" ? "image-slide-in-right" : "image-slide-in-left"}
                     >
-                        <Image
+                        <img
                             src={images[incomingIndex]}
                             alt={`Image ${incomingIndex + 1}`}
-                            fill
-                            sizes="(max-width: 1536px) 100vw, 100%"
-                            className="object-cover"
+                            className="w-full h-full aspect-video object-cover"
                         />
                     </div>
                 )}

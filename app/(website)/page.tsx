@@ -1,27 +1,38 @@
 import Link from "next/link";
-import { Button, ButtonMin } from "../components/misc/Button";
+import { Button, ButtonMask, ButtonMin } from "../components/misc/Button";
 import {
     Bed,
     BedSingle,
     CalendarRange,
     ChevronDown,
     CircleCheck,
+    Gift,
+    HeartHandshake,
+    Hourglass,
+    House,
+    Mail,
     MapPin,
     Medal,
     MoveRight,
+    Pin,
+    Sparkles,
+    Star,
     StarCheck,
+    Sunset,
     ThumbsUp,
     Trophy,
     Users,
 } from "lucide-react";
 import Image from "next/image";
 import HeroSlider from "../components/core/HeroSlider";
+import { CardRoomHigh, CardRoomMin } from "../components/core/CardRoom";
+import { CardInfo, CardMessage, CardNotice } from "../components/core/CardNotice";
 
 export default function Home() {
     return (
         <main className="-mt-(--navbar-height)">
             {/* Hero section */}
-            <section className="relative w-full h-150 text-white">
+            <div className="relative w-full h-185 text-white">
                 {/* Hero Slider */}
                 <div className="absolute inset-0 w-full h-full">
                     <HeroSlider />
@@ -60,169 +71,165 @@ export default function Home() {
                         </Link>
                     </div>
                 </div>
-            </section>
+            </div>
 
-            {/* Checkin availability */}
-            <div className="relative w-full z-1 bg-transparent flex items-center justify-center">
-                <div className="relative -top-18 w-full lg:w-5/6 flex max-lg:flex-col items-center bg-cream-soft border border-border rounded-lg shadow-xl mx-2 lg:mx-5">
-                    <div className="w-full lg:flex-1/2 p-5 space-y-1">
-                        <div className="text-muted-light text-sm font-semibold uppercase ps-2 cursor-default">Check-In</div>
-                        <div className="w-full text-ink cursor-pointer hover:opacity-80 hover:text-gold-dark group border-b-2 p-2 border-b-transparent hover:border-b-gold-dark transition-all duration-100 ease-in">
-                            <span className="font-semibold">May 24, 2026</span>
-                            <span className="inline-block align-middle float-right text-muted-light group-hover:text-gold-dark transition-all duration-100 ease-in">
-                                <CalendarRange size={"1.25rem"} />
-                            </span>
+            {/* Sections */}
+            <div className="w-full flex flex-col gap-y-5 py-5">
+                <div className="w-full mx-auto px-5 lg:px-10 xl:px-15 2xl:px-20">
+                    <div className="w-full grid grid-cols-1 xl:grid-cols-3 items-center gap-2">
+                        <CardMessage
+                            title="Exceptional Rooms"
+                            description="Thoughtfully designed spaces with modern amenities, cozy interios, and comfort in every detail."
+                        >
+                            <Bed size={"2rem"} />
+                        </CardMessage>
+                        <CardMessage
+                            title="Exclusive Benefits"
+                            description="Enjoy special rates, personalized service, and extra perks that make every stay more rewarding."
+                        >
+                            <Sparkles size={"2rem"} />
+                        </CardMessage>
+                        <CardMessage
+                            title="Service That Cares"
+                            description="From seamless check-in to attentive assistance, we make your comfort our priority."
+                        >
+                            <CalendarRange size={"2rem"} />
+                        </CardMessage>
+                    </div>
+                </div>
+                {/* Offers */}
+                <div className="relative inset-0 w-full bg-cream-dark border-y border-y-border-gray flex flex-col 2xl:flex-row items-start 2xl:items-start 2xl:justify-between gap-4 px-5 py-10 lg:px-10 xl:px-15 2xl:px-20">
+                    <div className="space-y-4 text-gray-600">
+                        <div className="text-gold text-sm font-medium tracking-widest uppercase cursor-default">
+                            Special Offers
+                        </div>
+                        <h1 className="text-5xl max-w-110 font-semibold tracking-wide">
+                            Exclusive Offers for Your Perfect Stay
+                        </h1>
+                        <p className="max-w-90 text-sm">
+                            Discover our handpicked offers and enjoy exceptional experiences, greater comfort and more value
+                            during your stay at Luxora Hotel.
+                        </p>
+                        <Link href="/offers">
+                            <ButtonMin className="flex items-center justify-center gap-1">
+                                <span>View All Offers</span>
+                                <MoveRight />
+                            </ButtonMin>
+                        </Link>
+                    </div>
+                    <div className="w-full 2xl:max-w-300 flex flex-wrap gap-4">
+                        <div className="w-full md:flex-1/3 home-flex shrink-0">
+                            <CardRoomHigh room={1} imageUrl="/img/hero.png" showDesc={false} />
+                        </div>
+                        <div className="w-full md:flex-1/3 home-flex shrink-0">
+                            <CardRoomHigh room={2} imageUrl="/img/hero2.png" showDesc={false} />
+                        </div>
+                        <div className="w-full md:flex-1/3 home-flex shrink-0">
+                            <CardRoomHigh room={3} imageUrl="/img/hero2.png" showDesc={false} />
                         </div>
                     </div>
-                    <div className="w-full lg:flex-1/2 p-5 space-y-1">
-                        <div className="text-muted-light text-sm font-semibold uppercase ps-2 cursor-default">Check-Out</div>
-                        <div className="w-full text-ink cursor-pointer hover:opacity-80 hover:text-gold-dark group border-b-2 p-2 border-b-transparent hover:border-b-gold-dark transition-all duration-100 ease-in">
-                            <span className="font-semibold">May 25, 2026</span>
-                            <span className="inline-block align-middle float-right text-muted-light group-hover:text-gold-dark transition-all duration-100 ease-in">
-                                <CalendarRange size={"1.25rem"} />
-                            </span>
+                </div>
+                {/* Most Popular Rooms */}
+                <div className="w-full flex flex-col items-start gap-y-5 px-5 py-10 lg:px-10 xl:px-15 2xl:px-20">
+                    <div className="w-full flex flex-col md:flex-row items-start md:items-center md:justify-between gap-4">
+                        <div className="space-y-4 text-gray-600">
+                            <div className="text-gold text-sm font-medium tracking-widest uppercase cursor-default">
+                                Featured Rooms
+                            </div>
+                            <h1 className="text-5xl max-w-150 font-semibold tracking-wide">Our Most Popular Rooms</h1>
+                            <p className="max-w-90 text-sm">
+                                Discover our handpicked selection of rooms, designed for your ultimate comfort and relaxation.
+                            </p>
+                        </div>
+                        <div>
+                            <Link
+                                href="/rooms"
+                                className="flex items-center justify-center gap-1 text-gold hover:text-gold-dark transition-colors duration-100"
+                            >
+                                <span className="text-sm">View All Rooms</span>
+                                <MoveRight size={"1.25rem"} />
+                            </Link>
                         </div>
                     </div>
-                    <div className="w-full lg:flex-1/2 p-5 space-y-1">
-                        <div className="text-muted-light text-sm font-semibold uppercase ps-2 cursor-default">Quests</div>
-                        <div className="w-full text-ink cursor-pointer hover:opacity-80 hover:text-gold-dark group border-b-2 p-2 border-b-transparent hover:border-b-gold-dark transition-all duration-100 ease-in">
-                            <span className="font-semibold">One person</span>
-                            <span className="inline-block align-middle float-right pt-0.5 text-muted-light group-hover:text-gold-dark transition-all duration-100 ease-in">
-                                <ChevronDown size={"1.25rem"} />
-                            </span>
+                    <div className="w-full grid md:grid-cols-2 2xl:grid-cols-4 gap-4">
+                        <div className="">
+                            <CardRoomHigh room={1} imageUrl="/img/hero.png" showDesc={false} />
+                        </div>
+                        <div className="">
+                            <CardRoomHigh room={1} imageUrl="/img/hero.png" showDesc={false} />
+                        </div>
+                        <div className="">
+                            <CardRoomHigh room={1} imageUrl="/img/hero.png" showDesc={false} />
+                        </div>
+                        <div className="">
+                            <CardRoomHigh room={1} imageUrl="/img/hero.png" showDesc={false} />
                         </div>
                     </div>
-                    <div className="max-lg:w-full px-5 py-2 space-y-1">
-                        <Button className="w-full flex items-center justify-center gap-1">
-                            <CircleCheck />
-                            <span>Check Availability</span>
-                        </Button>
+                </div>
+
+                <div className="w-full mx-auto px-5 py-10 lg:px-10 xl:px-15 2xl:px-20 bg-cream border-y border-y-border-gray">
+                    <div className="w-full grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 items-center gap-6">
+                        <CardInfo
+                            title="A Place to Feel At Home"
+                            description="Discover a welcoming atmosphere where comfort meets thoughtful design. Every space is created to help you relax, unwind, and feel at ease from the moment you arrive."
+                        >
+                            <House size={"2rem"} />
+                        </CardInfo>
+                        <CardInfo
+                            title="Comfort in Every Detail"
+                            description="From elegant interios to carefully selected furnishings, every detail contributes to a relaxing experience. Enjoy a balance of modern style, everyday convenience, and lasting comfort."
+                        >
+                            <Bed size={"2rem"} />
+                        </CardInfo>
+                        <CardInfo
+                            title="Hospitality That Matters"
+                            description="We believe a great stay begins with feeling welcome. Our approach to hospitality is built around attentive service, thoughtful touches and making every guest feel valued."
+                        >
+                            <HeartHandshake size={"2rem"} />
+                        </CardInfo>
+                        <CardInfo
+                            title="More Than Just A stay"
+                            description="Make the most of your time away with inviting spaces, convenient amenities, and little comforts that turn an ordinary visit into a memorable experience."
+                        >
+                            <Star size={"2rem"} />
+                        </CardInfo>
+                        <CardInfo
+                            title="A Destination to Discover"
+                            description="Whether you're travelling for business or leisure, enjoy a comfortable base for your journey. Settle in, explore the surroundings and make every day your own."
+                        >
+                            <Pin size={"2rem"} />
+                        </CardInfo>
+                        <CardInfo
+                            title="Make Time for Yourself"
+                            description="Step away from your everday routine and embrace a slower pace. Enjoy a peacful atmosphere, recharge at your own rhythm, and make space for the moments that matter."
+                        >
+                            <Sunset size={"2rem"} />
+                        </CardInfo>
+                    </div>
+                </div>
+
+                <div className="w-full px-5 py-10 lg:px-10 xl:px-15 2xl:px-20">
+                    <div className="w-full relative inset-0 flex">
+                        <div className="w-full max-w-350 mt-auto mx-auto flex flex-col sm:flex-row items-center justify-between max-sm:gap-5 p-10 bg-cream border border-border-gray shadow-xl rounded-xl">
+                            <div className="flex flex-col min-[320px]:flex-row items-center gap-1 min-[320px]:gap-5 cursor-default">
+                                <Gift size={"2rem"} className="text-gold" />
+                                <div className="*:block">
+                                    <h1 className="text-lg font-medium">Have a Special Requests?</h1>
+                                    <span className="text-sm text-neutral-500">
+                                        Contact us and let us create a personalized offer just for you.
+                                    </span>
+                                </div>
+                            </div>
+                            <Link href="/contact" className="w-full sm:w-45">
+                                <ButtonMask width="btn-w-full" className="h-11 flex items-center justify-center gap-1">
+                                    <span>Contact Us</span>
+                                    <MoveRight size={"1.25rem"} />
+                                </ButtonMask>
+                            </Link>
+                        </div>
                     </div>
                 </div>
             </div>
-
-            {/* Notices */}
-            <section className="flex items-center justify-center text-center">
-                <div className="w-full lg:w-5/6 py-3 space-y-3">
-                    <div className="uppercase">Why choose us</div>
-                    <h1 className="font-bold text-3xl">Timeless Elegance, Modern Comfort</h1>
-                    <div className="flex max-lg:flex-wrap items-center justify-center max-lg:gap-y-5 lg:gap-x-5 mt-6">
-                        <div className="flex-1/2">
-                            <div className="w-full flex items-center justify-center">
-                                <div className="flex flex-col items-center justify-center gap-2 border border-transparent rounded-lg px-4 xl:px-16 py-2 hover:bg-gold-dark/20 hover:border-gold-dark cursor-pointer transition duration-75 ease-in-out">
-                                    <MapPin className="text-gold-light" size={"2rem"} />
-                                    <span className="font-semibold text-ink">Prime Location</span>
-                                    <p className="max-w-46 text-sm text-muted">
-                                        Located in the heart of the city, close to attractions and business hubs.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="flex-1/2">
-                            <div className="w-full flex items-center justify-center">
-                                <div className="flex flex-col items-center justify-center gap-2 border border-transparent rounded-lg px-4 xl:px-16 py-2 hover:bg-gold-dark/20 hover:border-gold-dark cursor-pointer transition duration-75 ease-in-out">
-                                    <BedSingle className="text-gold-light" size={"2rem"} />
-                                    <span className="font-semibold text-ink">Exceptional Comfort</span>
-                                    <p className="max-w-46 text-sm text-muted">
-                                        Well-appointed rooms with modern amenities for a relaxing stay.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="flex-1/2">
-                            <div className="w-full flex items-center justify-center">
-                                <div className="flex flex-col items-center justify-center gap-2 border border-transparent rounded-lg px-4 xl:px-16 py-2 hover:bg-gold-dark/20 hover:border-gold-dark cursor-pointer transition duration-75 ease-in-out">
-                                    <ThumbsUp className="text-gold-light" size={"2rem"} />
-                                    <span className="font-semibold text-ink">World Class Service</span>
-                                    <p className="max-w-46 text-sm text-muted">
-                                        Our dedicated team is here to ensure your stay is perfect in every way.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="flex-1/2">
-                            <div className="w-full flex items-center justify-center">
-                                <div className="flex flex-col items-center justify-center gap-2 border border-transparent rounded-lg px-4 xl:px-16 py-2 hover:bg-gold-dark/20 hover:border-gold-dark cursor-pointer transition duration-75 ease-in-out">
-                                    <Medal className="text-gold-light" size={"2rem"} />
-                                    <span className="font-semibold text-ink">Best Price Guarantee</span>
-                                    <p className="max-w-46 text-sm text-muted">
-                                        Book directly with us for the best rates and exclusive benefits.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            {/* About us */}
-            <section className="w-full lg:h-120 flex flex-col lg:flex-row mt-20">
-                <div className="relative w-full h-80 lg:h-full lg:w-1/2">
-                    <Image
-                        src="/img/about-us.png"
-                        alt="Hotel Room"
-                        fill
-                        sizes="(min-width: 1024px) 50vw, 100vw"
-                        className="object-cover"
-                    />
-                </div>
-                <div className="w-full lg:w-1/2 bg-cream-dark">
-                    <div className="w-full h-full flex flex-col items-start justify-center gap-2 px-10 py-4 space-y-5">
-                        <div className="tracking-wide uppercase text-heading">About Luxora Hotel</div>
-                        <h2 className="font-bold text-4xl">A Stay That Feels Like Home</h2>
-                        <p className="max-w-md text-heading tracking-wide">
-                            At Luxora Hotel, we blend timeless elegance with modern comfort to create unforgettable experiences.
-                            Whether you're here for business, leisure, or a special occasion, we're commited to making your stay
-                            exceptional.
-                        </p>
-                        <Link href={"/"}>
-                            <Button className="uppercase shadow-md">Learn more</Button>
-                        </Link>
-                    </div>
-                </div>
-            </section>
-
-            {/* Counts */}
-            <section className="w-full bg-brown text-gold-dark cursor-default overflow-hidden">
-                <div className="flex flex-wrap items-center justify-center gap-5 2xl:gap-32 py-10 px-5">
-                    <div className="max-sm:flex-1/2 max-lg:flex-2/6">
-                        <div className="flex items-center gap-4 py-5 px-10 rounded-lg cursor-pointer border border-gold-dark/20 hover:border-transparent hover:bg-gold-dark/10">
-                            <Bed size={"2.5rem"} />
-                            <div>
-                                <h2 className="text-3xl font-semibold text-white">120+</h2>
-                                <div className="font-semibold text-sm">Luxury Rooms</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="max-sm:flex-1/2 max-lg:flex-2/6">
-                        <div className="flex items-center gap-4 py-5 px-10 rounded-lg cursor-pointer border border-gold-dark/20 hover:border-transparent hover:bg-gold-dark/10">
-                            <Users size={"2.5rem"} />
-                            <div>
-                                <h2 className="text-3xl font-semibold text-white">5000+</h2>
-                                <div className="font-semibold text-sm">Happy Guests</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="max-sm:flex-1/2 max-lg:flex-2/6">
-                        <div className="flex items-center gap-4 py-5 px-10 rounded-lg cursor-pointer border border-gold-dark/20 hover:border-transparent hover:bg-gold-dark/10">
-                            <StarCheck size={"2.5rem"} />
-                            <div>
-                                <h2 className="text-3xl font-semibold text-white">4.8</h2>
-                                <div className="font-semibold text-sm">Guest Rating</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="max-sm:flex-1/2 max-lg:flex-2/6">
-                        <div className="flex items-center gap-4 py-5 px-10 rounded-lg cursor-pointer border border-gold-dark/20 hover:border-transparent hover:bg-gold-dark/10">
-                            <Trophy size={"2.5rem"} />
-                            <div>
-                                <h2 className="text-3xl font-semibold text-white">10+</h2>
-                                <div className="font-semibold text-sm">Awards Won</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
         </main>
     );
 }
