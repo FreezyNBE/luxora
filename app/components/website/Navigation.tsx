@@ -164,7 +164,7 @@ function Navigation() {
                     >
                         <div className="w-full">
                             <div className="py-2">
-                                <div className="w-full flex items-center justify-between text-center py-2 px-5">
+                                <div className="w-full flex items-center justify-between text-center py-2">
                                     <h1 className="flex items-center justify-center gap-1 text-2xl tracking-widest cursor-default">
                                         <Gem size={"1.5rem"} className="text-gold" />
                                         <span>Luxora</span>
@@ -320,7 +320,7 @@ function Navigation() {
 
                             <div className="my-5">
                                 <Link href="/rooms">
-                                    <ButtonMin className="flex items-center justify-center gap-2 uppercase">
+                                    <ButtonMin width="btn-w-full" className="flex items-center justify-center gap-2 uppercase">
                                         <span>Book now</span>
                                         <MoveRight />
                                     </ButtonMin>

@@ -1,79 +1,75 @@
-import { CardContainer, CardHeader } from "@/app/components/core/Card";
-import { CardNotice } from "@/app/components/core/CardNotice";
+import { CardMessage } from "@/app/components/core/CardNotice";
 import { ButtonMask } from "@/app/components/misc/Button";
 import TopLayout from "@/app/components/TopLayout";
-import { Flower, Gift, GraduationCap, MoveRight, Spotlight } from "lucide-react";
+import { Building2, Car, CirclePile, Dumbbell, Flower, MoveRight, Utensils, Waves } from "lucide-react";
 import Link from "next/link";
-import { Fragment } from "react/jsx-runtime";
 
 export default function FacilityPage() {
-    const validUntil = new Date();
-    validUntil.setDate(validUntil.getDate() + 1);
-
     return (
-        <div className="w-full flex flex-col items-center justify-center gap-y-10 pb-5">
+        <div className="w-full flex flex-col items-center justify-center">
             <TopLayout
                 imgUrl="/img/hero2.png"
                 title="World-Class Amenities for a Better Stay"
                 description="From relaxing in our spa to enjoying fine dining, our facilities are designed to make your stay truly special."
             >
                 <div className="flex items-center gap-2">
-                    <Spotlight size={"1.25rem"} />
+                    <Building2 size={"1.25rem"} />
                     <span className="text-sm">Hotel Facilities</span>
                 </div>
             </TopLayout>
 
-            <div className="w-full max-w-350 space-y-4 px-5">
-                <CardNotice
-                    title="Everything You Need"
-                    description="Discover a world of comfort, relaxation and entertainment with our premium facilities, designed for your enjoyment."
-                >
-                    <GraduationCap size={"1.5rem"} />
-                </CardNotice>
-                <CardContainer>
-                    <CardHeader>
-                        <div className="flex items-center gap-2">
-                            <h1 className="text-xl font-medium text-ink">Our Facilities</h1>
+            <div className="w-full">
+                <div className="space-y-5 bg-cream-dark border-b border-b-border-gray px-5 py-10 lg:px-10 xl:px-15 2xl:px-20">
+                    <div className="space-y-4 text-gray-600">
+                        <div className="text-gold text-sm font-medium tracking-widest uppercase cursor-default">
+                            Our Facilities
                         </div>
-                    </CardHeader>
-                    <div className="space-y-4 p-4">
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-5">
-                            {[0, 1, 2, 3, 4, 5].map((i) => (
-                                <Fragment key={i}>
-                                    <div className="w-full max-h-100 flex flex-col border border-border-gray shadow-xl rounded-xl overflow-hidden hover:-translate-y-3 hover:bg-gold-light/30 hover:border-transparent cursor-pointer transition-all duration-300">
-                                        <div className="w-full h-full max-h-50 overflow-hidden">
-                                            <img
-                                                src={i % 2 ? "/img/tmp1.png" : "/img/tmp3.png"}
-                                                alt="Tmp1"
-                                                className="w-full object-cover"
-                                            />
-                                        </div>
-                                        <div className="px-5 py-5">
-                                            <h1 className="text-xl font-semibold tracking-wide">Swimming Pool</h1>
-                                            <span className="text-sm text-heading">Outdoor pool with relaxing view.</span>
-                                        </div>
-                                    </div>
-                                    <div className="w-full max-h-100 flex flex-col border border-border-gray shadow-xl rounded-xl overflow-hidden hover:-translate-y-3 hover:bg-gold-light/30 hover:border-transparent cursor-pointer transition-all duration-300">
-                                        <div className="w-full h-full max-h-50 overflow-hidden">
-                                            <img
-                                                src={i % 2 ? "/img/tmp1.png" : "/img/tmp3.png"}
-                                                alt="Tmp1"
-                                                className="w-full object-cover"
-                                            />
-                                        </div>
-                                        <div className="px-5 py-5">
-                                            <h1 className="text-xl font-semibold tracking-wide">Restaurant</h1>
-                                            <span className="text-sm text-heading">
-                                                Eat delicious local and international food.
-                                            </span>
-                                        </div>
-                                    </div>
-                                </Fragment>
-                            ))}
-                        </div>
+                        <h1 className="text-5xl font-semibold tracking-wide">Everything You Need</h1>
+                        <p className="max-w-120 text-sm">
+                            Discover a world of comfort, relaxation and entertainment with our premium facilities, designed for
+                            your enjoyment.
+                        </p>
                     </div>
-                </CardContainer>
-                <div className="w-full relative inset-0 flex">
+                    <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
+                        <CardMessage
+                            title="Infinity Pool"
+                            description="Relax and enjoy breathtaking views from our infinity pool, overloading the coastline."
+                        >
+                            <Waves size={"2rem"} />
+                        </CardMessage>
+                        <CardMessage
+                            title="Spa & Wellness"
+                            description="Rejuvente your mind and body with our spa, sauna and wellness center services."
+                        >
+                            <Flower size={"2rem"} />
+                        </CardMessage>
+                        <CardMessage
+                            title="Fitness Center"
+                            description="Stay active during your stay with our modern fitness center, equipped with top-quality machines."
+                        >
+                            <Dumbbell size={"2rem"} />
+                        </CardMessage>
+                        <CardMessage
+                            title="Fine Dining"
+                            description="Indulge in exquisite cuisine at our signature restaurant, featuring local and international flavors."
+                        >
+                            <Utensils size={"2rem"} />
+                        </CardMessage>
+                        <CardMessage
+                            title="Meeting & Events"
+                            description="Host your events in our elegant meeting rooms and conference halls, with modern facilities and support."
+                        >
+                            <CirclePile size={"2rem"} />
+                        </CardMessage>
+                        <CardMessage
+                            title="Parking & Valet"
+                            description="Convenient and secure parking with valet service available for all our guests."
+                        >
+                            <Car size={"2rem"} />
+                        </CardMessage>
+                    </div>
+                </div>
+                <div className="w-full relative inset-0 flex py-10">
                     <div className="w-full max-w-350 mt-auto mx-auto flex flex-col sm:flex-row items-center justify-between max-sm:gap-5 p-10 bg-cream border border-border-gray shadow-xl rounded-xl">
                         <div className="flex flex-col min-[320px]:flex-row items-center gap-1 min-[320px]:gap-5 cursor-default">
                             <Flower size={"2rem"} className="text-gold" />

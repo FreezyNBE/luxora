@@ -182,7 +182,7 @@ export function CardRoomOffer({ imageUrl, tag = null }: { imageUrl: string; tag?
                 </div>
             )}
             <Link href={`/rooms/1`} className="relative">
-                <img src={imageUrl} alt={`Deluxe Room`} className="w-full aspect-video overflow-hidden object-cover" />
+                <img src={imageUrl} alt={`Deluxe Room`} className="w-full h-full max-h-70 overflow-hidden object-cover" />
                 <div
                     className="opacity-0 group-hover:opacity-100 absolute inset-0 transition-all duration-300 ease-in"
                     style={{

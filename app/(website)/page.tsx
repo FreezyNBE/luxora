@@ -130,7 +130,7 @@ export default function Home() {
                     </div>
                 </div>
                 {/* Most Popular Rooms */}
-                <div className="w-full flex flex-col items-start gap-y-5 px-5 py-10 lg:px-10 xl:px-15 2xl:px-20">
+                <div className="w-full flex flex-col items-start gap-y-5 px-5 py-5 lg:px-10 xl:px-15 2xl:px-20">
                     <div className="w-full flex flex-col md:flex-row items-start md:items-center md:justify-between gap-4">
                         <div className="space-y-4 text-gray-600">
                             <div className="text-gold text-sm font-medium tracking-widest uppercase cursor-default">
@@ -208,7 +208,7 @@ export default function Home() {
                     </div>
                 </div>
 
-                <div className="w-full px-5 py-10 lg:px-10 xl:px-15 2xl:px-20">
+                <div className="w-full px-5 py-5 lg:px-10 xl:px-15 2xl:px-20">
                     <div className="w-full relative inset-0 flex">
                         <div className="w-full max-w-350 mt-auto mx-auto flex flex-col sm:flex-row items-center justify-between max-sm:gap-5 p-10 bg-cream border border-border-gray shadow-xl rounded-xl">
                             <div className="flex flex-col min-[320px]:flex-row items-center gap-1 min-[320px]:gap-5 cursor-default">

@@ -38,18 +38,18 @@ export function CardMessage({ title, description, children }: CardNoticeProps) {
 
 export function CardInfo({ title, description, children }: CardNoticeProps) {
     return (
-        <div className="relative w-full h-full bg-white border border-border-gray rounded-xl hover:bg-white hover:-translate-y-1 hover:border-gold/50 hover:shadow-md hover:shadow-gold/30 transform-all duration-200 ease-in-out group overflow-hidden">
-            <div className="absolute top-0 bottom-0 w-0 group-hover:w-full h-1 flex">
+        <div className="relative w-full h-full bg-white border border-border-gray rounded-xl hover:bg-white hover:-translate-y-1 hover:border-gold/50 hover:shadow-md hover:shadow-gold-light/50 transform-all duration-200 ease-in-out group overflow-hidden">
+            <div className="absolute top-0 w-0 group-hover:w-full h-1 flex">
                 <div className="w-full ms-auto">
-                    <div className="float-end w-0 group-hover:w-full h-1 bg-gold-dark rounded-s-full transition-all duration-500 ease-in-out" />
+                    <div className="float-end w-0 group-hover:w-full h-1 bg-gold rounded-s-full transition-all duration-500 ease-in-out" />
                 </div>
                 <div className="w-full me-auto">
-                    <div className="w-0 group-hover:w-full h-1 bg-gold-dark rounded-e-full transition-all duration-500 ease-in-out" />
+                    <div className="w-0 group-hover:w-full h-1 bg-gold rounded-e-full transition-all duration-500 ease-in-out" />
                 </div>
             </div>
 
             <div className="flex items-start gap-4 py-3 px-6">
-                <div className="p-3 flex items-center justify-center text-white bg-gold-dark border border-dark rounded-xl">
+                <div className="p-3 flex items-center justify-center text-white bg-gold border border-gold rounded-xl">
                     {children}
                 </div>
                 <div className="flex flex-col gap-y-1">

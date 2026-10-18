@@ -11,7 +11,7 @@ import { useCurrentSession } from "@/lib/auth-session";
 import { CustomAlertType } from "@/types/_custom_alerts";
 import { letterCapitalize } from "@/utils/_functions";
 import { MAX_NAME_LENGTH, MIN_NAME_LENGTH } from "@/utils/_new_account_fields";
-import { API_URL, genderSelections } from "@/utils/_variables";
+import { API_URL, GENDERS } from "@/utils/_variables";
 import { countryList } from "@/utils/list_countries";
 import { phonePrefixesByCountry } from "@/utils/phone_numbers";
 import { LoaderCircle, SquarePen } from "lucide-react";
@@ -110,30 +110,28 @@ export default function ProfilePage() {
                 <span className="text-gray-600 text-sm">Edit your profile informations.</span>
             </div>
 
+            <div className="space-y-2">
+                {loading && <AlertLoading>Updating settings...</AlertLoading>}
+
+                {status.success && (
+                    <AlertSuccess closeBtn={() => setStatus({ success: false, error: false })}>{status.message}</AlertSuccess>
+                )}
+
+                {status.error && (
+                    <AlertError closeBtn={() => setStatus({ success: false, error: false })}>{status.message}</AlertError>
+                )}
+
+                {session.user.authProvider && session.user.authProvider !== "credential" && (
+                    <AlertInfo>
+                        You are signed in using a provider (
+                        <span className="font-semibold">{letterCapitalize(session.user.authProvider)}</span>).
+                    </AlertInfo>
+                )}
+            </div>
+
             {/* Fields */}
-            <div className="w-full space-y-5 p-4 bg-cream border border-border-gray rounded-md">
-                <div className="space-y-2">
-                    {loading && <AlertLoading>Updating settings...</AlertLoading>}
-
-                    {status.success && (
-                        <AlertSuccess closeBtn={() => setStatus({ success: false, error: false })}>
-                            {status.message}
-                        </AlertSuccess>
-                    )}
-
-                    {status.error && (
-                        <AlertError closeBtn={() => setStatus({ success: false, error: false })}>{status.message}</AlertError>
-                    )}
-
-                    {session.user.authProvider && session.user.authProvider !== "credential" && (
-                        <AlertInfo>
-                            You are signed in using a provider (
-                            <span className="font-semibold">{letterCapitalize(session.user.authProvider)}</span>).
-                        </AlertInfo>
-                    )}
-                </div>
-
-                <div className="grid grid-cols-1 gap-x-2 gap-y-5 pb-5">
+            <div className="w-full p-4 bg-cream border border-border-gray rounded-md">
+                <div className="flex flex-col gap-5 pb-5">
                     <div className="w-full max-w-lg flex flex-col gap-2">
                         <Input
                             type="text"
@@ -212,7 +210,7 @@ export default function ProfilePage() {
                         </div>
                     </div>
                     <div className="w-full max-w-lg flex flex-col gap-2">
-                        <Select id="gender" name="gender" options={genderSelections}>
+                        <Select id="gender" name="gender" options={GENDERS}>
                             Gender <span className="text-rose-700">*</span>
                         </Select>
                     </div>

@@ -21,6 +21,8 @@ model User {
     countryName   String    @default("Romania")
     gender        Int       @default(0)
 
+    isAdmin Boolean @default(false)
+
     reservations Reservation[]
     wishlists    Wishlist[]
 
@@ -73,26 +75,33 @@ model Verification {
     @@map("verification")
 }
 
+enum RoomType {
+    Standard
+    Deluxe
+    Executive
+    Suite
+}
+
 enum RoomView {
-    CITY
-    GARDEN
-    POOL
-    SEA
-    NONE
+    None
+    City
+    Garden
+    Pool
+    Sea
 }
 
 model Room {
-    id            String   @id
-    number        Int
-    areaSqm       Int
+    id            String   @id @default(cuid())
+    name          String
     description   String?
-    type          String   @default("Standard")
-    view          RoomView @default(NONE)
+    type          RoomType @default(Standard)
+    view          RoomView @default(None)
+    areaSqm       Int
     pricePerNight Decimal  @db.Decimal(10, 2)
     maxGuests     Int      @default(1)
     maxNights     Int      @default(1)
-    image         String
-    images        String[]
+    image         String?
+    images        String[] @default([])
 
     doorNumber  Int
     floorNumber Int
@@ -111,10 +120,10 @@ model Room {
 }
 
 enum ReservationStatus {
-    PENDING
-    CONFIRMED
-    COMPLETED
-    CANCELED
+    Pending
+    Confirmed
+    Completed
+    Canceled
 }
 
 model Reservation {
@@ -132,7 +141,7 @@ model Reservation {
     pricePerNight Decimal @db.Decimal(10, 2)
     totalPrice    Decimal @db.Decimal(10, 2)
 
-    status ReservationStatus @default(PENDING)
+    status ReservationStatus @default(Pending)
 
     guestDetails GuestDetails?
 
@@ -156,16 +165,16 @@ model GuestDetails {
 }
 
 enum PaymentMethod {
-    MASTERCARD
-    VISA
-    PAYPAL
+    Mastercard
+    Visa
+    PayPal
 }
 
 enum PaymentStatus {
-    PENDING
-    COMPLETED
-    FAILED
-    REFUNDED
+    Pending
+    Completed
+    Failed
+    Refunded
 }
 
 model Payment {

@@ -21,7 +21,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useCurrentSession } from "@/lib/auth-session";
 
 export default function AdminNavigation() {
@@ -32,6 +32,12 @@ export default function AdminNavigation() {
     const session = useCurrentSession();
 
     if (!session?.user) return;
+
+    useEffect(() => {
+        if (navMobileStatus) {
+            closeMenu(false);
+        }
+    }, [pathname]);
 
     const openMenu = () => {
         setNavMobileVisible(true);
@@ -64,120 +70,112 @@ export default function AdminNavigation() {
                     </h1>
                 </div>
                 <div className="w-full px-5">
-                    <ul className="w-full space-y-1.5 pt-5 border-t border-t-border-gray">
-                        <li
+                    <div className="w-full flex flex-col gap-y-1.5 pt-5 border-t border-t-border-gray">
+                        <Link
+                            href="/admin"
                             className={
                                 pathname === "/admin"
                                     ? "p-2 bg-gray-400/10 border border-gray-400/20 rounded-md cursor-pointer transition-all duration-100 group"
                                     : "p-2 border border-transparent rounded-md hover:bg-gray-400/10 hover:border-gray-400/20 cursor-pointer transition-all duration-100 group"
                             }
                         >
-                            <Link href="/admin" className="block w-full">
-                                <Home size={"1.25rem"} className="inline-block text-gold-dark" />
-                                <span className="inline-block align-middle ms-3 text-gray-500 text-sm group-hover:text-gold">
-                                    Dashboard
-                                </span>
-                            </Link>
-                        </li>
-                        <li
+                            <Home size={"1.25rem"} className="inline-block text-gold-dark" />
+                            <span className="inline-block align-middle ms-3 text-gray-500 text-sm group-hover:text-gold">
+                                Dashboard
+                            </span>
+                        </Link>
+                        <Link
+                            href="/admin/rooms"
                             className={
                                 pathname.match("/admin/rooms")
                                     ? "p-2 bg-gray-400/10 border border-gray-400/20 rounded-md cursor-pointer transition-all duration-100 group"
                                     : "p-2 border border-transparent rounded-md hover:bg-gray-400/10 hover:border-gray-400/20 cursor-pointer transition-all duration-100 group"
                             }
                         >
-                            <Link href="/admin/rooms" className="block w-full">
-                                <Bed size={"1.25rem"} className="inline-block text-gold-dark" />
-                                <span className="inline-block align-middle ms-3 text-gray-500 text-sm group-hover:text-gold">
-                                    Rooms
-                                </span>
-                            </Link>
-                        </li>
-                        <li
+                            <Bed size={"1.25rem"} className="inline-block text-gold-dark" />
+                            <span className="inline-block align-middle ms-3 text-gray-500 text-sm group-hover:text-gold">
+                                Rooms
+                            </span>
+                        </Link>
+                        <Link
+                            href="/admin/bookings"
                             className={
                                 pathname.match("/admin/bookings")
                                     ? "p-2 bg-gray-400/10 border border-gray-400/20 rounded-md cursor-pointer transition-all duration-100 group"
                                     : "p-2 border border-transparent rounded-md hover:bg-gray-400/10 hover:border-gray-400/20 cursor-pointer transition-all duration-100 group"
                             }
                         >
-                            <Link href="/admin/bookings" className="block w-full">
-                                <CalendarDays size={"1.25rem"} className="inline-block text-gold-dark" />
-                                <span className="inline-block align-middle ms-3 text-gray-500 text-sm group-hover:text-gold">
-                                    Bookings
-                                </span>
-                            </Link>
-                        </li>
-                        <li
+                            <CalendarDays size={"1.25rem"} className="inline-block text-gold-dark" />
+                            <span className="inline-block align-middle ms-3 text-gray-500 text-sm group-hover:text-gold">
+                                Bookings
+                            </span>
+                        </Link>
+                        <Link
+                            href="/admin/users"
                             className={
                                 pathname.match("/admin/users")
                                     ? "p-2 bg-gray-400/10 border border-gray-400/20 rounded-md cursor-pointer transition-all duration-100 group"
                                     : "p-2 border border-transparent rounded-md hover:bg-gray-400/10 hover:border-gray-400/20 cursor-pointer transition-all duration-100 group"
                             }
                         >
-                            <Link href="/admin/users" className="block w-full">
-                                <Users size={"1.25rem"} className="inline-block text-gold-dark" />
-                                <span className="inline-block align-middle ms-3 text-gray-500 text-sm group-hover:text-gold">
-                                    Users
-                                </span>
-                            </Link>
-                        </li>
-                        <li
+                            <Users size={"1.25rem"} className="inline-block text-gold-dark" />
+                            <span className="inline-block align-middle ms-3 text-gray-500 text-sm group-hover:text-gold">
+                                Users
+                            </span>
+                        </Link>
+                        <Link
+                            href="/admin/offers"
                             className={
                                 pathname.match("/admin/offers")
                                     ? "p-2 bg-gray-400/10 border border-gray-400/20 rounded-md cursor-pointer transition-all duration-100 group"
                                     : "p-2 border border-transparent rounded-md hover:bg-gray-400/10 hover:border-gray-400/20 cursor-pointer transition-all duration-100 group"
                             }
                         >
-                            <Link href="/admin/offers" className="block w-full">
-                                <Tags size={"1.25rem"} className="inline-block text-gold-dark" />
-                                <span className="inline-block align-middle ms-3 text-gray-500 text-sm group-hover:text-gold">
-                                    Offers
-                                </span>
-                            </Link>
-                        </li>
-                        <li
+                            <Tags size={"1.25rem"} className="inline-block text-gold-dark" />
+                            <span className="inline-block align-middle ms-3 text-gray-500 text-sm group-hover:text-gold">
+                                Offers
+                            </span>
+                        </Link>
+                        <Link
+                            href="/admin/facilities"
                             className={
                                 pathname.match("/admin/facilities")
                                     ? "p-2 bg-gray-400/10 border border-gray-400/20 rounded-md cursor-pointer transition-all duration-100 group"
                                     : "p-2 border border-transparent rounded-md hover:bg-gray-400/10 hover:border-gray-400/20 cursor-pointer transition-all duration-100 group"
                             }
                         >
-                            <Link href="/admin/facilities" className="block w-full">
-                                <LayoutList size={"1.25rem"} className="inline-block text-gold-dark" />
-                                <span className="inline-block align-middle ms-3 text-gray-500 text-sm group-hover:text-gold">
-                                    Facilities
-                                </span>
-                            </Link>
-                        </li>
-                        <li
+                            <LayoutList size={"1.25rem"} className="inline-block text-gold-dark" />
+                            <span className="inline-block align-middle ms-3 text-gray-500 text-sm group-hover:text-gold">
+                                Facilities
+                            </span>
+                        </Link>
+                        <Link
+                            href="/admin/amenities"
                             className={
                                 pathname.match("/admin/amenities")
                                     ? "p-2 bg-gray-400/10 border border-gray-400/20 rounded-md cursor-pointer transition-all duration-100 group"
                                     : "p-2 border border-transparent rounded-md hover:bg-gray-400/10 hover:border-gray-400/20 cursor-pointer transition-all duration-100 group"
                             }
                         >
-                            <Link href="/admin/amenities" className="block w-full">
-                                <ListChecks size={"1.25rem"} className="inline-block text-gold-dark" />
-                                <span className="inline-block align-middle ms-3 text-gray-500 text-sm group-hover:text-gold">
-                                    Amenities
-                                </span>
-                            </Link>
-                        </li>
-                        <li
+                            <ListChecks size={"1.25rem"} className="inline-block text-gold-dark" />
+                            <span className="inline-block align-middle ms-3 text-gray-500 text-sm group-hover:text-gold">
+                                Amenities
+                            </span>
+                        </Link>
+                        <Link
+                            href="/admin/settings"
                             className={
                                 pathname.match("/admin/settings")
                                     ? "p-2 bg-gray-400/10 border border-gray-400/20 rounded-md cursor-pointer transition-all duration-100 group"
                                     : "p-2 border border-transparent rounded-md hover:bg-gray-400/10 hover:border-gray-400/20 cursor-pointer transition-all duration-100 group"
                             }
                         >
-                            <Link href="/admin/settings" className="block w-full">
-                                <Settings size={"1.25rem"} className="inline-block text-gold-dark" />
-                                <span className="inline-block align-middle ms-3 text-gray-500 text-sm group-hover:text-gold">
-                                    Settings
-                                </span>
-                            </Link>
-                        </li>
-                    </ul>
+                            <Settings size={"1.25rem"} className="inline-block text-gold-dark" />
+                            <span className="inline-block align-middle ms-3 text-gray-500 text-sm group-hover:text-gold">
+                                Settings
+                            </span>
+                        </Link>
+                    </div>
                 </div>
             </nav>
 
@@ -234,120 +232,112 @@ export default function AdminNavigation() {
                             </div>
                         </div>
                         <div className="w-full px-5">
-                            <ul className="w-full space-y-1.5 pt-5 border-t border-t-border-gray">
-                                <li
+                            <div className="w-full flex flex-col gap-y-1.5 pt-5 border-t border-t-border-gray">
+                                <Link
+                                    href="/admin"
                                     className={
                                         pathname === "/admin"
                                             ? "p-2 bg-gray-400/10 border border-gray-400/20 rounded-md cursor-pointer transition-all duration-100 group"
                                             : "p-2 border border-transparent rounded-md hover:bg-gray-400/10 hover:border-gray-400/20 cursor-pointer transition-all duration-100 group"
                                     }
                                 >
-                                    <Link href="/admin" className="block w-full">
-                                        <Home size={"1.25rem"} className="inline-block text-gold-dark" />
-                                        <span className="inline-block align-middle ms-3 text-gray-500 text-sm group-hover:text-gold">
-                                            Dashboard
-                                        </span>
-                                    </Link>
-                                </li>
-                                <li
+                                    <Home size={"1.25rem"} className="inline-block text-gold-dark" />
+                                    <span className="inline-block align-middle ms-3 text-gray-500 text-sm group-hover:text-gold">
+                                        Dashboard
+                                    </span>
+                                </Link>
+                                <Link
+                                    href="/admin/rooms"
                                     className={
                                         pathname.match("/admin/rooms/")
                                             ? "p-2 bg-gray-400/10 border border-gray-400/20 rounded-md cursor-pointer transition-all duration-100 group"
                                             : "p-2 border border-transparent rounded-md hover:bg-gray-400/10 hover:border-gray-400/20 cursor-pointer transition-all duration-100 group"
                                     }
                                 >
-                                    <Link href="/admin/rooms" className="block w-full">
-                                        <Bed size={"1.25rem"} className="inline-block text-gold-dark" />
-                                        <span className="inline-block align-middle ms-3 text-gray-500 text-sm group-hover:text-gold">
-                                            Rooms
-                                        </span>
-                                    </Link>
-                                </li>
-                                <li
+                                    <Bed size={"1.25rem"} className="inline-block text-gold-dark" />
+                                    <span className="inline-block align-middle ms-3 text-gray-500 text-sm group-hover:text-gold">
+                                        Rooms
+                                    </span>
+                                </Link>
+                                <Link
+                                    href="/admin/bookings"
                                     className={
                                         pathname.match("/admin/bookings")
                                             ? "p-2 bg-gray-400/10 border border-gray-400/20 rounded-md cursor-pointer transition-all duration-100 group"
                                             : "p-2 border border-transparent rounded-md hover:bg-gray-400/10 hover:border-gray-400/20 cursor-pointer transition-all duration-100 group"
                                     }
                                 >
-                                    <Link href="/admin/bookings" className="block w-full">
-                                        <CalendarDays size={"1.25rem"} className="inline-block text-gold-dark" />
-                                        <span className="inline-block align-middle ms-3 text-gray-500 text-sm group-hover:text-gold">
-                                            Bookings
-                                        </span>
-                                    </Link>
-                                </li>
-                                <li
+                                    <CalendarDays size={"1.25rem"} className="inline-block text-gold-dark" />
+                                    <span className="inline-block align-middle ms-3 text-gray-500 text-sm group-hover:text-gold">
+                                        Bookings
+                                    </span>
+                                </Link>
+                                <Link
+                                    href="/admin/users"
                                     className={
                                         pathname.match("/admin/users")
                                             ? "p-2 bg-gray-400/10 border border-gray-400/20 rounded-md cursor-pointer transition-all duration-100 group"
                                             : "p-2 border border-transparent rounded-md hover:bg-gray-400/10 hover:border-gray-400/20 cursor-pointer transition-all duration-100 group"
                                     }
                                 >
-                                    <Link href="/admin/users" className="block w-full">
-                                        <Users size={"1.25rem"} className="inline-block text-gold-dark" />
-                                        <span className="inline-block align-middle ms-3 text-gray-500 text-sm group-hover:text-gold">
-                                            Users
-                                        </span>
-                                    </Link>
-                                </li>
-                                <li
+                                    <Users size={"1.25rem"} className="inline-block text-gold-dark" />
+                                    <span className="inline-block align-middle ms-3 text-gray-500 text-sm group-hover:text-gold">
+                                        Users
+                                    </span>
+                                </Link>
+                                <Link
+                                    href="/admin/offers"
                                     className={
                                         pathname.match("/admin/offers")
                                             ? "p-2 bg-gray-400/10 border border-gray-400/20 rounded-md cursor-pointer transition-all duration-100 group"
                                             : "p-2 border border-transparent rounded-md hover:bg-gray-400/10 hover:border-gray-400/20 cursor-pointer transition-all duration-100 group"
                                     }
                                 >
-                                    <Link href="/admin/offers" className="block w-full">
-                                        <Tags size={"1.25rem"} className="inline-block text-gold-dark" />
-                                        <span className="inline-block align-middle ms-3 text-gray-500 text-sm group-hover:text-gold">
-                                            Offers
-                                        </span>
-                                    </Link>
-                                </li>
-                                <li
+                                    <Tags size={"1.25rem"} className="inline-block text-gold-dark" />
+                                    <span className="inline-block align-middle ms-3 text-gray-500 text-sm group-hover:text-gold">
+                                        Offers
+                                    </span>
+                                </Link>
+                                <Link
+                                    href="/admin/facilities"
                                     className={
                                         pathname.match("/admin/facilities")
                                             ? "p-2 bg-gray-400/10 border border-gray-400/20 rounded-md cursor-pointer transition-all duration-100 group"
                                             : "p-2 border border-transparent rounded-md hover:bg-gray-400/10 hover:border-gray-400/20 cursor-pointer transition-all duration-100 group"
                                     }
                                 >
-                                    <Link href="/admin/facilities" className="block w-full">
-                                        <LayoutList size={"1.25rem"} className="inline-block text-gold-dark" />
-                                        <span className="inline-block align-middle ms-3 text-gray-500 text-sm group-hover:text-gold">
-                                            Facilities
-                                        </span>
-                                    </Link>
-                                </li>
-                                <li
+                                    <LayoutList size={"1.25rem"} className="inline-block text-gold-dark" />
+                                    <span className="inline-block align-middle ms-3 text-gray-500 text-sm group-hover:text-gold">
+                                        Facilities
+                                    </span>
+                                </Link>
+                                <Link
+                                    href="/admin/amenities"
                                     className={
                                         pathname.match("/admin/amenities")
                                             ? "p-2 bg-gray-400/10 border border-gray-400/20 rounded-md cursor-pointer transition-all duration-100 group"
                                             : "p-2 border border-transparent rounded-md hover:bg-gray-400/10 hover:border-gray-400/20 cursor-pointer transition-all duration-100 group"
                                     }
                                 >
-                                    <Link href="/admin/amenities" className="block w-full">
-                                        <ListChecks size={"1.25rem"} className="inline-block text-gold-dark" />
-                                        <span className="inline-block align-middle ms-3 text-gray-500 text-sm group-hover:text-gold">
-                                            Amenities
-                                        </span>
-                                    </Link>
-                                </li>
-                                <li
+                                    <ListChecks size={"1.25rem"} className="inline-block text-gold-dark" />
+                                    <span className="inline-block align-middle ms-3 text-gray-500 text-sm group-hover:text-gold">
+                                        Amenities
+                                    </span>
+                                </Link>
+                                <Link
+                                    href="/admin/settings"
                                     className={
                                         pathname.match("/admin/settings")
                                             ? "p-2 bg-gray-400/10 border border-gray-400/20 rounded-md cursor-pointer transition-all duration-100 group"
                                             : "p-2 border border-transparent rounded-md hover:bg-gray-400/10 hover:border-gray-400/20 cursor-pointer transition-all duration-100 group"
                                     }
                                 >
-                                    <Link href="/admin/settings" className="block w-full">
-                                        <Settings size={"1.25rem"} className="inline-block text-gold-dark" />
-                                        <span className="inline-block align-middle ms-3 text-gray-500 text-sm group-hover:text-gold">
-                                            Settings
-                                        </span>
-                                    </Link>
-                                </li>
-                            </ul>
+                                    <Settings size={"1.25rem"} className="inline-block text-gold-dark" />
+                                    <span className="inline-block align-middle ms-3 text-gray-500 text-sm group-hover:text-gold">
+                                        Settings
+                                    </span>
+                                </Link>
+                            </div>
                         </div>
                         <div className="w-full h-full flex min-[470px]:hidden items-end">
                             <div className="text-sm flex flex-col items-center justify-center gap-2 bg-cream-soft border border-border-gray rounded-lg">

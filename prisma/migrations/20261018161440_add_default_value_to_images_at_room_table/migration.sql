@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "Room" ALTER COLUMN "image" DROP NOT NULL,
+ALTER COLUMN "images" SET DEFAULT ARRAY[]::TEXT[];
