@@ -1,6 +1,14 @@
+import { getUserSession } from "@/lib/auth.server";
 import AdminNavigation from "../components/admin/AdminNavigation";
+import { redirect } from "next/navigation";
 
-export default function AdminLayout({ children }: { children: React.ReactNode }) {
+export default async function AdminLayout({ children }: { children: React.ReactNode }) {
+    const session = await getUserSession();
+
+    if (!session?.user || !session.user.isAdmin) {
+        return redirect("/");
+    }
+
     return (
         <div className="relative w-full min-h-screen flex">
             <AdminNavigation />

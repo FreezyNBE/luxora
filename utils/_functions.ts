@@ -35,3 +35,8 @@ export function getAllowTypePictures(types: string[]) {
 export function isValidDate(date: Date) {
     return date && Number.isFinite(date.getTime());
 }
+
+// Allow only positive base-10 integers
+export function isValidPageNumber(page: string) {
+    return !/^[1-9]\d*$/.test(page);
+}

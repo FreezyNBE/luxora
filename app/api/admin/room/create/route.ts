@@ -1,4 +1,4 @@
-import { AddNewRoomResponse } from "@/app/admin/rooms/add/page";
+import { AddNewRoomResponse } from "@/app/components/admin/view/AdminCreateRoom";
 import { Prisma } from "@/generated/prisma/client";
 import { RoomType, RoomView } from "@/generated/prisma/enums";
 import { getUserSession } from "@/lib/auth.server";
@@ -211,30 +211,36 @@ export async function POST(request: NextRequest): Promise<NextResponse<AddNewRoo
         };
         let galleryImagesUrl: string[] = [];
 
-        try {
-            const mainImageName = currentDate + "-" + room.id;
-            const blob = await put(mainImageName, mainImage, {
-                access: "public",
-            });
+        if (mainImage) {
+            try {
+                const mainImageName = currentDate + "-" + room.id;
+                const blob = await put(mainImageName, mainImage, {
+                    access: "public",
+                    addRandomSuffix: true,
+                });
 
-            mainImageBlob.uploaded = true;
-            mainImageBlob.url = blob.url;
-        } catch {
-            mainImageBlob.uploaded = false;
+                mainImageBlob.uploaded = true;
+                mainImageBlob.url = blob.url;
+            } catch {
+                mainImageBlob.uploaded = false;
+            }
         }
 
-        try {
-            galleryImagesUrl = await Promise.all(
-                images.map(async (image, index) => {
-                    const galleryImageName = currentDate + `-${index}-` + room.id;
-                    const blob = await put(galleryImageName, image, {
-                        access: "public",
-                    });
+        if (images) {
+            try {
+                galleryImagesUrl = await Promise.all(
+                    images.map(async (image, index) => {
+                        const galleryImageName = currentDate + `-${index}-` + room.id;
+                        const blob = await put(galleryImageName, image, {
+                            access: "public",
+                            addRandomSuffix: true,
+                        });
 
-                    return blob.url;
-                }),
-            );
-        } catch {}
+                        return blob.url;
+                    }),
+                );
+            } catch {}
+        }
 
         await prisma.room.update({
             where: {

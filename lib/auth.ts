@@ -1,9 +1,11 @@
-import { betterAuth } from "better-auth";
+import { betterAuth, BetterAuthOptions } from "better-auth";
 import { prismaAdapter } from "better-auth/adapters/prisma";
 import { prisma } from "./prisma";
 import { nextCookies } from "better-auth/next-js";
-import { customSessionClient } from "better-auth/client/plugins";
 import { customSession } from "better-auth/plugins";
+
+// export type ServerSession = typeof auth.$Infer.Session;
+// export type ServerUser = ServerSession["user"];
 
 const appUrl = process.env.APP_URL;
 
@@ -11,7 +13,7 @@ if (!appUrl) {
     throw Error("APP_URL is not defined");
 }
 
-export const auth = betterAuth({
+const authOptions = {
     database: prismaAdapter(prisma, {
         provider: "postgresql",
     }),
@@ -37,6 +39,11 @@ export const auth = betterAuth({
     },
     user: {
         additionalFields: {
+            isAdmin: {
+                type: "boolean",
+                required: false,
+                input: false,
+            },
             phoneNumber: {
                 type: "string",
                 required: false,
@@ -51,6 +58,10 @@ export const auth = betterAuth({
         },
     },
     trustedOrigins: [appUrl],
+} satisfies BetterAuthOptions;
+
+export const auth = betterAuth({
+    ...authOptions,
     plugins: [
         customSession(async ({ user, session }) => {
             const account = await prisma.account.findFirst({
@@ -69,7 +80,7 @@ export const auth = betterAuth({
                 },
                 session,
             };
-        }),
+        }, authOptions),
         nextCookies(),
     ],
 });
