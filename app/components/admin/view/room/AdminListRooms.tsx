@@ -4,9 +4,9 @@ import BackButton from "@/app/components/min/BackButton";
 import { ButtonMin } from "@/app/components/misc/Button";
 import { InputSearch, Select } from "@/app/components/misc/Input";
 import { RoomModel } from "@/types/_rooms";
-import { ROWS_PER_PAGE } from "@/utils/admin/_admin_variables";
-import { ChevronLeft, ChevronRight, Ellipsis, Pencil, Plus, Search, Trash2, Users, X } from "lucide-react";
+import { Ellipsis, Pencil, Plus, Search, Trash2, Users, X } from "lucide-react";
 import Link from "next/link";
+import AdminPagination from "../../AdminPagination";
 
 type AdminListProps = {
     rooms: RoomModel[];
@@ -154,52 +154,13 @@ export default function AdminListRooms({ rooms, page, totalRooms, totalPages }: 
                         </tbody>
                     </table>
                 </div>
-                <div className="flex items-start justify-between">
-                    <div className="text-gray-500 text-xs font-medium">
-                        Showing {(page - 1) * ROWS_PER_PAGE + 1}-{(page - 1) * ROWS_PER_PAGE + rooms.length} of {totalRooms}{" "}
-                        rooms
-                    </div>
-                    {/* Pages */}
-                    <div className="flex items-center gap-1">
-                        {/* Arrow Back */}
-                        <Link
-                            href={`/admin/rooms?page=${page - 1 < 1 ? 1 : page - 1}`}
-                            className="w-8 h-8 flex items-center justify-center text-gray-400 bg-gray-300/10 border border-gray-400/20 hover:text-gray-500 hover:bg-gold-light/20 hover:border-gold/50 rounded-md"
-                        >
-                            <ChevronLeft size={"1.25rem"} />
-                        </Link>
-                        <div className="flex items-center gap-1">
-                            {page > 1 && (
-                                <Link
-                                    href={`/admin/rooms?page=${page - 1}`}
-                                    className="w-8 h-8 flex items-center justify-center text-gray-500 bg-gray-300/30 border border-gray-500/20 hover:bg-gold-light/20 hover:border-gold/50 rounded-md"
-                                >
-                                    <span>{page - 1}</span>
-                                </Link>
-                            )}
-                            <Link
-                                href={`/admin/rooms?page=${page}`}
-                                className="w-8 h-8 flex items-center justify-center text-gray-500 bg-gold-light/20 border border-gold/50 hover:bg-gold-light/30 hover:border-gold/60 rounded-md"
-                            >
-                                <span>{page}</span>
-                            </Link>
-                            {page + 1 < totalPages && (
-                                <Link
-                                    href={`/admin/rooms?page=${page + 1}`}
-                                    className="w-8 h-8 flex items-center justify-center text-gray-500 bg-gray-300/30 border border-gray-500/20 hover:bg-gold-light/20 hover:border-gold/50 rounded-md"
-                                >
-                                    <span>{page + 1}</span>
-                                </Link>
-                            )}
-                        </div>
-                        <Link
-                            href={`/admin/rooms?page=${page + 1 > totalPages ? totalPages : page + 1}`}
-                            className="w-8 h-8 flex items-center justify-center text-gray-400 bg-gray-300/10 border border-gray-400/20 hover:text-gray-500 hover:bg-gold-light/20 hover:border-gold/50 rounded-md"
-                        >
-                            <ChevronRight size={"1.25rem"} />
-                        </Link>
-                    </div>
-                </div>
+                <AdminPagination
+                    itemName="rooms"
+                    page={page}
+                    itemsOnPage={rooms.length}
+                    totalItems={totalRooms}
+                    totalPages={totalPages}
+                />
             </div>
         </>
     );

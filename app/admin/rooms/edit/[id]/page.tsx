@@ -1,4 +1,4 @@
-import AdminEditRoom from "@/app/components/admin/view/AdminEditRoom";
+import AdminEditRoom from "@/app/components/admin/view/room/AdminEditRoom";
 import { prisma } from "@/lib/prisma";
 import { RoomModel } from "@/types/_rooms";
 import { redirect } from "next/navigation";

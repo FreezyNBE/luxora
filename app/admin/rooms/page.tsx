@@ -1,4 +1,4 @@
-import AdminListRooms from "@/app/components/admin/view/AdminListRooms";
+import AdminListRooms from "@/app/components/admin/view/room/AdminListRooms";
 import { prisma } from "@/lib/prisma";
 import { isValidPageNumber } from "@/utils/_functions";
 import { ROWS_PER_PAGE } from "@/utils/admin/_admin_variables";

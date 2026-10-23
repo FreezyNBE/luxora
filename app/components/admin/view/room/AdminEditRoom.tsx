@@ -8,6 +8,7 @@ import { Input, InputDate, Select, Textarea } from "@/app/components/misc/Input"
 import { Amenity } from "@/generated/prisma/client";
 import { RoomType, RoomView } from "@/generated/prisma/enums";
 import { useCurrentSession } from "@/lib/auth-session";
+import { RoomModel } from "@/types/_rooms";
 import { formatDate, getAllowTypePictures, isAmountDecimal, isValidDate } from "@/utils/_functions";
 import {
     ALLOWED_PICTURE_TYPES,
@@ -25,22 +26,26 @@ import {
     MAX_ROOM_DESCRIPTION,
     MAX_ROOM_SIZE,
 } from "@/utils/_variables";
-import { Camera, Download, Info, SquarePen, X } from "lucide-react";
+import { Camera, Download, SquarePen, X } from "lucide-react";
 import { useEffect, useState, useTransition } from "react";
 
-export type NewRoomData = {
+type RoomData = {
     name: string;
     type: RoomType;
     description: string;
-    images?: {
-        main?: {
+    image: string | null;
+    images: string[];
+    uploads?: {
+        image?: {
             file?: any;
             previewSourceBlob?: string;
-        };
-        gallery?: {
-            file?: any;
-            previewSourceBlob?: string;
-        }[];
+        } | null;
+        images?:
+            | {
+                  file?: any;
+                  previewSourceBlob?: string;
+              }[]
+            | [];
     };
     maxGuests?: number;
     roomSize?: number;
@@ -52,31 +57,48 @@ export type NewRoomData = {
     maxNights?: number;
     status: boolean;
     availableFrom?: {
-        value?: Date | undefined;
-        error?: string | undefined;
+        value?: Date | null;
+        error?: string | null;
     };
     availableUntil?: {
-        value?: Date | undefined;
-        error?: string | undefined;
+        value?: Date | null;
+        error?: string | null;
     };
 };
 
-export type AddNewRoomResponse = {
+export type EditRoomResponse = {
     success: boolean;
     message: string;
+    room?: RoomModel;
 };
 
-const initialState = {
-    name: "",
-    type: RoomType.Standard,
-    description: "",
-    roomView: RoomView.None,
-    status: false,
+const initialState = (room: RoomModel): RoomData => {
+    return {
+        name: room.name,
+        type: room.type,
+        description: room.description ?? "",
+        maxGuests: room.maxGuests,
+        roomSize: room.areaSqm,
+        roomView: room.view,
+        floor: room.floorNumber,
+        door: room.doorNumber,
+        pricePerNight: room.pricePerNight,
+        maxNights: room.maxNights,
+        status: room.isActive,
+        availableFrom: {
+            value: room.availableFrom ? new Date(room.availableFrom) : null,
+        },
+        availableUntil: {
+            value: room.availableUntil ? new Date(room.availableUntil) : null,
+        },
+        image: room.image,
+        images: room.images,
+    };
 };
 
-export default function AdminCreateRoom() {
+export default function AdminEditRoom({ room }: { room: RoomModel }) {
     const session = useCurrentSession()!;
-    const [newRoomData, setNewRoomData] = useState<NewRoomData>(initialState);
+    const [roomData, setRoomData] = useState<RoomData>(initialState(room));
     const [success, setSuccess] = useState<string>("");
     const [error, setError] = useState<string>("");
     const [isPending, startTransition] = useTransition();
@@ -85,13 +107,12 @@ export default function AdminCreateRoom() {
         if (success.length || error.length) {
             window.scrollTo({
                 top: 0,
-                behavior: "smooth",
             });
         }
     }, [success, error]);
 
     const setRoomPrice = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setNewRoomData((prev) => {
+        setRoomData((prev) => {
             const value = e.target.value;
 
             if (isAmountDecimal(value)) {
@@ -106,7 +127,7 @@ export default function AdminCreateRoom() {
     };
 
     const setRoomStatus = () => {
-        setNewRoomData((prev) => {
+        setRoomData((prev) => {
             return {
                 ...prev,
                 status: !prev.status,
@@ -124,13 +145,15 @@ export default function AdminCreateRoom() {
             return;
         }
 
+        removeMainImageDB();
+
         setError("");
 
-        setNewRoomData((prev) => {
+        setRoomData((prev) => {
             return {
                 ...prev,
-                images: {
-                    ...prev.images,
+                uploads: {
+                    ...prev.uploads,
                     main: {
                         file,
                         previewSourceBlob: URL.createObjectURL(file),
@@ -142,19 +165,23 @@ export default function AdminCreateRoom() {
 
     const removeMainImage = () => {
         // Prevent memory leaks
-        if (newRoomData.images?.main?.previewSourceBlob) {
-            URL.revokeObjectURL(newRoomData.images.main.previewSourceBlob);
+        if (roomData.uploads?.image?.previewSourceBlob) {
+            URL.revokeObjectURL(roomData.uploads.image.previewSourceBlob);
         }
 
-        setNewRoomData((prev) => {
+        setRoomData((prev) => {
             return {
                 ...prev,
-                images: {
-                    ...prev.images,
-                    main: undefined,
+                uploads: {
+                    ...prev.uploads,
+                    main: null,
                 },
             };
         });
+    };
+
+    const removeMainImageDB = () => {
+        setRoomData((prev) => ({ ...prev, image: null }));
     };
 
     const uploadGalleryImage = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -169,13 +196,13 @@ export default function AdminCreateRoom() {
 
         setError("");
 
-        setNewRoomData((prev) => {
+        setRoomData((prev) => {
             return {
                 ...prev,
-                images: {
-                    ...prev.images,
+                uploads: {
+                    ...prev.uploads,
                     gallery: [
-                        ...(prev.images?.gallery ?? []),
+                        ...(prev.uploads?.images ?? []),
                         {
                             file,
                             previewSourceBlob: URL.createObjectURL(file),
@@ -187,50 +214,59 @@ export default function AdminCreateRoom() {
     };
 
     const removeGalleryImage = (i: number) => {
-        const image = newRoomData.images?.gallery?.[i];
+        const image = roomData.uploads?.images?.[i];
 
         if (image?.previewSourceBlob) {
             URL.revokeObjectURL(image.previewSourceBlob);
         }
 
-        setNewRoomData((prev) => {
+        setRoomData((prev) => {
             return {
                 ...prev,
-                images: {
-                    ...prev.images,
-                    gallery: prev.images?.gallery?.filter((_, index) => index !== i),
+                uploads: {
+                    ...prev.uploads,
+                    gallery: prev.uploads?.images?.filter((_, index) => index !== i),
                 },
             };
         });
     };
 
-    const addNewRoom = async () => {
+    const removeGalleryImageDB = (i: number) => {
+        setRoomData((prev) => {
+            return {
+                ...prev,
+                images: prev.images.filter((_, index) => index !== i),
+            };
+        });
+    };
+
+    const editRoom = async () => {
         if (isPending) return;
 
         if (
-            !newRoomData.name ||
-            !newRoomData.description ||
-            !newRoomData.maxGuests ||
-            !newRoomData.roomSize ||
-            !newRoomData.floor ||
-            !newRoomData.door ||
-            !newRoomData.pricePerNight ||
-            !newRoomData.maxNights ||
-            !newRoomData.availableFrom?.value ||
-            !newRoomData.availableUntil?.value
+            !roomData.name ||
+            !roomData.description ||
+            !roomData.maxGuests ||
+            !roomData.roomSize ||
+            !roomData.floor ||
+            !roomData.door ||
+            !roomData.pricePerNight ||
+            !roomData.maxNights ||
+            !roomData.availableFrom?.value ||
+            !roomData.availableUntil?.value
         ) {
             setError("Required fields are missing.");
             return;
         }
 
-        if (newRoomData.images?.main?.file instanceof File) {
-            if (newRoomData.images.main.file.size > MAX_IMAGE_SIZE) {
+        if (roomData.uploads?.image?.file instanceof File) {
+            if (roomData.uploads.image.file.size > MAX_IMAGE_SIZE) {
                 setError(`Main image must be ${MAX_IMAGE_SIZE_MB} MB or smaller.`);
                 return;
             }
         }
 
-        newRoomData.images?.gallery?.forEach((image) => {
+        roomData.uploads?.images?.forEach((image) => {
             if (image.file instanceof File) {
                 if (image.file.size > MAX_IMAGE_SIZE) {
                     setError(`Gallery images must be ${MAX_IMAGE_SIZE_MB} MB or smaller.`);
@@ -239,65 +275,53 @@ export default function AdminCreateRoom() {
             }
         });
 
-        if (newRoomData.name.length < MIN_ROOM_NAME || newRoomData.name.length > MAX_ROOM_NAME) {
+        if (roomData.name.length < MIN_ROOM_NAME || roomData.name.length > MAX_ROOM_NAME) {
             setError(`Room name length must be between ${MIN_ROOM_NAME} and ${MAX_ROOM_NAME} characters.`);
             return;
         }
 
-        if (newRoomData.description.length < MIN_ROOM_DESCRIPTION || newRoomData.description.length > MAX_ROOM_DESCRIPTION) {
+        if (roomData.description.length < MIN_ROOM_DESCRIPTION || roomData.description.length > MAX_ROOM_DESCRIPTION) {
             setError(`Room description length must be between ${MIN_ROOM_DESCRIPTION} and ${MAX_ROOM_DESCRIPTION} characters.`);
             return;
         }
 
-        if (
-            !Number.isSafeInteger(newRoomData.maxGuests) ||
-            newRoomData.maxGuests < 1 ||
-            newRoomData.maxGuests > MAX_ROOM_GUESTS
-        ) {
+        if (!Number.isSafeInteger(roomData.maxGuests) || roomData.maxGuests < 1 || roomData.maxGuests > MAX_ROOM_GUESTS) {
             setError(`Max guests must be between 1 and ${MAX_ROOM_GUESTS}.`);
             return;
         }
 
-        if (!Number.isSafeInteger(newRoomData.roomSize) || newRoomData.roomSize < 1 || newRoomData.roomSize > MAX_ROOM_SIZE) {
+        if (!Number.isSafeInteger(roomData.roomSize) || roomData.roomSize < 1 || roomData.roomSize > MAX_ROOM_SIZE) {
             setError(`Room size (sq) must be between 1 and ${MAX_ROOM_SIZE}.`);
             return;
         }
 
-        if (!Number.isSafeInteger(newRoomData.floor) || newRoomData.floor < 1 || newRoomData.floor > MAX_FLOORS) {
+        if (!Number.isSafeInteger(roomData.floor) || roomData.floor < 1 || roomData.floor > MAX_FLOORS) {
             setError(`Invalid floor number (1-${MAX_FLOORS}).`);
             return;
         }
 
-        if (
-            !Number.isSafeInteger(newRoomData.door) ||
-            newRoomData.door < 1 ||
-            newRoomData.door > MAX_FLOORS * MAX_DOORS_PER_FLOOR
-        ) {
+        if (!Number.isSafeInteger(roomData.door) || roomData.door < 1 || roomData.door > MAX_FLOORS * MAX_DOORS_PER_FLOOR) {
             setError(`Invalid door number (1-${MAX_FLOORS * MAX_DOORS_PER_FLOOR}).`);
             return;
         }
 
-        if (
-            !Number.isSafeInteger(newRoomData.maxNights) ||
-            newRoomData.maxNights < 1 ||
-            newRoomData.maxNights > MAX_ROOM_NIGHTS
-        ) {
+        if (!Number.isSafeInteger(roomData.maxNights) || roomData.maxNights < 1 || roomData.maxNights > MAX_ROOM_NIGHTS) {
             setError(`Maximum stays (nights) must be between 1 and ${MAX_ROOM_NIGHTS}.`);
             return;
         }
 
-        if (!isAmountDecimal(newRoomData.pricePerNight)) {
+        if (!isAmountDecimal(roomData.pricePerNight)) {
             setError("Price per night is not decimal (eg: 100.00).");
             return;
         }
 
-        if (Number(newRoomData.pricePerNight) < 1 || Number(newRoomData.pricePerNight) >= 500.0) {
+        if (Number(roomData.pricePerNight) < 1 || Number(roomData.pricePerNight) >= 500.0) {
             setError("Invalid price per night (acceptable value must be between 1 and 500.00).");
             return;
         }
 
-        const from = new Date(newRoomData.availableFrom.value);
-        const until = new Date(newRoomData.availableUntil.value);
+        const from = new Date(roomData.availableFrom.value);
+        const until = new Date(roomData.availableUntil.value);
 
         if (!isValidDate(from) || !isValidDate(until)) {
             setError("Invalid availability dates.");
@@ -309,54 +333,82 @@ export default function AdminCreateRoom() {
             return;
         }
 
-        if (confirm("Add new room?")) {
+        if (confirm("Save changes?")) {
             const formData = new FormData();
             formData.append("userId", session.user.id);
+            formData.append("roomId", room.id);
 
-            formData.append("name", newRoomData.name);
-            formData.append("type", newRoomData.type);
-            formData.append("description", newRoomData.description);
+            formData.append("name", roomData.name);
+            formData.append("type", roomData.type);
+            formData.append("description", roomData.description);
 
-            if (newRoomData.images?.main) {
-                formData.append("mainImage", newRoomData.images?.main?.file);
+            if (roomData.image) {
+                formData.append("originalImage", "1");
+            } else if (!roomData.image && roomData.uploads?.image) {
+                formData.append("image", roomData.uploads?.image?.file);
             }
 
-            newRoomData.images?.gallery?.forEach((image) => {
+            roomData.images.forEach((i) => {
+                formData.append("originalImages", i);
+            });
+
+            roomData.uploads?.images?.forEach((image) => {
                 if (image.file instanceof File) {
                     formData.append("images", image.file);
                 }
             });
 
-            formData.append("maxGuests", newRoomData.maxGuests?.toString());
-            formData.append("roomSize", newRoomData.roomSize?.toString());
-            formData.append("roomView", newRoomData.roomView);
-            formData.append("floor", newRoomData.floor?.toString());
-            formData.append("door", newRoomData.door?.toString());
-            formData.append("pricePerNight", newRoomData.pricePerNight?.toString());
-            formData.append("maxNights", newRoomData.maxNights?.toString());
-            formData.append("availableFrom", newRoomData.availableFrom.value.toString());
-            formData.append("availableUntil", newRoomData.availableUntil.value.toString());
-            formData.append("isActive", newRoomData.status ? "1" : "0");
+            formData.append("maxGuests", roomData.maxGuests?.toString());
+            formData.append("roomSize", roomData.roomSize?.toString());
+            formData.append("roomView", roomData.roomView);
+            formData.append("floor", roomData.floor?.toString());
+            formData.append("door", roomData.door?.toString());
+            formData.append("pricePerNight", roomData.pricePerNight?.toString());
+            formData.append("maxNights", roomData.maxNights?.toString());
+            formData.append("availableFrom", roomData.availableFrom.value.toString());
+            formData.append("availableUntil", roomData.availableUntil.value.toString());
+            formData.append("isActive", roomData.status ? "1" : "0");
 
             startTransition(async () => {
                 try {
-                    const request = await fetch(`${API_URL}/admin/room/create`, {
+                    const request = await fetch(`${API_URL}/admin/room/edit`, {
                         method: "POST",
                         body: formData,
                     });
 
-                    const response: AddNewRoomResponse = await request.json();
+                    const response: EditRoomResponse = await request.json();
 
                     if (!response.success) {
-                        setError(response.message ?? "Failed to add new room.");
+                        setError(response.message ?? "Failed to save the changes.");
                         return;
                     }
 
                     setError("");
                     setSuccess(response.message);
-                    setNewRoomData(initialState);
+
+                    setRoomData({
+                        name: response.room!.name,
+                        type: response.room!.type,
+                        description: response.room!.description ?? "",
+                        maxGuests: response.room!.maxGuests,
+                        roomSize: response.room!.areaSqm,
+                        roomView: response.room!.view,
+                        floor: response.room!.floorNumber,
+                        door: response.room!.doorNumber,
+                        pricePerNight: response.room!.pricePerNight,
+                        maxNights: response.room!.maxNights,
+                        status: response.room!.isActive,
+                        availableFrom: {
+                            value: response.room!.availableFrom ? new Date(response.room!.availableFrom) : null,
+                        },
+                        availableUntil: {
+                            value: response.room!.availableUntil ? new Date(response.room!.availableUntil) : null,
+                        },
+                        image: response.room!.image,
+                        images: response.room!.images,
+                    });
                 } catch {
-                    setError("Something went wrong. Failed to add new room.");
+                    setError("Something went wrong. Failed to save the changes room.");
                 }
             });
         }
@@ -366,8 +418,8 @@ export default function AdminCreateRoom() {
         <>
             <BackButton url="/admin/rooms" text="Back to Rooms" />
             <div>
-                <h1 className="text-3xl tracking-wide">Add New Room</h1>
-                <span className="text-gray-600 text-sm">Fill in the details below to add a new room to your hotel.</span>
+                <h1 className="text-3xl tracking-wide">Edit room</h1>
+                <span className="text-gray-600 text-sm">Edit fields of this room.</span>
             </div>
             <div className="space-y-2">
                 {error && <AlertError closeBtn={() => setError("")}>{error}</AlertError>}
@@ -388,14 +440,12 @@ export default function AdminCreateRoom() {
                                 id="room_name"
                                 name="room_name"
                                 placeholder="Enter room name"
-                                value={newRoomData.name}
+                                value={roomData.name}
                                 onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                                    setNewRoomData((prev) => {
+                                    setRoomData((prev) => {
                                         return { ...prev, name: e.target.value };
                                     })
                                 }
-                                min={MIN_ROOM_NAME}
-                                max={MAX_ROOM_NAME}
                                 required
                             >
                                 Room Name <span className="text-rose-700">*</span>
@@ -406,9 +456,9 @@ export default function AdminCreateRoom() {
                                 id="room_type"
                                 name="room_type"
                                 options={Object.values(RoomType)}
-                                value={newRoomData.type}
+                                value={roomData.type}
                                 onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
-                                    setNewRoomData((prev) => {
+                                    setRoomData((prev) => {
                                         return { ...prev, type: e.target.value as RoomType };
                                     })
                                 }
@@ -424,14 +474,12 @@ export default function AdminCreateRoom() {
                                 placeholder="Enter a short description of this room..."
                                 className="h-15 lg:h-25 max-h-35"
                                 label={true}
-                                value={newRoomData.description}
+                                value={roomData.description}
                                 onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
-                                    setNewRoomData((prev) => {
+                                    setRoomData((prev) => {
                                         return { ...prev, description: e.target.value };
                                     })
                                 }
-                                minLength={MIN_ROOM_DESCRIPTION}
-                                maxLength={MAX_ROOM_DESCRIPTION}
                                 required
                             >
                                 Description <span className="text-rose-700">*</span>
@@ -443,10 +491,10 @@ export default function AdminCreateRoom() {
                         <div className="heading">
                             Main Image <span className="text-rose-700">*</span>
                         </div>
-                        {newRoomData.images?.main?.previewSourceBlob ? (
+                        {roomData.uploads?.image?.previewSourceBlob ? (
                             <div className="relative w-full h-auto rounded-md overflow-hidden">
                                 <img
-                                    src={newRoomData.images.main.previewSourceBlob}
+                                    src={roomData.uploads.image.previewSourceBlob}
                                     alt="Main Room Image"
                                     className="object-cover rounded-md aspect-video"
                                 />
@@ -458,16 +506,36 @@ export default function AdminCreateRoom() {
                                 </div>
                             </div>
                         ) : (
-                            <div className="w-full min-h-64 flex items-center justify-center border border-dashed border-gray-300 rounded-md text-gray-500">
-                                <span className="text-sm">No Image</span>
-                            </div>
+                            <>
+                                {roomData.image ? (
+                                    <div className="relative w-full h-auto rounded-md overflow-hidden">
+                                        <img
+                                            src={roomData.image}
+                                            alt="Main Room Image"
+                                            className="object-cover rounded-md aspect-video"
+                                        />
+                                        <div
+                                            onClick={removeMainImageDB}
+                                            className="absolute top-1 right-1 p-0.5 bg-black/50 hover:bg-rose-600 cursor-pointer rounded-full transition-colors duration-100"
+                                        >
+                                            <X size={"1rem"} className="text-white" />
+                                        </div>
+                                    </div>
+                                ) : (
+                                    <div className="w-full min-h-64 flex items-center justify-center border border-dashed border-gray-300 rounded-md text-gray-500">
+                                        <span className="text-sm">No Image</span>
+                                    </div>
+                                )}
+                            </>
                         )}
                         <div className="w-full border border-border-gray p-2.5 rounded-md hover:bg-border-gray cursor-pointer transition-all duration-100">
                             <input type="file" id="main_image" name="main_image" onChange={uploadMainImage} hidden />
                             <label htmlFor="main_image" className="flex items-center justify-center gap-2 cursor-pointer">
                                 <Download size={"1rem"} className="text-gray-700" />
                                 <span className="text-xs text-gray-600">
-                                    {newRoomData.images?.main?.previewSourceBlob ? "Change Main Image" : "Add Main Image"}
+                                    {roomData.uploads?.image?.previewSourceBlob || roomData.image
+                                        ? "Change Main Image"
+                                        : "Add Main Image"}
                                 </span>
                             </label>
                         </div>
@@ -487,7 +555,22 @@ export default function AdminCreateRoom() {
                 </div>
                 <div className="w-full space-y-2">
                     <div className="flex flex-wrap gap-4">
-                        {newRoomData.images?.gallery?.map((g, index) => (
+                        {roomData.images?.map((g, index) => (
+                            <div key={index} className="relative w-64 h-35 rounded-md overflow-hidden group">
+                                <img
+                                    src={g}
+                                    alt={`Gallery Image ${index + 1}`}
+                                    className="object-cover rounded-md aspect-video"
+                                />
+                                <div
+                                    onClick={() => removeGalleryImageDB(index)}
+                                    className="absolute top-1 right-1 p-0.5 bg-black/50 hover:bg-rose-600 cursor-pointer rounded-full transition-colors duration-100"
+                                >
+                                    <X size={"1rem"} className="text-white" />
+                                </div>
+                            </div>
+                        ))}
+                        {roomData.uploads?.images?.map((g, index) => (
                             <div key={index} className="relative w-64 h-35 rounded-md overflow-hidden group">
                                 <img
                                     src={g.previewSourceBlob}
@@ -510,7 +593,9 @@ export default function AdminCreateRoom() {
                             >
                                 <Camera />
                                 <span className="text-sm">
-                                    {newRoomData.images?.gallery?.length ? "Add More Images" : "Add Images"}
+                                    {roomData.uploads?.images?.length || roomData.images.length
+                                        ? "Add More Images"
+                                        : "Add Images"}
                                 </span>
                             </label>
                         </div>
@@ -534,9 +619,9 @@ export default function AdminCreateRoom() {
                                 id="max_guests"
                                 name="max_guests"
                                 placeholder="2"
-                                value={newRoomData.maxGuests ?? ""}
+                                value={roomData.maxGuests ?? ""}
                                 onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                                    setNewRoomData((prev) => {
+                                    setRoomData((prev) => {
                                         return {
                                             ...prev,
                                             maxGuests: Number(e.target.value),
@@ -556,9 +641,9 @@ export default function AdminCreateRoom() {
                                 id="room_size"
                                 name="room_size"
                                 placeholder="eg: 30"
-                                value={newRoomData.roomSize ?? ""}
+                                value={roomData.roomSize ?? ""}
                                 onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                                    setNewRoomData((prev) => {
+                                    setRoomData((prev) => {
                                         return {
                                             ...prev,
                                             roomSize: Number(e.target.value),
@@ -577,9 +662,9 @@ export default function AdminCreateRoom() {
                                 id="room_viewtype"
                                 name="room_viewtype"
                                 options={Object.values(RoomView)}
-                                value={newRoomData.roomView}
+                                value={roomData.roomView}
                                 onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
-                                    setNewRoomData((prev) => {
+                                    setRoomData((prev) => {
                                         return { ...prev, roomView: e.target.value as RoomView };
                                     })
                                 }
@@ -596,9 +681,9 @@ export default function AdminCreateRoom() {
                                 id="room_floor"
                                 name="room_floor"
                                 placeholder="eg: 8"
-                                value={newRoomData.floor ?? ""}
+                                value={roomData.floor ?? ""}
                                 onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                                    setNewRoomData((prev) => {
+                                    setRoomData((prev) => {
                                         return {
                                             ...prev,
                                             floor: Number(e.target.value),
@@ -618,9 +703,9 @@ export default function AdminCreateRoom() {
                                 id="room_door"
                                 name="room_door"
                                 placeholder="eg: 12"
-                                value={newRoomData.door ?? ""}
+                                value={roomData.door ?? ""}
                                 onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                                    setNewRoomData((prev) => {
+                                    setRoomData((prev) => {
                                         return {
                                             ...prev,
                                             door: Number(e.target.value),
@@ -669,7 +754,7 @@ export default function AdminCreateRoom() {
                                 name="room_price"
                                 inputMode="decimal"
                                 placeholder="eg: 100.99"
-                                value={newRoomData.pricePerNight ?? ""}
+                                value={roomData.pricePerNight ?? ""}
                                 onChange={setRoomPrice}
                             >
                                 Price (per night) <span className="text-rose-700">*</span>
@@ -681,9 +766,9 @@ export default function AdminCreateRoom() {
                                 id="max_nights"
                                 name="max_nights"
                                 placeholder="1"
-                                value={newRoomData.maxNights ?? ""}
+                                value={roomData.maxNights ?? ""}
                                 onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                                    setNewRoomData((prev) => {
+                                    setRoomData((prev) => {
                                         return {
                                             ...prev,
                                             maxNights: Number(e.target.value),
@@ -700,11 +785,11 @@ export default function AdminCreateRoom() {
                         <div className="flex flex-col gap-2">
                             <span className="heading">Status</span>
                             <div className="flex items-start gap-3">
-                                <Knob onClick={setRoomStatus} status={newRoomData.status} />
+                                <Knob onClick={setRoomStatus} status={roomData.status} />
                                 <div className="flex flex-col gap-2">
-                                    <span className="heading">{newRoomData.status ? "Available" : "Unavailable"}</span>
+                                    <span className="heading">{roomData.status ? "Available" : "Unavailable"}</span>
                                     <span className="text-xs text-gray-500/70">
-                                        {newRoomData.status
+                                        {roomData.status
                                             ? "Make this room be shown and available for booking."
                                             : "Disable this room to be shown and available for booking."}
                                     </span>
@@ -717,9 +802,9 @@ export default function AdminCreateRoom() {
                             <InputDate
                                 id="available_from"
                                 name="available_from"
-                                value={newRoomData.availableFrom?.value ? formatDate(newRoomData.availableFrom.value) : ""}
+                                value={roomData.availableFrom?.value ? formatDate(roomData.availableFrom.value) : ""}
                                 onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                                    setNewRoomData((prev) => {
+                                    setRoomData((prev) => {
                                         const value = e.target.value;
 
                                         if (value) {
@@ -729,7 +814,7 @@ export default function AdminCreateRoom() {
                                                 return {
                                                     ...prev,
                                                     availableFrom: {
-                                                        value: undefined,
+                                                        value: null,
                                                         error: "Available-from date must be before Available-until date.",
                                                     },
                                                 };
@@ -741,7 +826,7 @@ export default function AdminCreateRoom() {
                                                 // using new Date("y-m-dT00:00:000") avoids that particular issue by creating local midnight.
                                                 availableFrom: {
                                                     value: new Date(`${value}T00:00:00`),
-                                                    error: undefined,
+                                                    error: null,
                                                 },
                                             };
                                         }
@@ -749,24 +834,19 @@ export default function AdminCreateRoom() {
                                         return prev;
                                     })
                                 }
+                                error={roomData.availableFrom?.error ? roomData.availableFrom.error : null}
                                 required
                             >
                                 Available from <span className="text-rose-700">*</span>
                             </InputDate>
-                            {newRoomData.availableFrom?.error && (
-                                <div className="flex items-center gap-1 text-xs text-rose-700 font-medium">
-                                    <Info size={"1rem"} />
-                                    <span>{newRoomData.availableFrom.error}</span>
-                                </div>
-                            )}
                         </div>
                         <div className="flex flex-col gap-2">
                             <InputDate
                                 id="available_until"
                                 name="available_until"
-                                value={newRoomData.availableUntil?.value ? formatDate(newRoomData.availableUntil.value) : ""}
+                                value={roomData.availableUntil?.value ? formatDate(roomData.availableUntil.value) : ""}
                                 onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                                    setNewRoomData((prev) => {
+                                    setRoomData((prev) => {
                                         const value = e.target.value;
 
                                         if (value) {
@@ -776,7 +856,7 @@ export default function AdminCreateRoom() {
                                                 return {
                                                     ...prev,
                                                     availableUntil: {
-                                                        value: undefined,
+                                                        value: null,
                                                         error: "Available-until date must be after Available-from date.",
                                                     },
                                                 };
@@ -788,7 +868,7 @@ export default function AdminCreateRoom() {
                                                 // using new Date("y-m-dT00:00:000") avoids that particular issue by creating local midnight.
                                                 availableUntil: {
                                                     value: new Date(`${value}T00:00:00`),
-                                                    error: undefined,
+                                                    error: null,
                                                 },
                                             };
                                         }
@@ -796,26 +876,21 @@ export default function AdminCreateRoom() {
                                         return prev;
                                     })
                                 }
+                                error={roomData.availableUntil?.error ? roomData.availableUntil.error : null}
                                 required
                             >
                                 Available until <span className="text-rose-700">*</span>
                             </InputDate>
-                            {newRoomData.availableUntil?.error && (
-                                <div className="flex items-center gap-1 text-xs text-rose-700 font-medium">
-                                    <Info size={"1rem"} />
-                                    <span>{newRoomData.availableUntil.error}</span>
-                                </div>
-                            )}
                         </div>
                     </div>
                 </div>
             </div>
             <div className="w-full space-y-5 p-4 bg-cream border border-border-gray rounded-md">
                 <div className="flex flex-col gap-3">
-                    <span className="block text-xs text-gray-600 font-medium">Click the button to add this room.</span>
-                    <ButtonMin onClick={addNewRoom} className="flex items-center justify-center gap-2">
+                    <span className="block text-xs text-gray-600 font-medium">Save changes?</span>
+                    <ButtonMin onClick={editRoom} className="flex items-center justify-center gap-2">
                         <SquarePen size={"1.25rem"} className="text-white" />
-                        <span className="text-white">Add New Room</span>
+                        <span className="text-white">Save</span>
                     </ButtonMin>
                 </div>
             </div>

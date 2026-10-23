@@ -288,3 +288,21 @@ div > *::-webkit-scrollbar-thumb {
         @apply flex-1;
     }
 }
+
+.input-warning {
+    @apply border-2 border-rose-700 rounded-md focus-within:ring-0;
+    animation: inputWarn 1s ease-in-out;
+}
+
+@keyframes inputWarn {
+    0%,
+    50%,
+    100% {
+        transform: translateX(5px);
+    }
+
+    25%,
+    75% {
+        transform: translateX(-5px);
+    }
+}

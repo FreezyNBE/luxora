@@ -10,7 +10,6 @@ import { Input, Select } from "@/app/components/misc/Input";
 import { useCurrentSession } from "@/lib/auth-session";
 import { CustomAlertType } from "@/types/_custom_alerts";
 import { letterCapitalize } from "@/utils/_functions";
-import { MAX_NAME_LENGTH, MIN_NAME_LENGTH } from "@/utils/_new_account_fields";
 import { API_URL, GENDERS } from "@/utils/_variables";
 import { countryList } from "@/utils/list_countries";
 import { phonePrefixesByCountry } from "@/utils/phone_numbers";
@@ -140,8 +139,6 @@ export default function ProfilePage() {
                             autoComplete="name"
                             placeholder="eg: Alex Johnson"
                             className="text-ink"
-                            min={MIN_NAME_LENGTH}
-                            max={MAX_NAME_LENGTH}
                             value={userSettings.name}
                             onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
                                 setUserSettings((prev) => {

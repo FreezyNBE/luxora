@@ -35,3 +35,9 @@ export const MAX_ROOM_SIZE = 50;
 export const MAX_GALLERY_IMAGES = 10;
 export const MAX_IMAGE_SIZE_MB = 4.5; // 4.5 MB
 export const MAX_IMAGE_SIZE = MAX_IMAGE_SIZE_MB * 1024 * 1024; // transform to bytes
+
+export const MIN_AMENITY_NAME = 2;
+export const MAX_AMENITY_NAME = 24;
+
+export const MIN_AMENITY_DESCRIPTION = 2;
+export const MAX_AMENITY_DESCRIPTION = 64;

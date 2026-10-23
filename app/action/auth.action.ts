@@ -2,9 +2,9 @@
 
 import { auth } from "@/lib/auth";
 import { SignUpCode } from "@/utils/_auth_signup";
-import { validateEmail } from "@/utils/_functions";
 import { MAX_NAME_LENGTH, MAX_PASSWORD_LENGTH, MIN_NAME_LENGTH, MIN_PASSWORD_LENGTH } from "@/utils/_new_account_fields";
 import { countryList } from "@/utils/list_countries";
+import z from "zod";
 
 type ResponseSignUpEmail = {
     success?: boolean;
@@ -13,47 +13,50 @@ type ResponseSignUpEmail = {
     error?: string | string[];
 };
 
+const signUpSchema = z
+    .object({
+        name: z
+            .string()
+            .min(MIN_NAME_LENGTH, { error: `Name must be between ${MIN_NAME_LENGTH} - ${MAX_NAME_LENGTH} characters.` })
+            .max(MAX_NAME_LENGTH, { error: `Name must be between ${MIN_NAME_LENGTH} - ${MAX_NAME_LENGTH} characters.` }),
+        email: z.email({ error: "Email address is not valid." }),
+        password: z
+            .string()
+            .min(MIN_PASSWORD_LENGTH, {
+                error: `Password length must be between ${MIN_PASSWORD_LENGTH} - ${MAX_PASSWORD_LENGTH}.`,
+            })
+            .max(MAX_PASSWORD_LENGTH, {
+                error: `Password length must be between ${MIN_PASSWORD_LENGTH} - ${MAX_PASSWORD_LENGTH}.`,
+            }),
+        confirmedPassword: z.string(),
+        country: z.string().refine((country) => countryList.includes(country), { error: "Invalid country selected." }),
+        gender: z.union([z.literal(0), z.literal(1)], { error: "Invalid gender selected." }),
+        agreements: z.literal(true, { error: "You must agree with our Terms and Conditions." }),
+    })
+    .refine((data) => data.password === data.confirmedPassword, {
+        path: ["confirmedPassword"],
+        error: "The passwords do not match.",
+    });
+
 export async function actionSignUpEmail(formData: FormData): Promise<ResponseSignUpEmail> {
-    const name = formData.get("name") as string;
-    const email = formData.get("email") as string;
-    const password = formData.get("password") as string;
-    const confirmedPassword = formData.get("confirm_password") as string;
-    const country = formData.get("country") as string;
-    const gender = formData.get("gender") === "0" ? 0 : 1;
-    const agreements = formData.get("agreements") === "on";
-    const errors: string[] = [];
+    const body = {
+        name: formData.get("name"),
+        email: formData.get("email"),
+        password: formData.get("password"),
+        confirmedPassword: formData.get("confirm_password"),
+        country: formData.get("country"),
+        gender: formData.get("gender") === "0" ? 0 : 1,
+        agreements: formData.get("agreements") === "on",
+    };
 
-    if (name.length < MIN_NAME_LENGTH || name.length > MAX_NAME_LENGTH) {
-        errors.push(`Name must be between ${MIN_NAME_LENGTH} - ${MAX_NAME_LENGTH} characters.`);
-    }
+    const result = signUpSchema.safeParse(body);
 
-    if (!validateEmail(email)) {
-        errors.push("Email address is not valid.");
-    }
-
-    if (password.length < MIN_PASSWORD_LENGTH || password.length > MAX_PASSWORD_LENGTH) {
-        errors.push(`Password length must be between ${MIN_PASSWORD_LENGTH} - ${MAX_PASSWORD_LENGTH}.`);
-    }
-
-    if (password !== confirmedPassword) {
-        errors.push("The passwords do not match.");
-    }
-
-    if (!countryList.includes(country)) {
-        errors.push("Invalid country selected.");
-    }
-
-    if (gender !== 0 && gender !== 1) {
-        errors.push("Invalid gender selected.");
-    }
-
-    if (!agreements) {
-        errors.push("You must agree with our Terms and Conditions.");
-    }
-
-    if (errors.length) {
+    if (!result.success) {
+        const errors: string[] = result.error.issues.map((issue) => issue.message);
         return { error: errors };
     }
+
+    const { name, email, password, country, gender } = result.data;
 
     try {
         await auth.api.signUpEmail({

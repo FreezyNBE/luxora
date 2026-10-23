@@ -4,13 +4,11 @@ import { Eye, EyeOff, LockKeyhole, Mail, MapPinned, ShieldCheck, User } from "lu
 import Link from "next/link";
 import { ButtonAction } from "../misc/Button";
 import { useState } from "react";
-import { MAX_NAME_LENGTH, MIN_NAME_LENGTH } from "@/utils/_new_account_fields";
 import { actionSignUpEmail } from "@/app/action/auth.action";
 import { useRouter } from "next/navigation";
 import ErrorSignUp from "./ErrorSignUp";
 import { countryList } from "@/utils/list_countries";
 import { getIndexByCountry } from "@/utils/_functions";
-import { Select } from "../misc/Input";
 import { CardContainer, CardHeader } from "../core/Card";
 
 export default function RegisterComponent() {
@@ -35,6 +33,8 @@ export default function RegisterComponent() {
             } else {
                 setErrors([result.error]);
             }
+
+            setAgreeTerms(false);
 
             return;
         }
@@ -90,8 +90,6 @@ export default function RegisterComponent() {
                                             onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
                                                 setName(event.target.value)
                                             }
-                                            min={MIN_NAME_LENGTH}
-                                            max={MAX_NAME_LENGTH}
                                             required
                                         />
                                     </div>
